@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Zolaris - Energía Solar en Pasto, Nariño. Transformamos la energía en libertad, eficiencia y sostenibilidad." />
+    <title>Zolaris | Energía que Transforma Vidas</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        zolaris: {
+                            navy: '#0B2B46',   /* Azul Oscuro Institucional */
+                            blue: '#1B3D6D',   /* Azul Medio */
+                            light: '#E2E8F0',  /* Gris Azulado */
+                            orange: '#F7A600', /* Naranja Solar */
+                            yellow: '#FDCB58', /* Amarillo Brillante */
+                            accent: '#0EA5E9', /* Azul Cielo para detalles */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Estilos personalizados para barras de desplazamiento y efectos de cristal */
+        body {
+            background-color: #0f172a; /* Fondo base oscuro */
+            color: #f8fafc;
+        }
+        .glass-nav {
+            background: rgba(11, 43, 70, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #FDCB58, #F7A600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-blue {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden selection:bg-zolaris-orange selection:text-white">
+
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
+                    <img class="h-12 w-auto transition-transform transform group-hover:scale-110 duration-500" src="/public/assets/logo.png" alt="Zolaris Logo">
+                    <div class="hidden md:block">
+                        <span class="block text-2xl font-bold tracking-tight text-white leading-none">ZOLARIS</span>
+                        <span class="block text-[10px] uppercase tracking-[0.3em] text-zolaris-yellow">Paneles Solares</span>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:flex space-x-8 items-center">
+                    <a href="index.html" class="text-white font-medium hover:text-zolaris-yellow transition-colors relative group">
+                        Inicio
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-zolaris-yellow transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="nosotros.html" class="text-slate-300 font-medium hover:text-white transition-colors">Nosotros</a>
+                    <a href="proyectos.html" class="text-slate-300 font-medium hover:text-white transition-colors">Proyectos</a>
+                    <a href="servicios.html" class="text-slate-300 font-medium hover:text-white transition-colors">Servicios</a>
+                    
+                    <a href="calculadora.html" class="group relative px-6 py-3 font-bold text-zolaris-navy rounded-full bg-gradient-to-r from-zolaris-yellow to-zolaris-orange shadow-[0_0_20px_rgba(247,166,0,0.3)] hover:shadow-[0_0_30px_rgba(247,166,0,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
+                        <span class="relative z-10 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            Calculadora Solar
+                        </span>
+                        <div class="absolute inset-0 h-full w-full bg-white/30 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+                    </a>
+                </div>
+
+                <div class="lg:hidden flex items-center">
+                    <button class="text-white hover:text-zolaris-yellow focus:outline-none">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-t from-zolaris-navy via-zolaris-navy/80 to-transparent z-10"></div>
+            <div class="absolute inset-0 bg-black/40 z-10"></div>
+            <img src="/assets/Proyectos/finca cafetera/foto1.jpg" alt="Instalación Solar" class="w-full h-full object-cover scale-105 animate-pulse-slow">
+        </div>
+
+        <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="text-left space-y-8">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-zolaris-orange/30 text-zolaris-yellow text-sm font-bold tracking-wide uppercase animate-fade-in-up">
+                        <span class="w-2 h-2 rounded-full bg-zolaris-orange animate-ping"></span>
+                        Líderes en el Suroccidente Colombiano
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight tracking-tight">
+                        Energía que <br>
+                        <span class="text-gradient">Transforma Vidas</span>
+                    </h1>
+                    
+                    <p class="text-xl text-slate-300 max-w-lg leading-relaxed border-l-4 border-zolaris-orange pl-6">
+                        No nacimos solo para vender paneles. Nacimos para acompañar a quienes creen en un futuro distinto: más libre, eficiente y sostenible.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-5 pt-4">
+                        <a href="calculadora.html" class="flex justify-center items-center gap-3 px-8 py-4 bg-zolaris-orange text-zolaris-navy font-bold rounded-xl hover:bg-white transition-colors shadow-lg shadow-zolaris-orange/20">
+                            Cotizar Proyecto
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                        <a href="#proyectos" class="flex justify-center items-center gap-3 px-8 py-4 border border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 backdrop-blur-sm transition-all">
+                            Ver Portafolio (18+)
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hidden lg:block relative animate-float">
+                    <div class="glass-card p-8 rounded-3xl relative z-10 max-w-md mx-auto transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <p class="text-slate-400 text-sm">Ahorro Estimado Mensual</p>
+                                <h3 class="text-4xl font-bold text-white">$ 450.000 COP</h3>
+                            </div>
+                            <div class="p-3 bg-green-500/20 rounded-full text-green-400">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="h-2 bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-zolaris-orange to-zolaris-yellow w-3/4"></div>
+                            </div>
+                            <div class="flex justify-between text-sm text-slate-300">
+                                <span>Retorno de Inversión</span>
+                                <span class="text-white font-bold">2.5 Años</span>
+                            </div>
+                            <hr class="border-slate-700 my-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-zolaris-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                                </div>
+                                <div>
+                                    <p class="text-white font-bold">Impacto Ambiental</p>
+                                    <p class="text-xs text-slate-400">Equivale a plantar 45 árboles</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-zolaris-orange/20 rounded-full blur-3xl"></div>
+                    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-zolaris-blue/30 rounded-full blur-3xl"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+            <span class="text-xs uppercase tracking-widest text-slate-400">Descubre Más</span>
+            <svg class="w-6 h-6 text-zolaris-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </header>
+
+    <section class="py-10 bg-zolaris-navy border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-slate-800/50">
+                <div class="p-4 group">
+                    <p class="text-4xl font-extrabold text-white mb-2 group-hover:text-zolaris-orange transition-colors">18+</p>
+                    <p class="text-sm text-slate-400 uppercase tracking-widest">Proyectos Ejecutados</p>
+                </div>
+                <div class="p-4 group">
+                    <p class="text-4xl font-extrabold text-white mb-2 group-hover:text-zolaris-orange transition-colors">100%</p>
+                    <p class="text-sm text-slate-400 uppercase tracking-widest">Clientes Satisfechos</p>
+                </div>
+                <div class="p-4 group">
+                    <p class="text-4xl font-extrabold text-white mb-2 group-hover:text-zolaris-orange transition-colors">5</p>
+                    <p class="text-sm text-slate-400 uppercase tracking-widest">Aliados Estratégicos</p>
+                </div>
+                <div class="p-4 group">
+                    <p class="text-4xl font-extrabold text-white mb-2 group-hover:text-zolaris-orange transition-colors">2026</p>
+                    <p class="text-sm text-slate-400 uppercase tracking-widest">Visión Futura</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-slate-900 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-zolaris-blue/10 to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-zolaris-orange font-bold tracking-widest uppercase text-sm mb-4">Nuestra Historia</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-white mb-6 leading-snug">
+                        De los caminos de Colombia a la <span class="text-gradient-blue">innovación global</span>.
+                    </h3>
+                    <div class="space-y-6 text-slate-300 leading-relaxed">
+                        <p>
+                            [2023] Todo comenzó en comunidades ZNI, donde la noche era total. Ver la emoción de las familias al encender una luz por primera vez no solo iluminó sus hogares: <strong>iluminó nuestro propósito.</strong>
+                        </p>
+                        <p>
+                            [2025] En nuestra búsqueda de excelencia, viajamos a <strong>China</strong>, el gigante tecnológico. Lo que empezó como una misión técnica se convirtió en una revelación que hoy traemos a Nariño: estándares globales con corazón local.
+                        </p>
+                    </div>
+                    <div class="mt-8">
+                        <a href="nosotros.html" class="text-white border-b-2 border-zolaris-orange pb-1 hover:text-zolaris-orange transition-colors inline-flex items-center gap-2">
+                            Leer la historia completa
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="relative h-[500px]">
+                    <div class="absolute top-0 left-0 w-64 h-80 rounded-2xl overflow-hidden shadow-2xl border-4 border-slate-800 transform -rotate-6 hover:rotate-0 transition-transform duration-500 z-10">
+                        <img src="/public/assets/Proyectos/fincaremolino/foto1.jpeg" alt="Inicios" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute bottom-10 right-10 w-72 h-64 rounded-2xl overflow-hidden shadow-2xl border-4 border-slate-800 transform rotate-3 hover:rotate-0 transition-transform duration-500 z-20">
+                        <img src="/public/assets/Proyectos/subestacionCEDENAR/foto2.JPG" alt="Tecnología Actual" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-zolaris-orange/10 rounded-full blur-[100px] z-0"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-zolaris-orange font-bold uppercase tracking-widest text-xs">ADN Zolaris</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mt-3">Valores que nos definen</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group flex flex-col items-center text-center">
+                    <div class="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <img src="/public/assets/valores_institucionales/confianza.png" alt="Confianza" class="w-10 h-10 object-contain">
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Confianza</h3>
+                    <p class="text-slate-400 text-sm">Construimos relaciones transparentes. Tu inversión está segura en manos de expertos comprometidos.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group flex flex-col items-center text-center">
+                    <div class="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-yellow-500/20 to-orange-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <img src="/public/assets/valores_institucionales/excelencia.png" alt="Excelencia" class="w-10 h-10 object-contain">
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Excelencia</h3>
+                    <p class="text-slate-400 text-sm">No nos conformamos. Buscamos la perfección técnica en cada instalación y mantenimiento.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group flex flex-col items-center text-center">
+                    <div class="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <img src="/public/assets/valores_institucionales/inovacion.png" alt="Innovación" class="w-10 h-10 object-contain">
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Innovación</h3>
+                    <p class="text-slate-400 text-sm">Traemos el futuro al presente. Tecnología de vanguardia para maximizar tu energía.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group flex flex-col items-center text-center">
+                    <div class="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <img src="/public/assets/valores_institucionales/responsabilidad.png" alt="Responsabilidad" class="w-10 h-10 object-contain">
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Responsabilidad</h3>
+                    <p class="text-slate-400 text-sm">Con el planeta y contigo. Cumplimos plazos, normas y promesas.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group flex flex-col items-center text-center">
+                    <div class="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-pink-500/20 to-rose-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <img src="/public/assets/valores_institucionales/servicio.png" alt="Servicio" class="w-10 h-10 object-contain">
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Servicio</h3>
+                    <p class="text-slate-400 text-sm">Vocación real de ayuda. Estamos presentes antes, durante y después del proyecto.</p>
+                </div>
+
+                 <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group flex flex-col items-center text-center">
+                    <div class="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-violet-500/20 to-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <img src="/public/assets/valores_institucionales/gratitud.png" alt="Gratitud" class="w-10 h-10 object-contain">
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Gratitud</h3>
+                    <p class="text-slate-400 text-sm">Valoramos cada cliente que nos permite ser parte de su cambio energético.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="proyectos" class="py-24 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl md:text-5xl font-bold text-white">Proyectos Destacados</h2>
+                    <p class="text-slate-400 mt-4 max-w-xl">Desde fincas cafeteras hasta edificios inteligentes. Hemos llevado energía solar a diversos sectores.</p>
+                </div>
+                <a href="proyectos.html" class="hidden md:flex items-center gap-2 text-zolaris-orange font-bold hover:text-white transition-colors">
+                    Ver todos los proyectos
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <article class="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer">
+                    <img src="/public/assets/Proyectos/fincacafetera/foto1.PNG" alt="Finca Cafetera" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <span class="text-zolaris-orange text-xs font-bold uppercase tracking-wider">Agroindustria</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Finca Cafetera</h3>
+                        <p class="text-slate-300 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Autonomía energética para el procesamiento de café.</p>
+                    </div>
+                </article>
+
+                <article class="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer">
+                    <img src="/public/assets/Proyectos/edificiointeligenteCEIE/foto1.jpg" alt="Edificio CEIE" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <span class="text-zolaris-orange text-xs font-bold uppercase tracking-wider">Educativo / Institucional</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Edificio Inteligente CEIE</h3>
+                        <p class="text-slate-300 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Integración completa de domótica y energía solar.</p>
+                    </div>
+                </article>
+
+                <article class="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer">
+                    <img src="/public/assets/Proyectos/subestacionCEDENAR/foto3.jpg" alt="Cedenar" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <span class="text-zolaris-orange text-xs font-bold uppercase tracking-wider">Infraestructura</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Subestación CEDENAR</h3>
+                        <p class="text-slate-300 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Respaldo crítico para la red eléctrica departamental.</p>
+                    </div>
+                </article>
+                 <article class="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer lg:col-span-2">
+                    <img src="/public/assets/Proyectos/clinicaSPA/foto1.jpg" alt="Clínica Spa" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <span class="text-zolaris-orange text-xs font-bold uppercase tracking-wider">Comercial / Salud</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Clinical SPA</h3>
+                        <p class="text-slate-300 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Energía limpia para procesos estéticos y de salud.</p>
+                    </div>
+                </article>
+
+                <article class="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer">
+                    <img src="/public/assets/Proyectos/casavillacampanela/foto1.jpg" alt="Villa Campanela" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <span class="text-zolaris-orange text-xs font-bold uppercase tracking-wider">Residencial</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Casa Villa Campanela</h3>
+                        <p class="text-slate-300 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Hogar sostenible con cero emisiones.</p>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="mt-12 text-center md:hidden">
+                <a href="proyectos.html" class="inline-block px-8 py-3 border border-slate-700 text-white rounded-full hover:bg-white hover:text-slate-900 transition-colors">
+                    Ver todos los proyectos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold text-zolaris-navy mb-2">Aliados que confían en nosotros</h2>
+            <p class="text-slate-500 mb-12">Empresas e instituciones que respaldan nuestra calidad.</p>
+            
+            <div class="flex flex-wrap justify-center items-center gap-16 opacity-100">
+                <img src="/public/assets/aliados_estrategicos/CEDENAR.png" alt="Cedenar" class="h-20 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="/public/assets/aliados_estrategicos/sunky.PNG" alt="Sunkin" class="h-20 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="/public/assets/aliados_estrategicos/logo-CEIE-fondo-transparente.png" alt="CEIE" class="h-24 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="/public/assets/aliados_estrategicos/clinica_SPA.png" alt="Clinical Spa" class="h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="/public/assets/aliados_estrategicos/el_mural.png" alt="El Mural" class="h-20 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+            </div>
+        </div>
+    </section>
+
+    <section class="relative py-28 overflow-hidden">
+        <div class="absolute inset-0 bg-zolaris-orange">
+            <div class="absolute inset-0 bg-[url('/assets/pattern-solar.png')] opacity-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-zolaris-orange to-zolaris-yellow mix-blend-multiply"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-6xl font-extrabold text-zolaris-navy mb-6">¿Listo para dejar de pagar de más?</h2>
+            <p class="text-xl md:text-2xl text-zolaris-navy/80 mb-10 font-medium">
+                Descubre cuánto puedes ahorrar hoy mismo con nuestra calculadora interactiva. Sin compromisos.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="calculadora.html" class="px-10 py-5 bg-zolaris-navy text-white text-lg font-bold rounded-full shadow-2xl hover:shadow-xl hover:-translate-y-1 transition-all transform">
+                    Calcular mi Ahorro Ahora
+                </a>
+                <a href="https://wa.me/573235443070" target="_blank" class="px-10 py-5 bg-white text-zolaris-navy text-lg font-bold rounded-full shadow-lg hover:bg-slate-50 transition-colors flex items-center justify-center gap-2">
+                    <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                    Escribir al WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-zolaris-navy text-slate-300 pt-20 pb-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div class="space-y-4">
+                    <img src="/public/assets/logo.png" alt="Zolaris" class="h-16 brightness-0 invert">
+                    <p class="text-sm leading-relaxed max-w-xs">
+                        El futuro de la energía es solar. Acompañamos tu transición energética con tecnología, confianza y excelencia.
+                    </p>
+                    <div class="flex gap-4 pt-2">
+                        
+                        <a href="https://www.instagram.com/zolarisingenieria/" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-zolaris-orange hover:text-white transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-6">Navegación</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="index.html" class="hover:text-zolaris-orange transition-colors">Inicio</a></li>
+                        <li><a href="nosotros.html" class="hover:text-zolaris-orange transition-colors">Nuestra Historia</a></li>
+                        <li><a href="proyectos.html" class="hover:text-zolaris-orange transition-colors">Portafolio</a></li>
+                        <li><a href="calculadora.html" class="hover:text-zolaris-orange transition-colors">Calculadora Solar</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-6">Legal</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-zolaris-orange transition-colors">Política de Privacidad</a></li>
+                        <li><a href="#" class="hover:text-zolaris-orange transition-colors">Términos y Condiciones</a></li>
+                        <li><a href="#" class="hover:text-zolaris-orange transition-colors">Tratamiento de Datos</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-6">Contacto</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-zolaris-orange mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span>Cra. 37 #19b-35. Oficina 1005. Pasto, Nariño<br>Colombia</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-zolaris-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <span>tramites.zolaris@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                <p>&copy; 2026 Zolaris Ingeniería S.A.S. Todos los derechos reservados.</p>
+                <p>Desarrollado por Ivan Andres Zuñiga</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+                navbar.classList.replace('h-24', 'h-20');
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.classList.replace('h-20', 'h-24');
+            }
+        });
+    </script>
+</body>
+</html>
