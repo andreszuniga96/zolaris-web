@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Servicios y Soluciones | Zolaris</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        zolaris: {
+                            navy: '#0B2B46',   /* Azul Oscuro */
+                            blue: '#1B3D6D',   /* Azul Medio */
+                            light: '#E2E8F0',  /* Gris Azulado */
+                            orange: '#F7A600', /* Naranja Solar */
+                            yellow: '#FDCB58', /* Amarillo Brillante */
+                            accent: '#0EA5E9', /* Azul Cielo */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .glass-nav {
+            background: rgba(11, 43, 70, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #FDCB58, #F7A600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Línea de tiempo personalizada */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, #1B3D6D, #F7A600, #1B3D6D, transparent);
+            transform: translateX(-50%);
+        }
+        @media (max-width: 768px) {
+            .timeline-line::before {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
+                    <img class="h-12 w-auto transition-transform transform group-hover:scale-110 duration-500" src="/public/assets/logo.png" alt="Zolaris Logo">
+                    <div class="hidden md:block">
+                        <span class="block text-2xl font-bold tracking-tight text-white leading-none">ZOLARIS</span>
+                        <span class="block text-[10px] uppercase tracking-[0.3em] text-zolaris-yellow">Paneles Solares</span>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:flex space-x-8 items-center">
+                    <a href="index.html" class="text-white font-medium hover:text-zolaris-yellow transition-colors relative group">
+                        Inicio
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-zolaris-yellow transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="nosotros.html" class="text-slate-300 font-medium hover:text-white transition-colors">Nosotros</a>
+                    <a href="proyectos.html" class="text-slate-300 font-medium hover:text-white transition-colors">Proyectos</a>
+                    <a href="servicios.html" class="text-slate-300 font-medium hover:text-white transition-colors">Servicios</a>
+                    
+                    <a href="calculadora.html" class="group relative px-6 py-3 font-bold text-zolaris-navy rounded-full bg-gradient-to-r from-zolaris-yellow to-zolaris-orange shadow-[0_0_20px_rgba(247,166,0,0.3)] hover:shadow-[0_0_30px_rgba(247,166,0,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
+                        <span class="relative z-10 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            Calculadora Solar
+                        </span>
+                        <div class="absolute inset-0 h-full w-full bg-white/30 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+                    </a>
+                </div>
+
+                <div class="lg:hidden flex items-center">
+                    <button class="text-white hover:text-zolaris-yellow focus:outline-none">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative pt-40 pb-24 overflow-hidden">
+        <div class="absolute inset-0 bg-zolaris-navy">
+            <div class="absolute inset-0 bg-grid-pattern bg-[size:40px_40px] opacity-[0.05]"></div>
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-zolaris-blue/30 rounded-full blur-[120px]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+            <span class="inline-block py-1 px-3 rounded-full bg-slate-800 border border-slate-700 text-zolaris-orange text-xs font-bold tracking-widest uppercase mb-6">
+                Soluciones Integrales
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
+                No vendemos paneles, <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-zolaris-yellow to-zolaris-orange">diseñamos independencia.</span>
+            </h1>
+            <p class="text-xl text-slate-400 max-w-2xl mx-auto font-light">
+                Desde sistemas residenciales hasta infraestructura crítica industrial. Adaptamos la tecnología solar a tus necesidades específicas.
+            </p>
+        </div>
+    </header>
+
+    <section class="py-16 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div class="service-card bg-slate-800/50 border border-slate-700 rounded-3xl p-8 hover:bg-slate-800 transition-colors group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-zolaris-orange/10 rounded-bl-full transition-transform group-hover:scale-150"></div>
+                    <div class="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center mb-6 text-zolaris-orange shadow-lg">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Residencial</h3>
+                    <p class="text-slate-400 mb-6 leading-relaxed">
+                        Transforma tu hogar en una fuente de energía limpia. Reduce tu factura hasta en un 100% y valoriza tu propiedad.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Sistemas Interconectados (On-Grid)
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Sistemas Híbridos con Baterías
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Monitoreo desde App Móvil
+                        </li>
+                    </ul>
+                    <a href="proyectos.html" class="inline-flex items-center text-zolaris-orange font-bold text-sm hover:underline">
+                        Ver casos de éxito (Casa Villa Campanela)
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="service-card bg-slate-800/50 border border-slate-700 rounded-3xl p-8 hover:bg-slate-800 transition-colors group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-zolaris-blue/10 rounded-bl-full transition-transform group-hover:scale-150"></div>
+                    <div class="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center mb-6 text-zolaris-blue shadow-lg">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Comercial & Industrial</h3>
+                    <p class="text-slate-400 mb-6 leading-relaxed">
+                        Convierte un gasto fijo en una inversión rentable. Mejora tu competitividad y cumple metas de sostenibilidad corporativa.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Beneficios Tributarios (Ley 1715)
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Reducción de Costos Operativos
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Respaldo de Energía Crítica
+                        </li>
+                    </ul>
+                    <a href="proyectos.html" class="inline-flex items-center text-zolaris-blue font-bold text-sm hover:underline">
+                        Ver casos de éxito (Cueros El Mural)
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="service-card bg-slate-800/50 border border-slate-700 rounded-3xl p-8 hover:bg-slate-800 transition-colors group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-green-500/10 rounded-bl-full transition-transform group-hover:scale-150"></div>
+                    <div class="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center mb-6 text-green-500 shadow-lg">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Agro & Rural</h3>
+                    <p class="text-slate-400 mb-6 leading-relaxed">
+                        Lleva energía donde la red no llega. Soluciones robustas para bombeo de agua y electrificación rural.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Bombeo Solar Directo (Riego)
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Sistemas Aislados (Off-Grid)
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Cero Combustible / Ruido
+                        </li>
+                    </ul>
+                    <a href="proyectos.html" class="inline-flex items-center text-green-400 font-bold text-sm hover:underline">
+                        Ver casos de éxito (Finca Pasizara)
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-slate-900 border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-zolaris-blue font-bold uppercase tracking-widest text-sm">Metodología Zolaris</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mt-2">¿Cómo hacemos realidad tu proyecto?</h2>
+            </div>
+
+            <div class="relative">
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-slate-700 -translate-y-1/2 z-0"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+                    
+                    <div class="text-center group">
+                        <div class="w-20 h-20 mx-auto bg-slate-800 border-4 border-slate-700 rounded-full flex items-center justify-center text-2xl font-bold text-white mb-6 group-hover:border-zolaris-orange group-hover:scale-110 transition-all shadow-xl">
+                            1
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Diagnóstico</h3>
+                        <p class="text-slate-400 text-sm px-4">Analizamos tu consumo actual y visitamos tu ubicación para entender la viabilidad técnica.</p>
+                    </div>
+
+                    <div class="text-center group">
+                        <div class="w-20 h-20 mx-auto bg-slate-800 border-4 border-slate-700 rounded-full flex items-center justify-center text-2xl font-bold text-white mb-6 group-hover:border-zolaris-orange group-hover:scale-110 transition-all shadow-xl">
+                            2
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Diseño</h3>
+                        <p class="text-slate-400 text-sm px-4">Ingeniería a medida. Seleccionamos la mejor tecnología (paneles, inversores) para tu presupuesto.</p>
+                    </div>
+
+                    <div class="text-center group">
+                        <div class="w-20 h-20 mx-auto bg-slate-800 border-4 border-slate-700 rounded-full flex items-center justify-center text-2xl font-bold text-white mb-6 group-hover:border-zolaris-orange group-hover:scale-110 transition-all shadow-xl">
+                            3
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Instalación</h3>
+                        <p class="text-slate-400 text-sm px-4">Ejecución certificada bajo norma RETIE. Cuidamos la estética y seguridad de tu infraestructura.</p>
+                    </div>
+
+                    <div class="text-center group">
+                        <div class="w-20 h-20 mx-auto bg-slate-800 border-4 border-slate-700 rounded-full flex items-center justify-center text-2xl font-bold text-white mb-6 group-hover:border-zolaris-orange group-hover:scale-110 transition-all shadow-xl">
+                            4
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Monitoreo</h3>
+                        <p class="text-slate-400 text-sm px-4">Activamos el sistema y te damos acceso a la App para ver tu ahorro en tiempo real.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 relative overflow-hidden">
+        <div class="absolute right-0 top-0 w-1/2 h-full bg-zolaris-orange/5 clip-path-polygon"></div>
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-zolaris-orange font-bold uppercase tracking-widest text-sm">Post-Venta</span>
+                <h2 class="text-4xl font-bold text-white mt-2 mb-6">Nunca te dejamos solo</h2>
+                <p class="text-slate-400 text-lg mb-8">
+                    La energía solar es una inversión a largo plazo (25+ años). Nuestro servicio de mantenimiento asegura que tu sistema rinda al 100% siempre.
+                </p>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center shrink-0 text-zolaris-orange">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold">Mantenimiento Preventivo</h4>
+                            <p class="text-slate-500 text-sm">Limpieza técnica de paneles y revisión de conexiones eléctricas.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center shrink-0 text-zolaris-orange">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold">Monitoreo Remoto</h4>
+                            <p class="text-slate-500 text-sm">Detectamos alertas antes de que afecten tu producción de energía.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="relative h-96 rounded-2xl overflow-hidden shadow-2xl group">
+                <img src="/public/assets/Proyectos/carnesNiko/foto1.JPG" alt="Mantenimiento Solar" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-zolaris-navy/90 to-transparent"></div>
+                <div class="absolute bottom-8 left-8 right-8 bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20">
+                    <p class="text-white font-bold text-lg">"El servicio post-venta de Zolaris es lo que nos da tranquilidad operativa."</p>
+                    <p class="text-zolaris-yellow text-sm mt-2">- Gerencia Caernes Niko</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#0B1221]">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-white text-center mb-12">Preguntas Frecuentes</h2>
+            
+            <div class="space-y-4">
+                <details class="group bg-slate-800/50 rounded-xl border border-slate-700 open:border-zolaris-orange/50 transition-colors">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6">
+                        <span class="text-white text-lg">¿Cuánto tiempo duran los paneles solares?</span>
+                        <span class="transition group-open:rotate-180">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" class="text-zolaris-orange"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-400 px-6 pb-6 text-sm leading-relaxed">
+                        Los paneles solares modernos están diseñados para durar más de 25 a 30 años. Incluso después de este tiempo, siguen produciendo energía, aunque con una eficiencia ligeramente menor (alrededor del 80%).
+                    </div>
+                </details>
+
+                <details class="group bg-slate-800/50 rounded-xl border border-slate-700 open:border-zolaris-orange/50 transition-colors">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6">
+                        <span class="text-white text-lg">¿Qué pasa si está nublado o llueve?</span>
+                        <span class="transition group-open:rotate-180">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" class="text-zolaris-orange"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-400 px-6 pb-6 text-sm leading-relaxed">
+                        Los paneles siguen generando energía con radiación difusa (días nublados), aunque en menor cantidad. Para las noches, si tienes un sistema conectado a la red, usas la energía de la red eléctrica, o si tienes baterías, usas la energía almacenada.
+                    </div>
+                </details>
+
+                <details class="group bg-slate-800/50 rounded-xl border border-slate-700 open:border-zolaris-orange/50 transition-colors">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6">
+                        <span class="text-white text-lg">¿En cuánto tiempo recupero mi inversión?</span>
+                        <span class="transition group-open:rotate-180">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" class="text-zolaris-orange"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-400 px-6 pb-6 text-sm leading-relaxed">
+                        Depende de tu tarifa actual y consumo, pero en Colombia el retorno de inversión promedio oscila entre 3 y 5 años. Considerando la vida útil de 25+ años, tienes más de 20 años de energía prácticamente gratis.
+                    </div>
+                </details>
+
+                <details class="group bg-slate-800/50 rounded-xl border border-slate-700 open:border-zolaris-orange/50 transition-colors">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6">
+                        <span class="text-white text-lg">¿Gestionan los trámites con la empresa de energía?</span>
+                        <span class="transition group-open:rotate-180">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" class="text-zolaris-orange"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-400 px-6 pb-6 text-sm leading-relaxed">
+                        ¡Sí! En Zolaris nos encargamos de todo el proceso de legalización ante el operador de red (Cedenar u otros) y la certificación RETIE, para que tú no tengas que preocuparte por el papeleo.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-zolaris-navy text-slate-300 pt-20 pb-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div class="space-y-4">
+                    <img src="/public/assets/logo.png" alt="Zolaris" class="h-16 brightness-0 invert">
+                    <p class="text-sm leading-relaxed max-w-xs">
+                        El futuro de la energía es solar. Acompañamos tu transición energética con tecnología, confianza y excelencia.
+                    </p>
+                    <div class="flex gap-4 pt-2">
+                        
+                        <a href="https://www.instagram.com/zolarisingenieria/" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-zolaris-orange hover:text-white transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-6">Navegación</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="index.html" class="hover:text-zolaris-orange transition-colors">Inicio</a></li>
+                        <li><a href="nosotros.html" class="hover:text-zolaris-orange transition-colors">Nuestra Historia</a></li>
+                        <li><a href="proyectos.html" class="hover:text-zolaris-orange transition-colors">Portafolio</a></li>
+                        <li><a href="calculadora.html" class="hover:text-zolaris-orange transition-colors">Calculadora Solar</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-6">Legal</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-zolaris-orange transition-colors">Política de Privacidad</a></li>
+                        <li><a href="#" class="hover:text-zolaris-orange transition-colors">Términos y Condiciones</a></li>
+                        <li><a href="#" class="hover:text-zolaris-orange transition-colors">Tratamiento de Datos</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-6">Contacto</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-zolaris-orange mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span>Cra. 37 #19b-35. Oficina 1005. Pasto, Nariño<br>Colombia</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-zolaris-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <span>tramites.zolaris@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                <p>&copy; 2026 Zolaris Ingeniería S.A.S. Todos los derechos reservados.</p>
+                <p>Desarrollado por Ivan Andres Zuñiga</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+                navbar.classList.replace('h-24', 'h-20');
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.classList.replace('h-20', 'h-24');
+            }
+        });
+    </script>
+</body>
+</html>

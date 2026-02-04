@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portafolio de Proyectos | Zolaris</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        zolaris: {
+                            navy: '#0B2B46',   /* Azul Oscuro */
+                            blue: '#1B3D6D',   /* Azul Medio */
+                            light: '#E2E8F0',  /* Gris Azulado */
+                            orange: '#F7A600', /* Naranja Solar */
+                            yellow: '#FDCB58', /* Amarillo Brillante */
+                            accent: '#0EA5E9', /* Azul Cielo */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .glass-nav {
+            background: rgba(11, 43, 70, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #FDCB58, #F7A600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Línea de tiempo personalizada */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, #1B3D6D, #F7A600, #1B3D6D, transparent);
+            transform: translateX(-50%);
+        }
+        @media (max-width: 768px) {
+            .timeline-line::before {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
+                    <img class="h-12 w-auto transition-transform transform group-hover:scale-110 duration-500" src="/public/assets/logo.png" alt="Zolaris Logo">
+                    <div class="hidden md:block">
+                        <span class="block text-2xl font-bold tracking-tight text-white leading-none">ZOLARIS</span>
+                        <span class="block text-[10px] uppercase tracking-[0.3em] text-zolaris-yellow">Paneles Solares</span>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:flex space-x-8 items-center">
+                    <a href="index.html" class="text-white font-medium hover:text-zolaris-yellow transition-colors relative group">
+                        Inicio
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-zolaris-yellow transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="nosotros.html" class="text-slate-300 font-medium hover:text-white transition-colors">Nosotros</a>
+                    <a href="proyectos.html" class="text-slate-300 font-medium hover:text-white transition-colors">Proyectos</a>
+                    <a href="servicios.html" class="text-slate-300 font-medium hover:text-white transition-colors">Servicios</a>
+                    
+                    <a href="calculadora.html" class="group relative px-6 py-3 font-bold text-zolaris-navy rounded-full bg-gradient-to-r from-zolaris-yellow to-zolaris-orange shadow-[0_0_20px_rgba(247,166,0,0.3)] hover:shadow-[0_0_30px_rgba(247,166,0,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
+                        <span class="relative z-10 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            Calculadora Solar
+                        </span>
+                        <div class="absolute inset-0 h-full w-full bg-white/30 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+                    </a>
+                </div>
+
+                <div class="lg:hidden flex items-center">
+                    <button class="text-white hover:text-zolaris-yellow focus:outline-none">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative pt-40 pb-20 bg-zolaris-navy overflow-hidden">
+        <div class="absolute inset-0 bg-[url('/assets/pattern-solar.png')] opacity-5"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-zolaris-orange/20 rounded-full blur-[100px]"></div>
+        <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
+            <span class="text-zolaris-orange font-bold uppercase tracking-widest text-sm mb-2 block">Portafolio</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+                Ingeniería que genera <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-zolaris-yellow to-zolaris-orange">resultados reales</span>
+            </h1>
+            <p class="text-slate-400 max-w-2xl mx-auto text-lg">
+                18 proyectos ejecutados con éxito. 100% de ahorro energético garantizado en cada instalación.
+            </p>
+        </div>
+    </header>
+
+    <section class="sticky top-20 z-40 bg-slate-900/95 backdrop-blur-md py-4 border-b border-slate-800 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-center gap-3">
+            <button onclick="renderProjects('all')" class="filter-btn active px-5 py-2 rounded-full border border-slate-700 text-slate-300 hover:border-zolaris-orange hover:text-white transition-all text-sm">Todos</button>
+            <button onclick="renderProjects('residencial')" class="filter-btn px-5 py-2 rounded-full border border-slate-700 text-slate-300 hover:border-zolaris-orange hover:text-white transition-all text-sm">Residencial</button>
+            <button onclick="renderProjects('comercial')" class="filter-btn px-5 py-2 rounded-full border border-slate-700 text-slate-300 hover:border-zolaris-orange hover:text-white transition-all text-sm">Comercial</button>
+            <button onclick="renderProjects('agro')" class="filter-btn px-5 py-2 rounded-full border border-slate-700 text-slate-300 hover:border-zolaris-orange hover:text-white transition-all text-sm">Agro / Rural</button>
+            <button onclick="renderProjects('institucional')" class="filter-btn px-5 py-2 rounded-full border border-slate-700 text-slate-300 hover:border-zolaris-orange hover:text-white transition-all text-sm">Institucional</button>
+        </div>
+    </section>
+
+    <section class="py-16 bg-[#0f172a] min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                </div>
+        </div>
+    </section>
+
+    <div id="project-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+        
+        <div class="relative bg-slate-900 w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl border border-slate-700 transform transition-all scale-95 opacity-0 flex flex-col md:flex-row" id="modal-content">
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-20 w-10 h-10 bg-black/60 backdrop-blur rounded-full text-white flex items-center justify-center hover:bg-zolaris-orange transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <div class="w-full md:w-1/2 h-64 md:h-auto relative">
+                <img id="modal-img" src="" class="absolute inset-0 w-full h-full object-cover" alt="Proyecto">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent md:bg-gradient-to-r"></div>
+            </div>
+
+            <div class="w-full md:w-1/2 p-8 md:p-10 flex flex-col justify-center overflow-y-auto max-h-[80vh] md:max-h-full">
+                <div class="flex items-center gap-2 mb-2">
+                    <span id="modal-cat" class="px-3 py-1 rounded-full bg-zolaris-blue/30 text-zolaris-orange text-xs font-bold uppercase tracking-wider border border-zolaris-blue/50">Categoría</span>
+                    <span class="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-bold uppercase tracking-wider border border-green-500/30">100% Ahorro</span>
+                </div>
+                
+                <h2 id="modal-title" class="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">Titulo</h2>
+                
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700">
+                        <p class="text-slate-400 text-xs uppercase mb-1">Paneles</p>
+                        <p id="modal-panels" class="text-white font-bold text-lg">0</p>
+                    </div>
+                    <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700">
+                        <p class="text-slate-400 text-xs uppercase mb-1">Potencia Instalada</p>
+                        <p id="modal-power" class="text-white font-bold text-lg">0 kW</p>
+                    </div>
+                    <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700 col-span-2 relative overflow-hidden group">
+                        <div class="absolute right-0 top-0 p-2 opacity-10 text-green-500"><svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.15-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39h-2.07c-.06-.63-.4-1.51-1.83-1.51-1.4 0-2 .96-2 1.38 0 1.11 2.02 1.62 2.98 1.88 2.45.68 4.05 1.58 4.05 3.65 0 1.69-1.39 2.91-3.16 3.35z"/></svg></div>
+                        <p class="text-green-400 text-xs uppercase mb-1 font-bold">Ahorro Mensual Estimado</p>
+                        <p id="modal-savings" class="text-white font-bold text-2xl">0 COP</p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <p class="flex items-center gap-2 text-slate-400 text-sm mb-2">
+                        <svg class="w-4 h-4 text-zolaris-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        Ubicación del Proyecto
+                    </p>
+                    <p id="modal-location" class="text-white font-mono text-xs bg-black/30 p-3 rounded-lg border border-slate-700 select-all"></p>
+                </div>
+
+                <div class="mt-auto">
+                    <a href="calculadora.html" class="flex justify-center items-center gap-3 w-full py-4 bg-gradient-to-r from-zolaris-orange to-zolaris-yellow text-zolaris-navy font-bold rounded-xl hover:shadow-[0_0_20px_rgba(247,166,0,0.4)] transition-all">
+                        Cotizar un proyecto así
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-zolaris-navy text-slate-300 pt-20 pb-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div class="space-y-4">
+                    <img src="/public/assets/logo.png" alt="Zolaris" class="h-16 brightness-0 invert">
+                    <p class="text-sm leading-relaxed max-w-xs">
+                        El futuro de la energía es solar. Acompañamos tu transición energética con tecnología, confianza y excelencia.
+                    </p>
+                    <div class="flex gap-4 pt-2">
+                        
+                        <a href="https://www.instagram.com/zolarisingenieria/" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-zolaris-orange hover:text-white transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-6">Navegación</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="index.html" class="hover:text-zolaris-orange transition-colors">Inicio</a></li>
+                        <li><a href="nosotros.html" class="hover:text-zolaris-orange transition-colors">Nuestra Historia</a></li>
+                        <li><a href="proyectos.html" class="hover:text-zolaris-orange transition-colors">Portafolio</a></li>
+                        <li><a href="calculadora.html" class="hover:text-zolaris-orange transition-colors">Calculadora Solar</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-6">Legal</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-zolaris-orange transition-colors">Política de Privacidad</a></li>
+                        <li><a href="#" class="hover:text-zolaris-orange transition-colors">Términos y Condiciones</a></li>
+                        <li><a href="#" class="hover:text-zolaris-orange transition-colors">Tratamiento de Datos</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-6">Contacto</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-zolaris-orange mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span>Cra. 37 #19b-35. Oficina 1005. Pasto, Nariño<br>Colombia</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-zolaris-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <span>tramites.zolaris@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                <p>&copy; 2026 Zolaris Ingeniería S.A.S. Todos los derechos reservados.</p>
+                <p>Desarrollado por Ivan Andres Zuñiga</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // BASE DE DATOS DE PROYECTOS (Fuente: Información proyectos.txt)
+        const projectsData = [
+            {
+                id: 1, title: "Tienda Las Cuadras", category: "comercial",
+                panels: 10, power: "6.15 kW", savings: "$ 580.000 COP",
+                location: `Lat: 1°13'21.82"N | Long: 77°16'46.77"O`,
+                img: "/public/assets/Proyectos/tiendalascuadras/foto1.PNG"
+            },
+            {
+                id: 2, title: "Subestación CEDENAR", category: "institucional",
+                panels: 32, power: "20 kW", savings: "$ 1.900.000 COP",
+                location: `Lat: 1°41'55.02"N | Long: 78°46'4.61"O`,
+                img: "/public/assets/Proyectos/subestacionCEDENAR/foto3.JPG"
+            },
+            {
+                id: 3, title: "La Cancha", category: "comercial",
+                panels: 92, power: "52.5 kW", savings: "$ 4.800.000 COP",
+                location: "Pasto, Nariño (Zona Recreativa)",
+                img: "/public/assets/Proyectos/lacancha/foto1.jpg"
+            },
+            {
+                id: 4, title: "Finca Remolino", category: "agro",
+                panels: 15, power: "10.95 kW", savings: "$ 850.000 COP",
+                location: `Lat: 1°40'17.10"N | Long: 77°19'57.75"O`,
+                img: "/public/assets/Proyectos/fincaremolino/foto1.jpeg"
+            },
+            {
+                id: 5, title: "Finca Pasizara", category: "agro",
+                panels: 20, power: "12.3 kW", savings: "$ 1.100.000 COP",
+                location: `Lat: 1°22'52.47"N | Long: 77°15'23.36"O`,
+                img: "/public/assets/Proyectos/fincapasizara/foto1.PNG"
+            },
+            {
+                id: 6, title: "Finca Cafetera", category: "agro",
+                panels: 8, power: "4.68 kW", savings: "$ 410.000 COP",
+                location: `Lat: 1°21'34.13"N | Long: 77°14'57.92"O`,
+                img: "/public/assets/Proyectos/fincacafetera/foto1.PNG"
+            },
+            {
+                id: 7, title: "Edificio Maridiaz", category: "residencial",
+                panels: 32, power: "20 kW", savings: "$ 2.120.000 COP",
+                location: `1.222515, -77.284007`,
+                img: "/public/assets/Proyectos/edificiomaridiaz/foto1.PNG"
+            },
+            {
+                id: 8, title: "Edificio CEIE", category: "institucional",
+                panels: 33, power: "25 kW", savings: "$ 2.200.000 COP",
+                location: "Centro de Estudios Internacionales",
+                img: "/public/assets/Proyectos/edificiointeligenteCEIE/foto1.jpg"
+            },
+            {
+                id: 9, title: "Cueros El Mural", category: "comercial",
+                panels: 10, power: "7 kW", savings: "$ 650.000 COP",
+                location: `1.214932, -77.283052`,
+                img: "/public/assets/Proyectos/cueroselmural/foto1.JPG"
+            },
+            {
+                id: 10, title: "Clinical SPA", category: "comercial",
+                panels: 50, power: "36.5 kW", savings: "$ 3.400.000 COP",
+                location: "Pasto, Nariño",
+                img: "/public/assets/Proyectos/clinicaSPA/foto1.jpg"
+            },
+            {
+                id: 11, title: "Casa Villa Campanela", category: "residencial",
+                panels: 5, power: "3.07 kW", savings: "$ 280.000 COP",
+                location: `1.213375, -77.292828`,
+                img: "/public/assets/Proyectos/casavillacampanela/foto1.JPG"
+            },
+            {
+                id: 12, title: "Casa San Javier", category: "residencial",
+                panels: 5, power: "3.07 kW", savings: "$ 280.000 COP",
+                location: `Medellín: 6.257727, -76.624931`,
+                img: "/public/assets/Proyectos/casasanjaviermedellin/foto1.PNG"
+            },
+            {
+                id: 13, title: "Casa San Antonio", category: "residencial",
+                panels: 8, power: "4.92 kW", savings: "$ 420.000 COP",
+                location: `Lat: 1°23'26.69"N | Long: 77°14'12.16"O`,
+                img: "/public/assets/Proyectos/casasanantonio/foto1.jpg"
+            },
+            {
+                id: 14, title: "Casa Morasurco", category: "residencial",
+                panels: 5, power: "3.07 kW", savings: "$ 280.000 COP",
+                location: `1.229388, -77.282219`,
+                img: "/public/assets/Proyectos/casamorasurco/foto1.jpeg"
+            },
+            {
+                id: 15, title: "Casa Briceño", category: "residencial",
+                panels: 35, power: "18 kW", savings: "$ 1.700.000 COP",
+                location: `1.242439, -77.306375`,
+                note: "Incluye 2 baterías (10kW)",
+                img: "/public/assets/Proyectos/casabriceño/foto1.PNG"
+            },
+            {
+                id: 16, title: "Casa Aquine 2", category: "residencial",
+                panels: 6, power: "3.69 kW", savings: "$ 310.000 COP",
+                location: "Cra. 21 #23-2 a 23-42, Pasto",
+                img: "/public/assets/Proyectos/casaaquine2/foto1.jpg"
+            },
+            {
+                id: 17, title: "Carnes Niko", category: "comercial",
+                panels: 65, power: "40 kW", savings: "$ 4.500.000 COP",
+                location: `1.210646, -77.284906`,
+                img: "/public/assets/Proyectos/carnesNiko/foto1.JPG"
+            },
+            {
+                id: 18, title: "Cabañas San Antonio", category: "comercial",
+                panels: 6, power: "3.69 kW", savings: "$ 310.000 COP",
+                location: `Lat: 1°23'25.50"N | Long: 77°14'12.05"O`,
+                img: "/public/assets/Proyectos/cabañassanantonio/foto1.JPG"
+            }
+        ];
+
+        const container = document.getElementById('projects-container');
+        const modal = document.getElementById('project-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        // RENDERIZAR PROYECTOS
+        function renderProjects(filter = 'all') {
+            container.innerHTML = ''; // Limpiar
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Actualizar botones
+            buttons.forEach(btn => {
+                btn.classList.remove('active', 'border-zolaris-orange', 'text-white');
+                if (btn.textContent.toLowerCase().includes(filter === 'agro' ? 'agro' : filter)) {
+                    btn.classList.add('active');
+                }
+                if (filter === 'all' && btn.textContent === 'Todos') btn.classList.add('active');
+            });
+
+            // Filtrar y Crear HTML
+            const filtered = filter === 'all' 
+                ? projectsData 
+                : projectsData.filter(p => p.category === filter);
+
+            filtered.forEach(p => {
+                const card = document.createElement('article');
+                card.className = "project-card group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer shadow-lg fade-enter";
+                card.onclick = () => openModal(p.id);
+                
+                card.innerHTML = `
+                    <img src="${p.img}" alt="${p.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zolaris-navy via-zolaris-navy/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    
+                    <div class="absolute bottom-0 left-0 w-full p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <span class="text-zolaris-orange text-[10px] font-bold uppercase tracking-wider mb-1 block">${p.category}</span>
+                                <h3 class="text-xl font-bold text-white leading-tight">${p.title}</h3>
+                            </div>
+                        </div>
+                        <div class="mt-3 flex items-center gap-4 text-slate-300 text-xs border-t border-white/20 pt-3 opacity-0 group-hover:opacity-100 transition-opacity delay-75">
+                            <div class="flex items-center gap-1">
+                                <svg class="w-4 h-4 text-zolaris-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                <span>${p.power}</span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>Ahorro</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // LOGICA MODAL
+        function openModal(id) {
+            const p = projectsData.find(item => item.id === id);
+            if (!p) return;
+
+            document.getElementById('modal-img').src = p.img;
+            document.getElementById('modal-title').innerText = p.title;
+            document.getElementById('modal-cat').innerText = p.category;
+            document.getElementById('modal-panels').innerText = p.panels + " Unidades";
+            document.getElementById('modal-power').innerText = p.power;
+            document.getElementById('modal-savings').innerText = p.savings;
+            document.getElementById('modal-location').innerText = p.location;
+
+            // Nota especial para Casa Briceño
+            if (p.note) {
+                 document.getElementById('modal-power').innerHTML = `${p.power} <br><span class="text-xs text-zolaris-yellow">(${p.note})</span>`;
+            }
+
+            modal.classList.remove('hidden');
+            // Timeout para permitir animación
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Navbar Scroll Logic
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.replace('h-24', 'h-20');
+            } else {
+                navbar.classList.replace('h-20', 'h-24');
+            }
+        });
+
+        // Init
+        renderProjects('all');
+    </script>
+</body>
+</html>

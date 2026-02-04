@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
-import { resolve } from 'path';
+import { resolve } from 'path'; // Importante para manejar rutas
 
 export default defineConfig({
   plugins: [
@@ -11,6 +11,9 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         nosotros: resolve(__dirname, 'nosotros.html'),
+        proyectos: resolve(__dirname, 'proyectos.html'),
+        servicios: resolve(__dirname, 'servicios.html'),
+        calculadora: resolve(__dirname, 'calculadora.html'),
       },
     },
   },
