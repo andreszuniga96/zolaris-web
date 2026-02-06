@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zolaris Web3 | Panel de Energía Tokenizada</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        zolaris: {
+                            navy: '#0B2B46',
+                            blue: '#1B3D6D',
+                            light: '#E2E8F0',
+                            orange: '#F7A600',
+                            yellow: '#FDCB58',
+                            accent: '#0EA5E9',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { background-color: #0f172a; color: #f8fafc; }
+        .glass-nav { background: rgba(11, 43, 70, 0.90); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .glass-panel { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        /* Efecto Neon para elementos Web3 */
+        .neon-border { box-shadow: 0 0 15px rgba(14, 165, 233, 0.3); transition: all 0.3s ease; }
+        .neon-border:hover { box-shadow: 0 0 25px rgba(247, 166, 0, 0.5); border-color: #F7A600; }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer">
+                    <img class="h-10 w-auto" src="/public/assets/logo.png" alt="Zolaris Logo">
+                    <div class="hidden md:block">
+                        <span class="block text-xl font-bold text-white leading-none">ZOLARIS</span>
+                        <span class="block text-[9px] uppercase tracking-[0.3em] text-zolaris-accent">Web3 Dashboard</span>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:flex space-x-8 items-center">
+                    <a href="index.html" class="text-slate-400 hover:text-white transition-colors">Volver al Home</a>
+                </div>
+
+                <div>
+                    <button id="connect-wallet-btn" onclick="connectWallet()" class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-zolaris-blue hover:from-zolaris-orange hover:to-zolaris-yellow text-white font-bold rounded-full transition-all shadow-lg hover:shadow-zolaris-orange/20 border border-white/10">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <span id="wallet-text">Conectar Billetera</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-32 pb-20 relative min-h-screen">
+        <div class="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-zolaris-blue/20 to-transparent pointer-events-none"></div>
+        <div class="absolute top-20 right-0 w-96 h-96 bg-zolaris-orange/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                
+                <div class="lg:col-span-2 glass-panel rounded-3xl p-8 relative overflow-hidden neon-border group">
+                    <div class="absolute top-0 right-0 p-6 opacity-20">
+                        <svg class="w-32 h-32 text-zolaris-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5 10 5 10-5-5-2.5-5 2.5z"/></svg>
+                    </div>
+                    
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 bg-zolaris-orange rounded-full flex items-center justify-center text-2xl shadow-lg shadow-zolaris-orange/30 animate-pulse-slow">
+                                ⚡
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">Zolaris Energy Token</h2>
+                                <p class="text-zolaris-accent text-xs font-mono tracking-widest uppercase">ERC-20 | Polygon Network</p>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <p class="text-slate-400 text-sm uppercase mb-1">Tu Saldo Disponible</p>
+                            <div class="flex items-baseline gap-2">
+                                <h1 class="text-6xl font-extrabold text-white tracking-tight" id="token-balance">0.00</h1>
+                                <span class="text-2xl text-zolaris-yellow font-bold">ZOL</span>
+                            </div>
+                        </div>
+
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-black/30 rounded-lg border border-white/5">
+                            <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span class="text-sm text-slate-300">1 ZOL = 1 kWh de Energía Limpia Acumulada</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-3xl p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-4">Estado de Conexión</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center pb-4 border-b border-slate-700">
+                                <span class="text-slate-400">Red</span>
+                                <span class="flex items-center gap-2 text-white font-bold bg-purple-900/50 px-3 py-1 rounded-full border border-purple-500/30">
+                                    <span class="w-2 h-2 rounded-full bg-purple-500"></span> Polygon
+                                </span>
+                            </div>
+                            <div class="flex justify-between items-center pb-4 border-b border-slate-700">
+                                <span class="text-slate-400">Estado</span>
+                                <span id="connection-status" class="text-red-400 font-bold">Desconectado</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Gas (Gwei)</span>
+                                <span id="gas-price" class="text-white font-mono">--</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 bg-slate-800 rounded-xl border border-slate-700">
+                        <p class="text-xs text-slate-500 mb-1">Billetera Conectada</p>
+                        <p id="wallet-address" class="text-zolaris-accent font-mono text-sm truncate">--</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-zolaris-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    Mercado Energético & Cripto
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <div class="bg-slate-800/50 border border-slate-700 p-6 rounded-2xl flex items-center justify-between hover:border-purple-500 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <img src="https://cryptologos.cc/logos/polygon-matic-logo.png" class="w-10 h-10">
+                            <div>
+                                <p class="text-white font-bold">Polygon (MATIC)</p>
+                                <p class="text-xs text-slate-400">Token de Gas</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-white font-mono font-bold text-lg" id="price-matic">Cargando...</p>
+                            <p class="text-xs font-bold" id="change-matic">--%</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/50 border border-slate-700 p-6 rounded-2xl flex items-center justify-between hover:border-orange-500 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="w-10 h-10">
+                            <div>
+                                <p class="text-white font-bold">Bitcoin (BTC)</p>
+                                <p class="text-xs text-slate-400">Referencia Global</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-white font-mono font-bold text-lg" id="price-btc">Cargando...</p>
+                            <p class="text-xs font-bold" id="change-btc">--%</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/50 border border-slate-700 p-6 rounded-2xl flex items-center justify-between hover:border-blue-500 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="w-10 h-10">
+                            <div>
+                                <p class="text-white font-bold">Ethereum (ETH)</p>
+                                <p class="text-xs text-slate-400">L1 Network</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-white font-mono font-bold text-lg" id="price-eth">Cargando...</p>
+                            <p class="text-xs font-bold" id="change-eth">--%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-3xl overflow-hidden border border-slate-700">
+                <div class="p-6 border-b border-slate-700 bg-slate-800/30 flex justify-between items-center">
+                    <h3 class="text-lg font-bold text-white">Últimas Transacciones</h3>
+                    <button class="text-xs text-zolaris-accent hover:text-white transition-colors">Ver todo en PolygonScan</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-900/50 text-slate-400 text-xs uppercase">
+                            <tr>
+                                <th class="px-6 py-4">Tipo</th>
+                                <th class="px-6 py-4">Hash</th>
+                                <th class="px-6 py-4">Fecha</th>
+                                <th class="px-6 py-4">Monto (ZOL)</th>
+                                <th class="px-6 py-4">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm divide-y divide-slate-700">
+                            <tr class="hover:bg-slate-800/50 transition-colors">
+                                <td class="px-6 py-4 flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">↓</div>
+                                    <span class="text-white font-bold">Recibido</span>
+                                </td>
+                                <td class="px-6 py-4 text-zolaris-accent font-mono cursor-pointer hover:underline">0x8a2f...9b1c</td>
+                                <td class="px-6 py-4 text-slate-400">Hace 2 horas</td>
+                                <td class="px-6 py-4 text-white font-bold">+ 150.00</td>
+                                <td class="px-6 py-4"><span class="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs border border-green-500/20">Completado</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/50 transition-colors">
+                                <td class="px-6 py-4 flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-500">⚡</div>
+                                    <span class="text-white font-bold">Generación Solar</span>
+                                </td>
+                                <td class="px-6 py-4 text-zolaris-accent font-mono cursor-pointer hover:underline">0x3c1d...4e2f</td>
+                                <td class="px-6 py-4 text-slate-400">Ayer, 14:30</td>
+                                <td class="px-6 py-4 text-white font-bold">+ 24.50</td>
+                                <td class="px-6 py-4"><span class="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs border border-green-500/20">Completado</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="empty-state" class="hidden p-8 text-center">
+                    <p class="text-slate-500">Conecta tu billetera para ver tu historial.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURACIÓN ---
+        // NOTA PARA EL USUARIO: Cambia esta dirección por la de tu contrato real en Polygon
+        // Usamos una dirección "dummy" válida (USDT en Polygon) para que el código no rompa al probar.
+        const TOKEN_CONTRACT_ADDRESS = "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"; 
+        
+        // ABI Mínimo para leer saldo de un ERC-20
+        const TOKEN_ABI = [
+            "function balanceOf(address owner) view returns (uint256)",
+            "function decimals() view returns (uint8)",
+            "function symbol() view returns (string)"
+        ];
+
+        // Polygon Mainnet Params
+        const POLYGON_CHAIN_ID = '0x89'; // 137 en Hex
+        const POLYGON_RPC = 'https://polygon-rpc.com/';
+
+        // Elementos DOM
+        const connectBtn = document.getElementById('connect-wallet-btn');
+        const walletText = document.getElementById('wallet-text');
+        const tokenBalanceDisplay = document.getElementById('token-balance');
+        const connectionStatus = document.getElementById('connection-status');
+        const walletAddressDisplay = document.getElementById('wallet-address');
+
+        // --- 1. FUNCIÓN CONECTAR BILLETERA ---
+        async function connectWallet() {
+            // Verificar si MetaMask está instalado
+            if (typeof window.ethereum === 'undefined') {
+                alert("MetaMask no detectado. Por favor instálalo para usar esta dApp.");
+                window.open("https://metamask.io/download/", "_blank");
+                return;
+            }
+
+            try {
+                // Instanciar Provider (Ethers v6)
+                const provider = new ethers.BrowserProvider(window.ethereum);
+                
+                // Solicitar acceso a cuentas
+                const accounts = await provider.send("eth_requestAccounts", []);
+                const signer = await provider.getSigner();
+                const userAddress = await signer.getAddress();
+
+                // Actualizar UI
+                updateUIConnected(userAddress);
+
+                // Verificar Red (Polygon)
+                const network = await provider.getNetwork();
+                if (network.chainId !== 137n) { // 137n es BigInt en v6
+                    await switchToPolygon();
+                } else {
+                    connectionStatus.innerText = "Conectado a Polygon";
+                    connectionStatus.className = "text-green-400 font-bold";
+                }
+
+                // Obtener Saldo del Token
+                getTokenBalance(userAddress, provider);
+
+            } catch (error) {
+                console.error("Error conectando:", error);
+                alert("Error al conectar: " + error.message);
+            }
+        }
+
+        // --- 2. CAMBIAR DE RED AUTOMÁTICAMENTE ---
+        async function switchToPolygon() {
+            try {
+                await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: POLYGON_CHAIN_ID }],
+                });
+                connectionStatus.innerText = "Conectado a Polygon";
+                connectionStatus.className = "text-green-400 font-bold";
+            } catch (switchError) {
+                // Si la red no está agregada en MetaMask, agregarla
+                if (switchError.code === 4902) {
+                    try {
+                        await window.ethereum.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [{
+                                chainId: POLYGON_CHAIN_ID,
+                                chainName: 'Polygon Mainnet',
+                                rpcUrls: [POLYGON_RPC],
+                                nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
+                                blockExplorerUrls: ['https://polygonscan.com/']
+                            }],
+                        });
+                    } catch (addError) {
+                        console.error(addError);
+                    }
+                }
+                console.error(switchError);
+            }
+        }
+
+        // --- 3. LEER CONTRATO INTELIGENTE ---
+        async function getTokenBalance(address, provider) {
+            try {
+                const contract = new ethers.Contract(TOKEN_CONTRACT_ADDRESS, TOKEN_ABI, provider);
+                const rawBalance = await contract.balanceOf(address);
+                const decimals = await contract.decimals();
+                
+                // Formatear (ej: de 1000000 a 1.0)
+                const formattedBalance = ethers.formatUnits(rawBalance, decimals);
+                
+                // Animación de conteo simple
+                tokenBalanceDisplay.innerText = parseFloat(formattedBalance).toFixed(2);
+                
+            } catch (error) {
+                console.error("Error leyendo contrato:", error);
+                tokenBalanceDisplay.innerText = "Error";
+            }
+        }
+
+        // --- 4. UI HELPERS ---
+        function updateUIConnected(address) {
+            const shortAddress = `${address.substring(0, 6)}...${address.substring(38)}`;
+            walletText.innerText = shortAddress;
+            walletAddressDisplay.innerText = address;
+            connectBtn.classList.remove('from-blue-600', 'to-zolaris-blue');
+            connectBtn.classList.add('from-green-600', 'to-green-800', 'border-green-400');
+        }
+
+        // --- 5. MONITOR DE MERCADO (API FETCH) ---
+        async function fetchCryptoPrices() {
+            const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,matic-network&vs_currencies=usd&include_24hr_change=true';
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                updatePriceCard('btc', data.bitcoin);
+                updatePriceCard('eth', data.ethereum);
+                updatePriceCard('matic', data['matic-network']);
+
+            } catch (error) {
+                console.error("Error API Mercado:", error);
+            }
+        }
+
+        function updatePriceCard(id, data) {
+            const priceEl = document.getElementById(`price-${id}`);
+            const changeEl = document.getElementById(`change-${id}`);
+            
+            const price = data.usd.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            const change = data.usd_24h_change.toFixed(2);
+            const isPositive = data.usd_24h_change >= 0;
+
+            priceEl.innerText = price;
+            changeEl.innerText = `${isPositive ? '▲' : '▼'} ${change}%`;
+            changeEl.className = `text-xs font-bold ${isPositive ? 'text-green-400' : 'text-red-400'}`;
+        }
+
+        // Init Prices on Load
+        fetchCryptoPrices();
+        // Actualizar precios cada 60 segundos
+        setInterval(fetchCryptoPrices, 60000);
+
+    </script>
+</body>
+</html>

@@ -90,6 +90,7 @@
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-24">
+                
                 <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
                     <img class="h-12 w-auto transition-transform transform group-hover:scale-110 duration-500" src="/public/assets/logo.png" alt="Zolaris Logo">
                     <div class="hidden md:block">
@@ -99,28 +100,47 @@
                 </div>
                 
                 <div class="hidden lg:flex space-x-8 items-center">
-                    <a href="index.html" class="text-white font-medium hover:text-zolaris-yellow transition-colors relative group">
-                        Inicio
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-zolaris-yellow transition-all group-hover:w-full"></span>
-                    </a>
-                    <a href="nosotros.html" class="text-slate-300 font-medium hover:text-white transition-colors">Nosotros</a>
-                    <a href="proyectos.html" class="text-slate-300 font-medium hover:text-white transition-colors">Proyectos</a>
-                    <a href="servicios.html" class="text-slate-300 font-medium hover:text-white transition-colors">Servicios</a>
+                    <a href="index.html" class="text-slate-300 font-medium hover:text-white hover:scale-105 transition-all">Inicio</a>
+                    <a href="nosotros.html" class="text-slate-300 font-medium hover:text-white hover:scale-105 transition-all">Nuestra Historia</a>
+                    <a href="proyectos.html" class="text-slate-300 font-medium hover:text-white hover:scale-105 transition-all">Proyectos</a>
+                    <a href="servicios.html" class="text-white font-bold border-b-2 border-zolaris-yellow transition-all">Servicios</a>
                     
-                    <a href="calculadora.html" class="group relative px-6 py-3 font-bold text-zolaris-navy rounded-full bg-gradient-to-r from-zolaris-yellow to-zolaris-orange shadow-[0_0_20px_rgba(247,166,0,0.3)] hover:shadow-[0_0_30px_rgba(247,166,0,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
+                    <a href="calculadora.html" class="group relative px-6 py-3 font-bold text-zolaris-navy rounded-full bg-gradient-to-r from-zolaris-yellow to-zolaris-orange shadow-[0_0_15px_rgba(247,166,0,0.4)] hover:shadow-[0_0_25px_rgba(247,166,0,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
                         <span class="relative z-10 flex items-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                             Calculadora Solar
                         </span>
                         <div class="absolute inset-0 h-full w-full bg-white/30 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
                     </a>
+                    <a href="dashboard-web3.html" class="group relative px-6 py-3 font-bold text-zolaris-navy rounded-full bg-gradient-to-r from-zolaris-yellow to-zolaris-orange shadow-[0_0_15px_rgba(247,166,0,0.4)] hover:shadow-[0_0_25px_rgba(247,166,0,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
+                        <span class="relative z-10 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            Dashboard Web3
+                        </span>
+                        <div class="absolute inset-0 h-full w-full bg-white/30 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+                    </a>
                 </div>
 
                 <div class="lg:hidden flex items-center">
-                    <button class="text-white hover:text-zolaris-yellow focus:outline-none">
+                    <button onclick="toggleMobileMenu()" class="text-white hover:text-zolaris-yellow focus:outline-none p-2 rounded-md hover:bg-white/10 transition-colors">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
                 </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden bg-zolaris-navy/95 backdrop-blur-xl border-t border-slate-700 absolute w-full left-0 top-24 shadow-2xl transition-all duration-300 origin-top transform scale-y-0 opacity-0">
+            <div class="px-4 pt-4 pb-8 space-y-2">
+                <a href="index.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Inicio</a>
+                <a href="nosotros.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Nuestra Historia</a>
+                <a href="proyectos.html" class="block px-4 py-3 rounded-lg text-base font-medium text-white bg-white/10">Proyectos</a>
+                <a href="servicios.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Servicios</a>
+                <a href="calculadora.html" class="block mt-4 px-4 py-4 rounded-xl text-center text-base font-bold text-zolaris-navy bg-gradient-to-r from-zolaris-yellow to-zolaris-orange">
+                    Ir a Calculadora Solar
+                </a>
+                <a href="dashboard-web3.html" class="block mt-4 px-4 py-4 rounded-xl text-center text-base font-bold text-zolaris-navy bg-gradient-to-r from-zolaris-yellow to-zolaris-orange">
+                    Ir a Dashboard Web3
+                </a>
             </div>
         </div>
     </nav>
