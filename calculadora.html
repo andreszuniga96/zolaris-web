@@ -3,42 +3,34 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calculadora Solar Pro | Zolaris</title>
-    
-    <title>Calculadora Solar | Zolaris</title>
+    <title>Calculadora Solar | Zolaris Ingeniería</title>
+    <meta name="description" content="Cotiza tu sistema solar en segundos con la tecnología de Zolaris." />
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        zolaris: {
-                            navy: '#0B2B46',   /* Azul Oscuro */
-                            blue: '#1B3D6D',   /* Azul Medio */
-                            light: '#E2E8F0',  /* Gris Azulado */
-                            orange: '#F7A600', /* Naranja Solar */
-                            yellow: '#FDCB58', /* Amarillo Brillante */
-                            accent: '#0EA5E9', /* Azul Cielo */
+                        zolaris: { 
+                            navy: '#0B2B46', 
+                            blue: '#1B3D6D', 
+                            light: '#E2E8F0',
+                            orange: '#F7A600', 
+                            yellow: '#FDCB58',
+                            accent: '#0EA5E9',
+                            dark: '#0f172a'
                         }
                     },
-                    fontFamily: {
-                        sans: ['Manrope', 'sans-serif'],
-                    },
+                    fontFamily: { sans: ['Manrope', 'sans-serif'] },
                     animation: {
-                        'fade-in': 'fadeIn 1s ease-out forwards',
-                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
                     },
                     keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        slideUp: {
+                        fadeInUp: {
                             '0%': { opacity: '0', transform: 'translateY(40px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
                         }
@@ -47,49 +39,50 @@
             }
         }
     </script>
+
     <style>
-        body {
-            background-color: #0f172a;
-            color: #f8fafc;
+        body { background-color: #0f172a; color: #f8fafc; }
+        
+        /* Navbar Glass Effect idéntico a Nosotros */
+        .glass-nav { background: rgba(11, 43, 70, 0.90); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+
+        /* Estilos de inputs para la calculadora */
+        .glass-panel { 
+            background: rgba(30, 41, 59, 0.5); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
         }
-        .glass-nav {
-            background: rgba(11, 43, 70, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+        .glass-input {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            color: white;
         }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        
+        .glass-input:focus {
+            border-color: #F7A600;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(247, 166, 0, 0.2);
         }
-        .text-gradient {
-            background: linear-gradient(to right, #FDCB58, #F7A600);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        /* Range Slider Personalizado */
+        input[type="range"] { -webkit-appearance: none; background: transparent; }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; height: 20px; width: 20px;
+            border-radius: 50%; background: #F7A600; cursor: pointer;
+            margin-top: -8px; border: 2px solid #fff;
         }
-        /* Línea de tiempo personalizada */
-        .timeline-line::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 2px;
-            background: linear-gradient(to bottom, transparent, #1B3D6D, #F7A600, #1B3D6D, transparent);
-            transform: translateX(-50%);
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%; height: 4px; cursor: pointer;
+            background: rgba(255,255,255,0.2); border-radius: 2px;
         }
-        @media (max-width: 768px) {
-            .timeline-line::before {
-                left: 20px;
-            }
-        }
-        /* Hide Scrollbar */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Modals */
+        dialog::backdrop { background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(4px); }
     </style>
 </head>
-<body class="antialiased min-h-screen">
+<body class="antialiased overflow-x-hidden selection:bg-zolaris-orange selection:text-white flex flex-col min-h-screen">
 
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -149,117 +142,176 @@
         </div>
     </nav>
 
-    <main class="pt-32 pb-20 px-4">
-        <div class="max-w-6xl mx-auto">
-            <header class="text-center mb-12">
-                <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Calculadora de Eficiencia Solar</h1>
-                <p class="text-slate-400 max-w-2xl mx-auto">Obtén una pre-cotización instantánea basada en los estándares técnicos de Zolaris S.A.S.</p>
-            </header>
+    <header class="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <img src="/public/assets/fotoh1.jpg" alt="Fondo Calculadora" class="w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-b from-zolaris-navy/90 via-zolaris-navy/70 to-[#0f172a]"></div>
+        </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div class="relative z-10 text-center max-w-4xl mx-auto px-4 animate-fade-in-up">
+            <div class="inline-block mb-4 p-1 rounded-full bg-gradient-to-r from-zolaris-orange to-zolaris-yellow">
+                <div class="bg-zolaris-navy px-6 py-2 rounded-full">
+                    <span class="text-zolaris-yellow text-xs font-bold tracking-[0.3em] uppercase">Tecnología Inteligente</span>
+                </div>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
+                Calculadora Solar <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-zolaris-yellow to-zolaris-orange">Zolaris Premium</span>
+            </h1>
+            <p class="text-lg text-slate-300 font-light max-w-2xl mx-auto">
+                Descubre cuánto puedes ahorrar generando tu propia energía. Algoritmos basados en radiación real y tarifas 2026.
+            </p>
+        </div>
+    </header>
+
+    <section class="py-20 bg-[#0f172a] relative">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-zolaris-blue/10 rounded-full blur-[100px]"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
-                <section class="glass-card rounded-3xl p-8 space-y-6">
-                    <h2 class="text-xl font-bold text-zolaris-yellow flex items-center gap-2">
-                        <span class="w-8 h-8 rounded-full bg-zolaris-orange/20 flex items-center justify-center text-sm">1</span>
-                        Información del Cliente
-                    </h2>
+                <div class="lg:col-span-5 space-y-6">
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" id="lead-name" placeholder="Nombre completo" class="bg-slate-900 border border-slate-700 rounded-xl p-3 text-white focus:border-zolaris-orange outline-none">
-                        <input type="email" id="lead-email" placeholder="Correo electrónico" class="bg-slate-900 border border-slate-700 rounded-xl p-3 text-white focus:border-zolaris-orange outline-none">
-                        <input type="tel" id="lead-phone" placeholder="Celular" class="bg-slate-900 border border-slate-700 rounded-xl p-3 text-white focus:border-zolaris-orange outline-none col-span-full">
+                    <div class="glass-panel rounded-3xl p-8 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-zolaris-orange"></div>
+                        <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-zolaris-orange/20 flex items-center justify-center text-zolaris-orange text-sm">1</span>
+                            Tus Datos
+                        </h2>
                         
-                        <select id="lead-city" class="bg-slate-900 border border-slate-700 rounded-xl p-3 text-white focus:border-zolaris-orange outline-none" onchange="updateUI()">
-                            <option value="Pasto">Pasto</option>
-                            <option value="Bogotá">Bogotá</option>
-                            <option value="Medellín">Medellín</option>
-                            <option value="Cali">Cali</option>
-                            <option value="Cartagena">Cartagena</option>
-                            <option value="Barranquilla">Barranquilla</option>
-                            <option value="Chachagüí">Chachagüí</option>
-                            <option value="Taminango">Taminango</option>
-                            <option value="Otro">Otra Ciudad</option>
-                        </select>
-                        <select id="lead-roof" class="bg-slate-900 border border-slate-700 rounded-xl p-3 text-white focus:border-zolaris-orange outline-none">
-                            <option value="Teja">Teja</option>
-                            <option value="Concreto">Concreto / Plancha</option>
-                            <option value="Metal">Estructura Metálica</option>
-                            <option value="Barro">Teja de Barro</option>
-                            <option value="Policarbonato">Policarbonato</option>
-                        </select>
-                    </div>
-
-                    <hr class="border-white/5">
-
-                    <h2 class="text-xl font-bold text-zolaris-yellow flex items-center gap-2">
-                        <span class="w-8 h-8 rounded-full bg-zolaris-orange/20 flex items-center justify-center text-sm">2</span>
-                        Consumo Energético
-                    </h2>
-
-                    <div>
-                        <label class="block text-slate-400 text-xs font-bold uppercase mb-4 tracking-wider">¿Cómo deseas ingresar tu consumo?</label>
-                        <div class="grid grid-cols-2 gap-3 mb-6">
-                            <button onclick="setInputMode('bill')" id="mode-bill" class="py-3 rounded-xl border border-zolaris-orange bg-zolaris-orange/20 text-white font-bold transition-all">Valor Factura ($)</button>
-                            <button onclick="setInputMode('kwh')" id="mode-kwh" class="py-3 rounded-xl border border-slate-700 bg-transparent text-slate-400 font-medium transition-all">Consumo (kWh)</button>
-                        </div>
-
-                        <div id="input-container">
-                            <div class="flex justify-between items-end mb-2">
-                                <span class="text-slate-400 text-sm" id="input-label">Valor Factura</span>
-                                <span class="text-2xl font-bold text-zolaris-orange" id="val-display">$ 200.000</span>
-                            </div>
-                            <input type="range" id="main-slider" min="50000" max="5000000" step="10000" value="200000" class="w-full h-2 rounded-lg cursor-pointer" oninput="updateUI()">
-                        </div>
-                    </div>
-
-                    <div class="bg-zolaris-blue/10 p-4 rounded-xl border border-zolaris-blue/20">
-                        <p class="text-[11px] text-slate-400">
-                            *Cálculo técnico basado en irradiación local y paneles de 730W. Tarifa base: $940/kWh.
-                        </p>
-                    </div>
-                </section>
-
-                <section class="space-y-6">
-                    <div class="bg-gradient-to-br from-zolaris-navy to-slate-900 rounded-3xl p-8 border border-zolaris-orange/30 shadow-2xl relative overflow-hidden">
-                        <div class="relative z-10">
-                            <h2 class="text-slate-400 text-xs font-bold uppercase mb-1">Inversión Aproximada</h2>
-                            <div class="text-4xl md:text-5xl font-extrabold text-white mb-8" id="res-cost">$ 0</div>
-
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="bg-white/5 p-4 rounded-2xl border border-white/5">
-                                    <p class="text-zolaris-yellow text-[10px] font-bold uppercase">Paneles (730W)</p>
-                                    <p class="text-2xl font-bold" id="res-panels">0</p>
-                                </div>
-                                <div class="bg-white/5 p-4 rounded-2xl border border-white/5">
-                                    <p class="text-zolaris-yellow text-[10px] font-bold uppercase">Potencia Total</p>
-                                    <p class="text-2xl font-bold" id="res-power">0.0 kWp</p>
-                                </div>
-                                <div class="bg-white/5 p-4 rounded-2xl border border-white/5">
-                                    <p class="text-zolaris-yellow text-[10px] font-bold uppercase">Ahorro Mensual Est.</p>
-                                    <p class="text-2xl font-bold text-green-400" id="res-savings">$ 0</p>
-                                </div>
-                                <div class="bg-white/5 p-4 rounded-2xl border border-white/5">
-                                    <p class="text-zolaris-yellow text-[10px] font-bold uppercase">Retorno (Payback)</p>
-                                    <p class="text-2xl font-bold" id="res-payback">~0 Años</p>
-                                </div>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Nombre Completo</label>
+                                <input type="text" id="lead-name" class="w-full glass-input rounded-xl p-3 placeholder-slate-500" placeholder="Ej: Iván Andrés">
                             </div>
                             
-                            <div class="mt-4 pt-4 border-t border-white/10 grid grid-cols-2 gap-2 text-xs text-slate-400">
-                                <div>Gen. Anual: <span id="res-gen-anual" class="text-white">0</span> kWh</div>
-                                <div>Excedentes: <span id="res-excedentes" class="text-white">0</span> kWh/año</div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Celular</label>
+                                    <input type="tel" id="lead-phone" class="w-full glass-input rounded-xl p-3 placeholder-slate-500" placeholder="300 123...">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Email</label>
+                                    <input type="email" id="lead-email" class="w-full glass-input rounded-xl p-3 placeholder-slate-500" placeholder="tu@email.com">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Ciudad</label>
+                                <select id="lead-city" class="w-full glass-input rounded-xl p-3 cursor-pointer bg-slate-900" onchange="updateCalculations()">
+                                    </select>
                             </div>
                         </div>
                     </div>
 
-                    <button onclick="handleLeadSubmission()" id="btn-submit" class="w-full py-5 bg-zolaris-orange hover:bg-zolaris-yellow text-zolaris-navy font-black text-lg rounded-2xl shadow-xl transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                        <span id="btn-text">RECOGER MI COTIZACIÓN</span>
+                    <div class="glass-panel rounded-3xl p-8 relative">
+                        <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-zolaris-orange/20 flex items-center justify-center text-zolaris-orange text-sm">2</span>
+                            Consumo
+                        </h2>
+
+                        <div class="bg-slate-900/50 p-1 rounded-xl flex mb-6 border border-white/5">
+                            <button onclick="setInputMode('bill')" id="btn-mode-bill" class="flex-1 py-2 rounded-lg text-sm font-bold transition-all bg-zolaris-orange text-zolaris-navy shadow-lg">
+                                Valor Factura ($)
+                            </button>
+                            <button onclick="setInputMode('kwh')" id="btn-mode-kwh" class="flex-1 py-2 rounded-lg text-sm font-bold transition-all text-slate-400 hover:text-white">
+                                Consumo (kWh)
+                            </button>
+                        </div>
+
+                        <div class="mb-8">
+                            <div class="flex justify-between items-end mb-4">
+                                <span class="text-slate-400 font-medium" id="slider-label">Pago Mensual Promedio</span>
+                                <div class="text-right">
+                                    <span class="text-3xl font-bold text-zolaris-orange block" id="display-value">$ 200.000</span>
+                                    <span class="text-xs text-slate-500" id="display-subtext">~212 kWh/mes</span>
+                                </div>
+                            </div>
+                            <input type="range" id="consumption-slider" class="w-full mb-2" oninput="handleSliderChange(this.value)">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Tipo de Techo</label>
+                                <select id="roof-type" class="w-full glass-input rounded-xl p-2 text-sm bg-slate-900">
+                                    <option value="Teja de Barro">Teja de Barro</option>
+                                    <option value="Termoacústica">Termoacústica</option>
+                                    <option value="Placa Concreto">Placa Concreto</option>
+                                    <option value="Estructura Metálica">Estructura Metálica</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Tarifa ($/kWh)</label>
+                                <input type="number" id="kwh-price" value="940" class="w-full glass-input rounded-xl p-2 text-sm" onchange="updateCalculations()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-6">
+                    
+                    <div class="glass-panel rounded-3xl p-8 border-t-4 border-t-zolaris-orange relative overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900">
+                        <div class="absolute -right-20 -top-20 w-64 h-64 bg-zolaris-orange/10 rounded-full blur-3xl"></div>
+                        
+                        <div class="relative z-10 text-center md:text-left">
+                            <h3 class="text-zolaris-orange text-sm font-bold uppercase tracking-widest mb-2">Inversión Estimada "Llave en Mano"</h3>
+                            <div class="text-5xl md:text-7xl font-extrabold text-white mb-2" id="result-cost">$ 0</div>
+                            <p class="text-slate-500 text-xs mb-8">*Incluye Paneles, Inversores, Estructura, Ingeniería y Trámites.</p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="bg-slate-900/50 p-4 rounded-xl border border-white/5">
+                                    <p class="text-slate-400 text-[10px] uppercase font-bold">Potencia</p>
+                                    <p class="text-xl font-bold text-white" id="result-power">0 kWp</p>
+                                </div>
+                                <div class="bg-slate-900/50 p-4 rounded-xl border border-white/5">
+                                    <p class="text-slate-400 text-[10px] uppercase font-bold">Paneles (730W)</p>
+                                    <p class="text-xl font-bold text-white" id="result-panels">0</p>
+                                </div>
+                                <div class="bg-slate-900/50 p-4 rounded-xl border border-white/5">
+                                    <p class="text-green-400 text-[10px] uppercase font-bold">Ahorro Mensual</p>
+                                    <p class="text-xl font-bold text-green-400" id="result-savings">$ 0</p>
+                                </div>
+                                <div class="bg-slate-900/50 p-4 rounded-xl border border-white/5">
+                                    <p class="text-zolaris-yellow text-[10px] uppercase font-bold">Payback</p>
+                                    <p class="text-xl font-bold text-zolaris-yellow" id="result-payback">0 Años</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="glass-panel p-6 rounded-2xl flex items-center gap-4">
+                            <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center shrink-0">
+                                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-white" id="impact-co2">0 Ton</div>
+                                <div class="text-xs text-slate-400 uppercase">CO2 Evitado</div>
+                            </div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-2xl flex items-center gap-4">
+                            <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center shrink-0">
+                                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-white" id="impact-trees">0</div>
+                                <div class="text-xs text-slate-400 uppercase">Árboles</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="btn-submit" onclick="submitData()" class="group w-full py-5 bg-gradient-to-r from-zolaris-orange to-zolaris-yellow hover:from-orange-500 hover:to-yellow-400 text-zolaris-navy font-black text-lg rounded-2xl shadow-[0_0_20px_rgba(247,166,0,0.3)] transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3">
+                        <span id="btn-text">SOLICITAR PROPUESTA FORMAL</span>
+                        <svg id="btn-icon" class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                        <svg id="loading-icon" class="hidden w-6 h-6 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                     </button>
-                    <p id="status-msg" class="text-center text-xs text-slate-400 hidden"></p>
-                </section>
+                    <p class="text-center text-xs text-slate-500">Un ingeniero de Zolaris validará estos datos contigo vía WhatsApp.</p>
+                </div>
             </div>
         </div>
-    </main>
+    </section>
 
     <footer class="bg-zolaris-navy text-slate-300 pt-20 pb-10 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -287,9 +339,9 @@
                 <div>
                     <h3 class="text-white font-bold mb-6">Legal</h3>
                     <ul class="space-y-3 text-sm cursor-pointer">
-                        <li><span onclick="openLegalModal('modal-privacidad')" class="hover:text-zolaris-orange transition-colors">Política de Privacidad</span></li>
-                        <li><span onclick="openLegalModal('modal-terminos')" class="hover:text-zolaris-orange transition-colors">Términos y Condiciones</span></li>
-                        <li><span onclick="openLegalModal('modal-datos')" class="hover:text-zolaris-orange transition-colors">Tratamiento de Datos</span></li>
+                        <li><span onclick="openModal('modal-privacidad')" class="hover:text-zolaris-orange transition-colors">Política de Privacidad</span></li>
+                        <li><span onclick="openModal('modal-terminos')" class="hover:text-zolaris-orange transition-colors">Términos y Condiciones</span></li>
+                        <li><span onclick="openModal('modal-datos')" class="hover:text-zolaris-orange transition-colors">Tratamiento de Datos</span></li>
                     </ul>
                 </div>
 
@@ -315,46 +367,262 @@
         </div>
     </footer>
 
-    <div id="modal-privacidad" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeLegalModal('modal-privacidad')"></div>
+    <div id="modal-privacidad" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-privacidad')"></div>
         <div class="relative bg-slate-900 w-full max-w-2xl rounded-2xl p-8 border border-slate-700 shadow-2xl max-h-[80vh] overflow-y-auto">
             <h3 class="text-2xl font-bold text-white mb-4">Política de Privacidad</h3>
             <div class="text-slate-300 space-y-4 text-sm">
                 <p>En Zolaris Ingeniería S.A.S., valoramos su privacidad y estamos comprometidos con la protección de sus datos personales. Esta política describe cómo recopilamos, usamos y protegemos la información que usted nos proporciona a través de nuestro sitio web y servicios.</p>
                 <p>Recopilamos información personal básica, como nombre, correo electrónico y número de teléfono, únicamente cuando usted la proporciona voluntariamente a través de nuestros formularios de contacto o la calculadora solar. Estos datos se utilizan exclusivamente para brindarle la información solicitada, elaborar cotizaciones y mejorar nuestros servicios.</p>
                 <p>Zolaris no vende, alquila ni comparte su información personal con terceros con fines comerciales. Solo compartiremos sus datos si es necesario para cumplir con una obligación legal o para la ejecución de un contrato de servicio con usted (por ejemplo, trámites ante operadores de red).</p>
-                <button onclick="closeLegalModal('modal-privacidad')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
+                <p>Implementamos medidas de seguridad técnicas y organizativas para proteger sus datos contra el acceso no autorizado, la alteración o la destrucción. Sin embargo, recuerde que ninguna transmisión por Internet es 100% segura.</p>
+                <p>Usted tiene derecho a acceder, corregir o solicitar la eliminación de sus datos personales en cualquier momento contactándonos a través de nuestros canales oficiales.</p>
             </div>
+            <button onclick="closeModal('modal-privacidad')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
         </div>
     </div>
 
-    <div id="modal-terminos" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeLegalModal('modal-terminos')"></div>
+    <div id="modal-terminos" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-terminos')"></div>
         <div class="relative bg-slate-900 w-full max-w-2xl rounded-2xl p-8 border border-slate-700 shadow-2xl max-h-[80vh] overflow-y-auto">
             <h3 class="text-2xl font-bold text-white mb-4">Términos y Condiciones</h3>
             <div class="text-slate-300 space-y-4 text-sm">
                 <p>Bienvenido al sitio web de Zolaris Ingeniería S.A.S. Al acceder y utilizar este sitio, usted acepta cumplir con los siguientes términos y condiciones. Si no está de acuerdo con alguna parte de estos términos, le recomendamos no utilizar nuestros servicios.</p>
                 <p>El contenido de este sitio web, incluyendo textos, imágenes, logotipos y herramientas (como la calculadora solar), es propiedad de Zolaris o de sus licenciantes y está protegido por las leyes de propiedad intelectual. Queda prohibida su reproducción total o parcial sin autorización expresa.</p>
-                <button onclick="closeLegalModal('modal-terminos')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
+                <p>Las estimaciones proporcionadas por nuestra calculadora solar son aproximadas y se basan en promedios estadísticos. No constituyen una oferta vinculante ni garantizan ahorros exactos, ya que estos dependen de factores variables como la ubicación exacta, el clima y los hábitos de consumo.</p>
+                <p>Zolaris se reserva el derecho de modificar, suspender o interrumpir cualquier aspecto del servicio en cualquier momento sin previo aviso. No nos hacemos responsables por daños directos o indirectos derivados del uso o la imposibilidad de uso de este sitio web.</p>
+                <p>Cualquier disputa relacionada con estos términos se regirá por las leyes de la República de Colombia y se someterá a la jurisdicción de los tribunales de Pasto, Nariño.</p>
             </div>
+            <button onclick="closeModal('modal-terminos')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
         </div>
     </div>
 
-    <div id="modal-datos" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeLegalModal('modal-datos')"></div>
+    <div id="modal-datos" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-datos')"></div>
         <div class="relative bg-slate-900 w-full max-w-2xl rounded-2xl p-8 border border-slate-700 shadow-2xl max-h-[80vh] overflow-y-auto">
             <h3 class="text-2xl font-bold text-white mb-4">Tratamiento de Datos</h3>
             <div class="text-slate-300 space-y-4 text-sm">
                 <p>En cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013, Zolaris Ingeniería S.A.S. informa a los titulares de datos personales que la información recolectada será tratada de acuerdo con nuestra Política de Tratamiento de Datos.</p>
-                <p>La recolección de datos tiene como finalidad principal la gestión administrativa, comercial y operativa necesaria para la prestación de nuestros servicios de energía solar.</p>
-                <button onclick="closeLegalModal('modal-datos')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
+                <p>La recolección de datos tiene como finalidad principal la gestión administrativa, comercial y operativa necesaria para la prestación de nuestros servicios de energía solar. Esto incluye el envío de cotizaciones, información técnica y actualizaciones sobre proyectos.</p>
+                <p>Como titular de los datos, usted tiene derecho a conocer, actualizar y rectificar su información personal, así como a revocar la autorización otorgada para su tratamiento en los casos previstos por la ley.</p>
+                <p>Zolaris garantiza la confidencialidad y seguridad de la información, adoptando las medidas necesarias para evitar su adulteración, pérdida, consulta, uso o acceso no autorizado o fraudulento.</p>
+                <p>Para ejercer sus derechos de Habeas Data, puede contactarnos a través del correo electrónico tramites.zolaris@gmail.com o en nuestra oficina física en Pasto, Nariño.</p>
             </div>
+            <button onclick="closeModal('modal-datos')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
         </div>
     </div>
 
     <script>
+        // *** CONFIGURACIÓN ***
+        // PEGA AQUÍ LA URL DE TU SCRIPT DE GOOGLE QUE COPIASTE AL IMPLEMENTAR
+        const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzGTJxrUX0TjfjN9q_3Ho-nezs3s8tVv1pi81CBHpYJ3TQU3eP6dOHPBaWrIz02oVczNQ/exec"; 
 
-        // 3. Mobile Menu Toggle
+        const DEFAULT_PROD = 1840.0;
+        const POTENCIA_PANEL_W = 730;
+
+        const PRODUCCION_CIUDAD = {
+            "Medellín": 1556.4, "Envigado": 1528.5, "Rionegro": 1660.0, "Cartagena": 1840.0,
+            "Marinilla": 1662.9, "El Santuario": 1640.2, "Santa Elena": 1535.0, "Guarne": 1571.9,
+            "Copacabana": 1547.0, "Girardota": 1577.2, "Barbosa": 1546.9, "Itagui": 1535.3,
+            "Sabaneta": 1506.4, "La Estrella": 1499.1, "Caldas": 1449.7, "El Retiro": 1495.1,
+            "La Ceja": 1562.2, "La Unión": 1637.0, "El Peñol": 1613.9, "San Pedro De Los Milagros": 1552.5,
+            "Bello": 1580.8, "Santa Fe De Antioquia": 1620.4, "Sopetrán Y San Jerónimo": 1614.5,
+            "Pasto": 1332.6, "Taminango": 1560.3, "Chachagüí": 1411.5, "Bogotá": 1391.6,
+            "Cali": 1503.3, "Yumbo": 1493.3
+        };
+
+        let state = { mode: 'bill', val: 200000, city: 'Pasto', priceKwh: 940 };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            populateCities();
+            setInputMode('bill');
+            
+            // Efecto scroll navbar
+            window.addEventListener('scroll', () => {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-lg');
+                    navbar.classList.replace('h-24', 'h-20');
+                } else {
+                    navbar.classList.remove('shadow-lg');
+                    navbar.classList.replace('h-20', 'h-24');
+                }
+            });
+        });
+
+        function populateCities() {
+            const select = document.getElementById('lead-city');
+            Object.keys(PRODUCCION_CIUDAD).sort().forEach(city => {
+                const option = document.createElement('option');
+                option.value = city;
+                option.text = city;
+                if(city === 'Pasto') option.selected = true;
+                select.appendChild(option);
+            });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                setTimeout(() => menu.classList.remove('scale-y-0', 'opacity-0'), 10);
+            } else {
+                menu.classList.add('scale-y-0', 'opacity-0');
+                setTimeout(() => menu.classList.add('hidden'), 300);
+            }
+        }
+
+        function setInputMode(mode) {
+            state.mode = mode;
+            const slider = document.getElementById('consumption-slider');
+            const btnBill = document.getElementById('btn-mode-bill');
+            const btnKwh = document.getElementById('btn-mode-kwh');
+            
+            const activeClass = "bg-zolaris-orange text-zolaris-navy shadow-lg";
+            const inactiveClass = "text-slate-400 hover:text-white bg-transparent shadow-none";
+
+            if(mode === 'bill') {
+                slider.min = 50000; slider.max = 3000000; slider.step = 10000;
+                if(state.val < 50000) state.val = 200000;
+                document.getElementById('slider-label').innerText = "Pago Mensual Promedio ($)";
+                btnBill.className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${activeClass}`;
+                btnKwh.className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${inactiveClass}`;
+            } else {
+                slider.min = 50; slider.max = 3500; slider.step = 10;
+                if(state.val > 5000) state.val = Math.round(state.val / state.priceKwh);
+                document.getElementById('slider-label').innerText = "Consumo mensual (kWh)";
+                btnKwh.className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${activeClass}`;
+                btnBill.className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${inactiveClass}`;
+            }
+            slider.value = state.val;
+            handleSliderChange(state.val);
+        }
+
+        function handleSliderChange(val) {
+            state.val = parseFloat(val);
+            state.city = document.getElementById('lead-city').value;
+            state.priceKwh = parseFloat(document.getElementById('kwh-price').value) || 940;
+            updateCalculations();
+        }
+
+        function formatCOP(v) { return '$ ' + Math.round(v).toLocaleString('es-CO'); }
+
+        function updateCalculations() {
+            let consumo_kwh = state.mode === 'bill' ? (state.val / state.priceKwh) : state.val;
+            
+            // Labels UI
+            if (state.mode === 'bill') {
+                document.getElementById('display-value').innerText = formatCOP(state.val);
+                document.getElementById('display-subtext').innerText = `~${Math.round(consumo_kwh)} kWh/mes`;
+            } else {
+                document.getElementById('display-value').innerText = `${state.val} kWh`;
+                document.getElementById('display-subtext').innerText = `~${formatCOP(state.val * state.priceKwh)} COP/mes`;
+            }
+
+            // Lógica Técnica
+            const factor_seguridad = 1.2;
+            const hsp = 3.9;
+            const pr = 0.95 * 0.90;
+            const potencia_instalada = (consumo_kwh * factor_seguridad) / (30 * hsp * pr);
+
+            const num_paneles = Math.ceil(potencia_instalada / (POTENCIA_PANEL_W / 1000));
+            const potencia_real = num_paneles * (POTENCIA_PANEL_W / 1000);
+
+            // Costos
+            let cobro_kwp = potencia_real < 20 ? 4156723 : (potencia_real <= 50 ? 3882175 : 3623591);
+            const costo = potencia_real * cobro_kwp;
+
+            // Retorno
+            const produccion = (PRODUCCION_CIUDAD[state.city] || DEFAULT_PROD) * potencia_real;
+            const ahorro_anual = (consumo_kwh * 11.9 * state.priceKwh) + ((produccion/12 - consumo_kwh) > 0 ? ((produccion/12 - consumo_kwh)*12*330) : 0);
+            const beneficios = 0.40 * costo;
+            const payback = costo / (ahorro_anual + (beneficios/3));
+
+            // Impacto
+            const co2 = (consumo_kwh * 11.9 * 0.40) / 1000;
+
+            // UI Updates
+            document.getElementById('result-cost').innerText = formatCOP(costo);
+            document.getElementById('result-power').innerText = potencia_real.toFixed(2) + ' kWp';
+            document.getElementById('result-panels').innerText = num_paneles;
+            document.getElementById('result-savings').innerText = formatCOP(consumo_kwh * state.priceKwh);
+            document.getElementById('result-payback').innerText = payback > 0 ? payback.toFixed(1) + " Años" : "N/A";
+            document.getElementById('impact-co2').innerText = co2.toFixed(1) + " Ton";
+            document.getElementById('impact-trees').innerText = Math.round(co2 * 1000 / 22);
+        }
+
+        async function submitData() {
+            const btn = document.getElementById('btn-submit');
+            const btnText = document.getElementById('btn-text');
+            const btnIcon = document.getElementById('btn-icon');
+            const loadIcon = document.getElementById('loading-icon');
+
+            const nombre = document.getElementById('lead-name').value;
+            const email = document.getElementById('lead-email').value;
+            const telefono = document.getElementById('lead-phone').value;
+            const ciudad = document.getElementById('lead-city').value;
+
+            if(!nombre || !telefono) {
+                alert("Por favor completa tu Nombre y Celular.");
+                return;
+            }
+
+            // UI Loading
+            btn.disabled = true;
+            btnText.innerText = "PROCESANDO...";
+            btnIcon.classList.add('hidden');
+            loadIcon.classList.remove('hidden');
+
+            const payload = {
+                nombre: nombre,
+                email: email,
+                telefono: telefono,
+                ciudad: ciudad,
+                techo: document.getElementById('roof-type').value,
+                consumo: document.getElementById('display-value').innerText,
+                costoEstimado: document.getElementById('result-cost').innerText,
+                potencia: document.getElementById('result-power').innerText
+            };
+
+            try {
+                if(WEBHOOK_URL.includes("AQUI_TU_NUEVA_URL")) {
+                    console.warn("Modo Demo: Falta URL del Script.");
+                } else {
+                    await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                }
+
+                // WhatsApp Redirect
+                const msg = `Hola Zolaris, soy *${nombre}*. Hice mi cotización para ${ciudad}.\n⚡ Consumo: ${payload.consumo}\n🔋 Sistema: ${payload.potencia}\n💰 Inversión: ${payload.costoEstimado}\n\nQuiero agendar la visita técnica.`;
+                const waUrl = `https://wa.me/573235443070?text=${encodeURIComponent(msg)}`;
+
+                setTimeout(() => {
+                    window.open(waUrl, '_blank');
+                    btn.disabled = false;
+                    btnText.innerText = "SOLICITAR PROPUESTA FORMAL";
+                    btnIcon.classList.remove('hidden');
+                    loadIcon.classList.add('hidden');
+                }, 1500);
+
+            } catch (e) {
+                alert("Error de conexión, te llevaremos a WhatsApp.");
+                window.open(`https://wa.me/573235443070`, '_blank');
+            }
+        }
+
+        // 5. Modales Legales
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        // --- 5. MOBILE MENU (ACTUALIZADO CON ANIMACIÓN) ---
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             if (menu.classList.contains('hidden')) {
@@ -370,220 +638,17 @@
             }
         }
 
-         // 5. Modales Legales
-        function openModal(id) {
-            document.getElementById(id).classList.remove('hidden');
-        }
-        function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
-        }
-        
-        // Cerrar al hacer click fuera
-        document.querySelectorAll('dialog').forEach(dialog => {
-            dialog.addEventListener('click', (e) => {
-                const dialogDimensions = dialog.getBoundingClientRect()
-                if (
-                    e.clientX < dialogDimensions.left ||
-                    e.clientX > dialogDimensions.right ||
-                    e.clientY < dialogDimensions.top ||
-                    e.clientY > dialogDimensions.bottom
-                ) {
-                    dialog.close()
-                }
-            })
-        });
-        
-        // --- CONSTANTES DEL SCRIPT PYTHON ---
-        const PRECIO_KWH = 940; 
-        const POTENCIA_PANEL = 730; 
-        const DEFAULT_PROD = 1840.0;
-        
-        // Tabla de producción específica anual (kWh/kWp-año) portada del Python
-        const PRODUCCION_CIUDAD = {
-            "Medellín": 1556.4, "Envigado": 1528.5, "Rionegro": 1660.0, "Cartagena": 1840.0,
-            "Marinilla": 1662.9, "El Santuario": 1640.2, "Santa Elena": 1535.0, "Guarne": 1571.9,
-            "Copacabana": 1547.0, "Girardota": 1577.2, "Barbosa": 1546.9, "Itagui": 1535.3,
-            "Sabaneta": 1506.4, "La Estrella": 1499.1, "Caldas": 1449.7, "El Retiro": 1495.1,
-            "La Ceja": 1562.2, "La Unión": 1637.0, "El Peñol": 1613.9,
-            "San Pedro De Los Milagros": 1552.5, "Bello": 1580.8, "Santa Fe De Antioquia": 1620.4,
-            "Sopetrán Y San Jerónimo": 1614.5, "Pasto": 1332.6, "Taminango": 1560.3,
-            "Chachagüí": 1411.5, "Bogotá": 1391.6, "Cali": 1503.3, "Yumbo": 1493.3
-        };
-
-        // --- URL DEL SCRIPT DE GOOGLE (PÉGALA AQUÍ DESPUÉS DEL PASO 1) ---
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby9VX21rf-9p59bEhJKpLJbmLzVOU1vgnBa71Z2X_i9_szPN2HuGDNcdPAcGBOUtmaG/exec'; 
-
-        let inputMode = 'bill'; 
-     
-
-        function setInputMode(mode) {
-            inputMode = mode;
-            const slider = document.getElementById('main-slider');
-            const label = document.getElementById('input-label');
-            const btnBill = document.getElementById('mode-bill');
-            const btnKwh = document.getElementById('mode-kwh');
-
-            if(mode === 'bill') {
-                // Rango factura
-                slider.min = 50000; slider.max = 5000000; slider.step = 10000; slider.value = 200000;
-                label.innerText = "Valor Factura";
-                btnBill.className = "py-3 rounded-xl border border-zolaris-orange bg-zolaris-orange/20 text-white font-bold transition-all";
-                btnKwh.className = "py-3 rounded-xl border border-slate-700 bg-transparent text-slate-400 font-medium transition-all";
+        // Navbar Scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+                navbar.classList.replace('h-24', 'h-20');
             } else {
-                // Rango Kwh
-                slider.min = 50; slider.max = 5000; slider.step = 10; slider.value = 250;
-                label.innerText = "Consumo mensual (kWh)";
-                btnKwh.className = "py-3 rounded-xl border border-zolaris-orange bg-zolaris-orange/20 text-white font-bold transition-all";
-                btnBill.className = "py-3 rounded-xl border border-slate-700 bg-transparent text-slate-400 font-medium transition-all";
+                navbar.classList.remove('shadow-lg');
+                navbar.classList.replace('h-20', 'h-24');
             }
-            updateUI();
-        }
-
-        function formatCOP(v) { return '$ ' + v.toLocaleString('es-CO'); }
-
-        // Función portada de Python: tarifa_por_kwp
-        function getTarifaPorKwp(potenciaKwp) {
-            if (potenciaKwp >= 0 && potenciaKwp < 20) return 4156723;
-            else if (potenciaKwp >= 20 && potenciaKwp <= 50) return 3882175;
-            else return 3623591; // >50
-        }
-
-        function updateUI() {
-            const val = parseFloat(document.getElementById('main-slider').value);
-            const city = document.getElementById('lead-city').value;
-            
-            document.getElementById('val-display').innerText = inputMode === 'bill' ? formatCOP(val) : val + ' kWh';
-
-            // 1. Determinar Consumo kWh
-            const consumoKwh = inputMode === 'bill' ? (val / PRECIO_KWH) : val;
-
-            // 2. Lógica exacta del Python: potencia_instalada = (consumo_kwh * 1.2) / (30 * 3.9 * 0.95 * 0.9)
-            // (Nota: 30 * 3.9 * 0.95 * 0.9 = 99.945)
-            const potenciaInstalada = (consumoKwh * 1.2) / (30 * 3.9 * 0.95 * 0.9);
-
-            // 3. Número de paneles: math.ceil((potencia_instalada * 1000) / 730)
-            const numeroPaneles = Math.ceil((potenciaInstalada * 1000) / POTENCIA_PANEL);
-
-            // 4. Producción Anual (Depende de la ciudad)
-            const valorCiudad = PRODUCCION_CIUDAD[city] || DEFAULT_PROD;
-            const produccionAnual = valorCiudad * potenciaInstalada;
-
-            // 5. Excedentes anuales: (produccion_anual / 12) - consumo_kwh
-            // *Nota del script Python*: "excedentes_producidos_al_año = (produccion_anual / 12) - consumo_kwh"
-            // Esto parece calcular excedente mensual promedio, no anual, pero seguimos la lógica del nombre variable en Python
-            // Si el resultado es negativo, es 0 (no hay excedente)
-            let excedentesCalculo = (produccionAnual / 12) - consumoKwh;
-            if(excedentesCalculo < 0) excedentesCalculo = 0;
-            // Si queremos mostrar el anual real basado en el mensual:
-            const excedentesAnuales = excedentesCalculo * 12;
-
-            // 6. Consumo anual: consumo_kwh * 11.9 (según script Python)
-            const consumoAnual = consumoKwh * 11.9;
-
-            // 7. Ahorro mes: (consumo_anual / 12) * precio_kwh
-            const ahorroMes = (consumoAnual / 12) * PRECIO_KWH;
-
-            // 8. Costo Proyecto
-            const cobroKwp = getTarifaPorKwp(potenciaInstalada);
-            const costoProyecto = potenciaInstalada * cobroKwp;
-
-            // 9. Ingreso Mensual Estimado (Venta excedentes a 330)
-            const ingresoMensualEstimado = excedentesCalculo * 330;
-
-            // 10. Payback
-            const beneficiosTributarios = 0.40 * costoProyecto;
-            
-            // Lógica Python: denominador_payback = ingreso_mensual_estimado + ahorro_mes + beneficios_tributarios
-            // *OJO*: En el script Python suman (mensual + mensual + total_tributario). 
-            // Esto matemáticamente resulta en un payback muy bajo.
-            // Para mantener fidelidad al script usaré esa lógica, pero generalmente tributario se divide.
-            // Ajuste para web: El script Python divide costo / suma. 
-            // Si el script original dice eso, lo respetamos.
-            const denominadorPayback = ingresoMensualEstimado + ahorroMes + beneficiosTributarios;
-            
-            let paybackAnios = 0;
-            if (denominadorPayback > 0) {
-                paybackAnios = Math.ceil(costoProyecto / denominadorPayback);
-            }
-
-            // --- ACTUALIZAR DOM ---
-            document.getElementById('res-cost').innerText = formatCOP(Math.round(costoProyecto));
-            document.getElementById('res-panels').innerText = numeroPaneles;
-            document.getElementById('res-power').innerText = potenciaInstalada.toFixed(2) + ' kWp';
-            
-            // Ahorro mostrado al usuario (Ahorro factura + Venta energía)
-            document.getElementById('res-savings').innerText = formatCOP(Math.round(ahorroMes + ingresoMensualEstimado));
-            
-            document.getElementById('res-payback').innerText = (paybackAnios > 0 && paybackAnios < 20) ? `${paybackAnios} Años` : "Consultar";
-            
-            // Info extra
-            document.getElementById('res-gen-anual').innerText = Math.round(produccionAnual).toLocaleString();
-            document.getElementById('res-excedentes').innerText = Math.round(excedentesAnuales).toLocaleString();
-        }
-
-        async function handleLeadSubmission() {
-            const btn = document.getElementById('btn-submit');
-            const btnText = document.getElementById('btn-text');
-            const statusMsg = document.getElementById('status-msg');
-
-            const nombre = document.getElementById('lead-name').value;
-            const email = document.getElementById('lead-email').value;
-            const telefono = document.getElementById('lead-phone').value;
-            const ciudad = document.getElementById('lead-city').value;
-            const techo = document.getElementById('lead-roof').value;
-
-            if(!nombre || !email || !telefono) {
-                alert("Por favor completa tus datos (Nombre, Email, Teléfono) para recibir la cotización.");
-                return;
-            }
-
-            // Estado de carga
-            btn.disabled = true;
-            btnText.innerText = "Enviando...";
-            
-            const datos = {
-                nombre: nombre,
-                email: email,
-                telefono: telefono,
-                ciudad: ciudad,
-                techo: techo,
-                consumo: document.getElementById('val-display').innerText, // Guardamos lo que ve el usuario
-                costo: document.getElementById('res-cost').innerText,
-                potencia: document.getElementById('res-power').innerText
-            };
-
-            // 1. Enviar a Google Sheets
-            try {
-                if(GOOGLE_SCRIPT_URL !== 'TU_URL_DE_APPS_SCRIPT_AQUI') {
-                    await fetch(GOOGLE_SCRIPT_URL, {
-                        method: 'POST',
-                        mode: 'no-cors', // Importante para enviar a Google Script desde otro dominio
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(datos)
-                    });
-                } else {
-                    console.log("Modo simulación (Configura la URL de Apps Script):", datos);
-                }
-                
-                statusMsg.innerText = "¡Datos guardados correctamente!";
-                statusMsg.classList.remove('hidden');
-
-            } catch (error) {
-                console.error("Error al guardar en hoja:", error);
-            }
-
-            // 2. Redirigir a WhatsApp
-            const msg = `¡Hola Zolaris! Soy ${nombre} desde ${ciudad}. Hice mi pre-cotización para un sistema de ${datos.potencia} en techo de ${techo}. Mi consumo/factura es aprox ${datos.consumo}. El estimado web fue de ${datos.costo}. Quedo atento.`;
-            
-            setTimeout(() => {
-                window.open(`https://wa.me/573235443070?text=${encodeURIComponent(msg)}`, '_blank');
-                btn.disabled = false;
-                btnText.innerText = "RECOGER MI COTIZACIÓN";
-            }, 1000);
-        }
-
-        // Inicializar
-        updateUI(); 
+        });
     </script>
 </body>
 </html>

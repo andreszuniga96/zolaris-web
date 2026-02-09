@@ -83,6 +83,20 @@
                 left: 20px;
             }
         }
+        /* Modal Styles */
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+        }
+        dialog {
+            background: #0f172a;
+            color: white;
+            border: 1px solid #334155;
+            border-radius: 1rem;
+            max-width: 800px;
+            width: 90%;
+            padding: 0;
+        }
         /* Hide Scrollbar */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -434,9 +448,9 @@
                 <div>
                     <h3 class="text-white font-bold mb-6">Legal</h3>
                     <ul class="space-y-3 text-sm cursor-pointer">
-                        <li><span onclick="openLegalModal('modal-privacidad')" class="hover:text-zolaris-orange transition-colors">Política de Privacidad</span></li>
-                        <li><span onclick="openLegalModal('modal-terminos')" class="hover:text-zolaris-orange transition-colors">Términos y Condiciones</span></li>
-                        <li><span onclick="openLegalModal('modal-datos')" class="hover:text-zolaris-orange transition-colors">Tratamiento de Datos</span></li>
+                        <li><span onclick="openModal('modal-privacidad')" class="hover:text-zolaris-orange transition-colors">Política de Privacidad</span></li>
+                        <li><span onclick="openModal('modal-terminos')" class="hover:text-zolaris-orange transition-colors">Términos y Condiciones</span></li>
+                        <li><span onclick="openModal('modal-datos')" class="hover:text-zolaris-orange transition-colors">Tratamiento de Datos</span></li>
                     </ul>
                 </div>
 
@@ -462,57 +476,61 @@
         </div>
     </footer>
 
-    <div id="modal-privacidad" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeLegalModal('modal-privacidad')"></div>
+    <div id="modal-privacidad" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-privacidad')"></div>
         <div class="relative bg-slate-900 w-full max-w-2xl rounded-2xl p-8 border border-slate-700 shadow-2xl max-h-[80vh] overflow-y-auto">
             <h3 class="text-2xl font-bold text-white mb-4">Política de Privacidad</h3>
             <div class="text-slate-300 space-y-4 text-sm">
                 <p>En Zolaris Ingeniería S.A.S., valoramos su privacidad y estamos comprometidos con la protección de sus datos personales. Esta política describe cómo recopilamos, usamos y protegemos la información que usted nos proporciona a través de nuestro sitio web y servicios.</p>
                 <p>Recopilamos información personal básica, como nombre, correo electrónico y número de teléfono, únicamente cuando usted la proporciona voluntariamente a través de nuestros formularios de contacto o la calculadora solar. Estos datos se utilizan exclusivamente para brindarle la información solicitada, elaborar cotizaciones y mejorar nuestros servicios.</p>
                 <p>Zolaris no vende, alquila ni comparte su información personal con terceros con fines comerciales. Solo compartiremos sus datos si es necesario para cumplir con una obligación legal o para la ejecución de un contrato de servicio con usted (por ejemplo, trámites ante operadores de red).</p>
-                <button onclick="closeLegalModal('modal-privacidad')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
+                <p>Implementamos medidas de seguridad técnicas y organizativas para proteger sus datos contra el acceso no autorizado, la alteración o la destrucción. Sin embargo, recuerde que ninguna transmisión por Internet es 100% segura.</p>
+                <p>Usted tiene derecho a acceder, corregir o solicitar la eliminación de sus datos personales en cualquier momento contactándonos a través de nuestros canales oficiales.</p>
             </div>
+            <button onclick="closeModal('modal-privacidad')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
         </div>
     </div>
 
-    <div id="modal-terminos" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeLegalModal('modal-terminos')"></div>
+    <div id="modal-terminos" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-terminos')"></div>
         <div class="relative bg-slate-900 w-full max-w-2xl rounded-2xl p-8 border border-slate-700 shadow-2xl max-h-[80vh] overflow-y-auto">
             <h3 class="text-2xl font-bold text-white mb-4">Términos y Condiciones</h3>
             <div class="text-slate-300 space-y-4 text-sm">
                 <p>Bienvenido al sitio web de Zolaris Ingeniería S.A.S. Al acceder y utilizar este sitio, usted acepta cumplir con los siguientes términos y condiciones. Si no está de acuerdo con alguna parte de estos términos, le recomendamos no utilizar nuestros servicios.</p>
                 <p>El contenido de este sitio web, incluyendo textos, imágenes, logotipos y herramientas (como la calculadora solar), es propiedad de Zolaris o de sus licenciantes y está protegido por las leyes de propiedad intelectual. Queda prohibida su reproducción total o parcial sin autorización expresa.</p>
-                <button onclick="closeLegalModal('modal-terminos')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
+                <p>Las estimaciones proporcionadas por nuestra calculadora solar son aproximadas y se basan en promedios estadísticos. No constituyen una oferta vinculante ni garantizan ahorros exactos, ya que estos dependen de factores variables como la ubicación exacta, el clima y los hábitos de consumo.</p>
+                <p>Zolaris se reserva el derecho de modificar, suspender o interrumpir cualquier aspecto del servicio en cualquier momento sin previo aviso. No nos hacemos responsables por daños directos o indirectos derivados del uso o la imposibilidad de uso de este sitio web.</p>
+                <p>Cualquier disputa relacionada con estos términos se regirá por las leyes de la República de Colombia y se someterá a la jurisdicción de los tribunales de Pasto, Nariño.</p>
             </div>
+            <button onclick="closeModal('modal-terminos')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
         </div>
     </div>
 
-    <div id="modal-datos" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeLegalModal('modal-datos')"></div>
+    <div id="modal-datos" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-datos')"></div>
         <div class="relative bg-slate-900 w-full max-w-2xl rounded-2xl p-8 border border-slate-700 shadow-2xl max-h-[80vh] overflow-y-auto">
             <h3 class="text-2xl font-bold text-white mb-4">Tratamiento de Datos</h3>
             <div class="text-slate-300 space-y-4 text-sm">
                 <p>En cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013, Zolaris Ingeniería S.A.S. informa a los titulares de datos personales que la información recolectada será tratada de acuerdo con nuestra Política de Tratamiento de Datos.</p>
-                <p>La recolección de datos tiene como finalidad principal la gestión administrativa, comercial y operativa necesaria para la prestación de nuestros servicios de energía solar.</p>
-                <button onclick="closeLegalModal('modal-datos')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
+                <p>La recolección de datos tiene como finalidad principal la gestión administrativa, comercial y operativa necesaria para la prestación de nuestros servicios de energía solar. Esto incluye el envío de cotizaciones, información técnica y actualizaciones sobre proyectos.</p>
+                <p>Como titular de los datos, usted tiene derecho a conocer, actualizar y rectificar su información personal, así como a revocar la autorización otorgada para su tratamiento en los casos previstos por la ley.</p>
+                <p>Zolaris garantiza la confidencialidad y seguridad de la información, adoptando las medidas necesarias para evitar su adulteración, pérdida, consulta, uso o acceso no autorizado o fraudulento.</p>
+                <p>Para ejercer sus derechos de Habeas Data, puede contactarnos a través del correo electrónico tramites.zolaris@gmail.com o en nuestra oficina física en Pasto, Nariño.</p>
             </div>
+            <button onclick="closeModal('modal-datos')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
         </div>
     </div>
 
     <script>
-        // Navbar Effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('shadow-lg');
-                navbar.classList.replace('h-24', 'h-20');
-            } else {
-                navbar.classList.remove('shadow-lg');
-                navbar.classList.replace('h-20', 'h-24');
-            }
-        });
+        // 5. Modales Legales
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
 
-        // 3. Mobile Menu Toggle
+        // --- 5. MOBILE MENU (ACTUALIZADO CON ANIMACIÓN) ---
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             if (menu.classList.contains('hidden')) {
@@ -527,6 +545,33 @@
                 }, 300);
             }
         }
+
+        // Navbar Scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+                navbar.classList.replace('h-24', 'h-20');
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.classList.replace('h-20', 'h-24');
+            }
+        });
+
+        // Cerrar al hacer click fuera
+        document.querySelectorAll('dialog').forEach(dialog => {
+            dialog.addEventListener('click', (e) => {
+                const dialogDimensions = dialog.getBoundingClientRect()
+                if (
+                    e.clientX < dialogDimensions.left ||
+                    e.clientX > dialogDimensions.right ||
+                    e.clientY < dialogDimensions.top ||
+                    e.clientY > dialogDimensions.bottom
+                ) {
+                    dialog.close()
+                }
+            })
+        });
     </script>
 </body>
 </html>
