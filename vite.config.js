@@ -14,6 +14,8 @@ export default defineConfig({
         proyectos: resolve(__dirname, 'proyectos.html'),
         servicios: resolve(__dirname, 'servicios.html'),
         calculadora: resolve(__dirname, 'calculadora.html'),
+        dashboard: resolve(__dirname, 'dashboard-web3.html'),
+        
       },
     },
   },
