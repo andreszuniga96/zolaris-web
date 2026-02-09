@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zolaris Web3 | Panel de Energía Tokenizada</title>
+    <title>Zolaris Token | Inversión y Beneficios</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -23,14 +24,14 @@
                             light: '#E2E8F0',
                             orange: '#F7A600',
                             yellow: '#FDCB58',
-                            accent: '#0EA5E9',
+                            green: '#10B981', // Color Crypto/Gain
                         }
                     },
                     fontFamily: {
                         sans: ['Manrope', 'sans-serif'],
                     },
                     animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     }
                 }
             }
@@ -38,364 +39,489 @@
     </script>
     
     <style>
-        body { background-color: #0f172a; color: #f8fafc; }
-        .glass-nav { background: rgba(11, 43, 70, 0.90); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .glass-panel { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
-        
-        /* Efecto Neon para elementos Web3 */
-        .neon-border { box-shadow: 0 0 15px rgba(14, 165, 233, 0.3); transition: all 0.3s ease; }
-        .neon-border:hover { box-shadow: 0 0 25px rgba(247, 166, 0, 0.5); border-color: #F7A600; }
+        body { background-color: #050b14; color: #f8fafc; } /* Fondo más oscuro para resaltar datos */
+        .glass-panel {
+            background: rgba(11, 43, 70, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .neon-text {
+            text-shadow: 0 0 10px rgba(247, 166, 0, 0.5);
+        }
+        /* Scrollbar custom */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #F7A600; }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden">
 
-    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+    <nav class="fixed w-full z-50 glass-panel transition-all duration-300 border-b border-slate-800" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-24">
-                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer">
-                    <img class="h-10 w-auto" src="/public/assets/logo.png" alt="Zolaris Logo">
-                    <div class="hidden md:block">
-                        <span class="block text-xl font-bold text-white leading-none">ZOLARIS</span>
-                        <span class="block text-[9px] uppercase tracking-[0.3em] text-zolaris-accent">Web3 Dashboard</span>
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3 cursor-pointer">
+                    <img class="h-10 w-auto" src="/public/assets/logo.png" alt="Zolaris Logo"> <div class="hidden md:block">
+                        
                     </div>
                 </div>
                 
-                <div class="hidden lg:flex space-x-8 items-center">
-                    <a href="index.html" class="text-slate-400 hover:text-white transition-colors">Volver al Home</a>
-                </div>
-
-                <div>
-                    <button id="connect-wallet-btn" onclick="connectWallet()" class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-zolaris-blue hover:from-zolaris-orange hover:to-zolaris-yellow text-white font-bold rounded-full transition-all shadow-lg hover:shadow-zolaris-orange/20 border border-white/10">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        <span id="wallet-text">Conectar Billetera</span>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="text-slate-400 hover:text-white transition-colors">Volver a Web</a>
+                    <div class="flex items-center gap-2 bg-slate-900/50 px-3 py-1 rounded-full border border-slate-700">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </span>
+                        <span class="text-xs text-slate-300">Polygon Network</span>
+                    </div>
+                    
+                    <button id="connect-wallet" onclick="connectWallet()" class="group relative px-6 py-2.5 font-bold text-white rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all shadow-[0_0_20px_rgba(124,58,237,0.3)]">
+                        <span class="flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <span id="wallet-text">Conectar Wallet</span>
+                        </span>
                     </button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="pt-32 pb-20 relative min-h-screen">
-        <div class="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-zolaris-blue/20 to-transparent pointer-events-none"></div>
-        <div class="absolute top-20 right-0 w-96 h-96 bg-zolaris-orange/10 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="pt-28 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        
+        <div id="network-alert" class="hidden mb-6 bg-red-900/50 border border-red-500 text-red-200 px-4 py-3 rounded-xl flex items-center gap-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <span>Por favor, cambia tu red a <strong>Polygon Mainnet</strong> para interactuar.</span>
+        </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-                
-                <div class="lg:col-span-2 glass-panel rounded-3xl p-8 relative overflow-hidden neon-border group">
-                    <div class="absolute top-0 right-0 p-6 opacity-20">
-                        <svg class="w-32 h-32 text-zolaris-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5 10 5 10-5-5-2.5-5 2.5z"/></svg>
-                    </div>
-                    
-                    <div class="relative z-10">
-                        <div class="flex items-center gap-3 mb-6">
-                            <div class="w-12 h-12 bg-zolaris-orange rounded-full flex items-center justify-center text-2xl shadow-lg shadow-zolaris-orange/30 animate-pulse-slow">
-                                ⚡
-                            </div>
-                            <div>
-                                <h2 class="text-2xl font-bold text-white">Zolaris Energy Token</h2>
-                                <p class="text-zolaris-accent text-xs font-mono tracking-widest uppercase">ERC-20 | Polygon Network</p>
-                            </div>
-                        </div>
-
-                        <div class="mb-6">
-                            <p class="text-slate-400 text-sm uppercase mb-1">Tu Saldo Disponible</p>
-                            <div class="flex items-baseline gap-2">
-                                <h1 class="text-6xl font-extrabold text-white tracking-tight" id="token-balance">0.00</h1>
-                                <span class="text-2xl text-zolaris-yellow font-bold">ZOL</span>
-                            </div>
-                        </div>
-
-                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-black/30 rounded-lg border border-white/5">
-                            <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <span class="text-sm text-slate-300">1 ZOL = 1 kWh de Energía Limpia Acumulada</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass-panel rounded-3xl p-8 flex flex-col justify-between">
+            <div class="lg:col-span-2 space-y-6">
+                <div class="glass-panel p-6 rounded-3xl flex flex-col sm:flex-row justify-between items-end sm:items-center gap-4">
                     <div>
-                        <h3 class="text-lg font-bold text-white mb-4">Estado de Conexión</h3>
-                        <div class="space-y-4">
-                            <div class="flex justify-between items-center pb-4 border-b border-slate-700">
-                                <span class="text-slate-400">Red</span>
-                                <span class="flex items-center gap-2 text-white font-bold bg-purple-900/50 px-3 py-1 rounded-full border border-purple-500/30">
-                                    <span class="w-2 h-2 rounded-full bg-purple-500"></span> Polygon
-                                </span>
-                            </div>
-                            <div class="flex justify-between items-center pb-4 border-b border-slate-700">
-                                <span class="text-slate-400">Estado</span>
-                                <span id="connection-status" class="text-red-400 font-bold">Desconectado</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-400">Gas (Gwei)</span>
-                                <span id="gas-price" class="text-white font-mono">--</span>
-                            </div>
-                        </div>
+                        <h1 class="text-2xl font-bold text-white flex items-center gap-2">
+                            $ZOL Token
+                            <span class="bg-zolaris-orange/20 text-zolaris-orange text-xs px-2 py-1 rounded border border-zolaris-orange/30">Utility Token</span>
+                        </h1>
+                        <p class="text-slate-400 text-sm">Contrato: <span class="font-mono text-slate-500 text-xs">0x7d1af... (Simulado)</span></p>
                     </div>
-                    <div class="mt-6 p-4 bg-slate-800 rounded-xl border border-slate-700">
-                        <p class="text-xs text-slate-500 mb-1">Billetera Conectada</p>
-                        <p id="wallet-address" class="text-zolaris-accent font-mono text-sm truncate">--</p>
+                    <div class="text-right">
+                        <p class="text-slate-400 text-xs uppercase tracking-wide">Precio Actual</p>
+                        <h2 class="text-4xl font-extrabold text-white neon-text">$ 0.45 USD</h2>
+                        <p class="text-zolaris-green text-sm font-bold flex items-center justify-end gap-1">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            +12.5% (24h)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-3xl h-[400px] relative">
+                    <div class="absolute top-6 left-6 z-10 flex gap-2">
+                        <button class="bg-slate-800 text-white text-xs px-3 py-1 rounded hover:bg-slate-700">1H</button>
+                        <button class="bg-slate-700 text-white text-xs px-3 py-1 rounded border border-slate-600">24H</button>
+                        <button class="bg-slate-800 text-white text-xs px-3 py-1 rounded hover:bg-slate-700">7D</button>
+                    </div>
+                    <canvas id="priceChart"></canvas>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="glass-panel p-4 rounded-2xl border-t-4 border-zolaris-blue">
+                        <p class="text-slate-400 text-xs uppercase">Market Cap</p>
+                        <p class="text-white font-bold text-xl">$ 4.5M</p>
+                    </div>
+                    <div class="glass-panel p-4 rounded-2xl border-t-4 border-zolaris-orange">
+                        <p class="text-slate-400 text-xs uppercase">Holders</p>
+                        <p class="text-white font-bold text-xl">1,240</p>
+                    </div>
+                    <div class="glass-panel p-4 rounded-2xl border-t-4 border-purple-500">
+                        <p class="text-slate-400 text-xs uppercase">Total Supply</p>
+                        <p class="text-white font-bold text-xl">10M ZOL</p>
                     </div>
                 </div>
             </div>
 
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                    <svg class="w-6 h-6 text-zolaris-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                    Mercado Energético & Cripto
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="space-y-6">
+                
+                <div class="glass-panel p-6 rounded-3xl bg-gradient-to-br from-slate-800 to-slate-900">
+                    <h3 class="text-slate-400 text-sm uppercase mb-4">Tu Billetera</h3>
+                    <div id="wallet-info" class="text-center py-8">
+                        <div class="w-16 h-16 bg-slate-800 rounded-full mx-auto flex items-center justify-center mb-3">
+                            <svg class="w-8 h-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
+                        <p class="text-slate-500 text-sm">Conecta tu wallet para ver tu saldo y nivel.</p>
+                    </div>
+                    <div id="wallet-connected" class="hidden">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-slate-400 text-sm">Saldo ZOL:</span>
+                            <span class="text-zolaris-orange font-bold text-xl" id="zol-balance">0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="text-slate-400 text-sm">Nivel Actual:</span>
+                            <span class="bg-slate-700 text-white text-xs px-2 py-1 rounded" id="user-tier">Sin Nivel</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-zolaris-orange h-full w-0 transition-all duration-1000" id="tier-progress"></div>
+                        </div>
+                        <p class="text-xs text-center text-slate-500 mt-2" id="next-tier-msg">Compra más ZOL para subir de nivel</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-3xl border border-zolaris-orange/30">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-white font-bold">Comprar $ZOL</h3>
+                        <span class="text-xs text-slate-400 cursor-pointer hover:text-white">Configurar ⚙️</span>
+                    </div>
                     
-                    <div class="bg-slate-800/50 border border-slate-700 p-6 rounded-2xl flex items-center justify-between hover:border-purple-500 transition-colors">
-                        <div class="flex items-center gap-4">
-                            <img src="https://cryptologos.cc/logos/polygon-matic-logo.png" class="w-10 h-10">
-                            <div>
-                                <p class="text-white font-bold">Polygon (MATIC)</p>
-                                <p class="text-xs text-slate-400">Token de Gas</p>
-                            </div>
+                    <div class="bg-slate-900 p-4 rounded-xl mb-2 border border-slate-700">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-xs text-slate-400">Pagas</span>
+                            <span class="text-xs text-slate-400">Saldo: <span id="matic-balance">0.0</span></span>
                         </div>
-                        <div class="text-right">
-                            <p class="text-white font-mono font-bold text-lg" id="price-matic">Cargando...</p>
-                            <p class="text-xs font-bold" id="change-matic">--%</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-800/50 border border-slate-700 p-6 rounded-2xl flex items-center justify-between hover:border-orange-500 transition-colors">
-                        <div class="flex items-center gap-4">
-                            <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="w-10 h-10">
-                            <div>
-                                <p class="text-white font-bold">Bitcoin (BTC)</p>
-                                <p class="text-xs text-slate-400">Referencia Global</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-white font-mono font-bold text-lg" id="price-btc">Cargando...</p>
-                            <p class="text-xs font-bold" id="change-btc">--%</p>
+                        <div class="flex justify-between items-center">
+                            <input type="number" placeholder="0.0" class="bg-transparent text-white text-2xl font-bold w-1/2 focus:outline-none" id="input-amount" oninput="calculateSwap()">
+                            <button class="flex items-center gap-2 bg-slate-800 px-3 py-1 rounded-lg hover:bg-slate-700">
+                                <img src="https://cryptologos.cc/logos/polygon-matic-logo.png" class="w-5 h-5">
+                                <span class="font-bold text-white">MATIC</span>
+                            </button>
                         </div>
                     </div>
 
-                    <div class="bg-slate-800/50 border border-slate-700 p-6 rounded-2xl flex items-center justify-between hover:border-blue-500 transition-colors">
-                        <div class="flex items-center gap-4">
-                            <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="w-10 h-10">
-                            <div>
-                                <p class="text-white font-bold">Ethereum (ETH)</p>
-                                <p class="text-xs text-slate-400">L1 Network</p>
-                            </div>
+                    <div class="flex justify-center -my-3 relative z-10">
+                        <button class="bg-slate-800 p-2 rounded-full border border-slate-700 hover:rotate-180 transition-transform">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                        </button>
+                    </div>
+
+                    <div class="bg-slate-900 p-4 rounded-xl mb-6 border border-slate-700">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-xs text-slate-400">Recibes (Estimado)</span>
                         </div>
-                        <div class="text-right">
-                            <p class="text-white font-mono font-bold text-lg" id="price-eth">Cargando...</p>
-                            <p class="text-xs font-bold" id="change-eth">--%</p>
+                        <div class="flex justify-between items-center">
+                            <input type="text" placeholder="0.0" class="bg-transparent text-zolaris-orange text-2xl font-bold w-1/2 focus:outline-none" id="output-amount" readonly>
+                            <button class="flex items-center gap-2 bg-slate-800 px-3 py-1 rounded-lg">
+                                <img src="/public/assets/logo.png" class="w-5 h-5 invert brightness-0">
+                                <span class="font-bold text-white">ZOL</span>
+                            </button>
                         </div>
+                    </div>
+
+                    <button id="swap-btn" onclick="executeSwap()" disabled class="w-full py-4 rounded-xl bg-slate-700 text-slate-400 font-bold cursor-not-allowed transition-all">
+                        Conecta tu Wallet
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <section class="mt-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-4">Hold & Earn: Beneficios Exclusivos</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    Al mantener (Hold) tokens $ZOL en tu billetera, accedes automáticamente a descuentos en nuestros servicios de ingeniería y convenios.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-panel p-1 rounded-3xl hover:transform hover:-translate-y-2 transition-all duration-300 opacity-50" id="card-tier-1">
+                    <div class="bg-slate-900 rounded-[22px] p-8 h-full relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4">
+                            <span class="text-xs font-bold text-slate-500 border border-slate-700 px-2 py-1 rounded">NIVEL 1</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Zolar Saver</h3>
+                        <p class="text-zolaris-orange font-bold text-lg mb-6">1,000 $ZOL</p>
+                        <ul class="space-y-3 text-sm text-slate-300 mb-8">
+                            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> 5% Descuento en Mantenimiento</li>
+                            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Acceso a Newsletter Premium</li>
+                        </ul>
+                        <button class="w-full py-2 rounded-lg border border-slate-600 text-slate-400 text-sm">Bloqueado</button>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-1 rounded-3xl bg-gradient-to-b from-blue-500 to-zolaris-navy hover:transform hover:-translate-y-2 transition-all duration-300 shadow-2xl" id="card-tier-2">
+                    <div class="bg-slate-900 rounded-[22px] p-8 h-full relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4">
+                            <span class="text-xs font-bold text-blue-400 border border-blue-900 px-2 py-1 rounded bg-blue-900/20">NIVEL 2</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Zolar Pro</h3>
+                        <p class="text-blue-400 font-bold text-lg mb-6">5,000 $ZOL</p>
+                        <ul class="space-y-3 text-sm text-slate-300 mb-8">
+                            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> 10% Descuento en Instalación</li>
+                            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> 1 Mantenimiento Gratis/año</li>
+                            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Soporte Prioritario</li>
+                        </ul>
+                        <button class="w-full py-2 rounded-lg bg-blue-600 text-white font-bold text-sm shadow-lg shadow-blue-900/50">Recomendado</button>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-1 rounded-3xl hover:transform hover:-translate-y-2 transition-all duration-300 opacity-50" id="card-tier-3">
+                    <div class="bg-slate-900 rounded-[22px] p-8 h-full relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4">
+                            <span class="text-xs font-bold text-zolaris-orange border border-zolaris-orange/30 px-2 py-1 rounded bg-zolaris-orange/10">NIVEL 3</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Zolar Whale</h3>
+                        <p class="text-zolaris-orange font-bold text-lg mb-6">20,000 $ZOL</p>
+                        <ul class="space-y-3 text-sm text-slate-300 mb-8">
+                            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> 15% Descuento Total</li>
+                            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Participación en Ganancias (Staking)</li>
+                            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Visita Técnica VIP Gratis</li>
+                        </ul>
+                        <button class="w-full py-2 rounded-lg border border-slate-600 text-slate-400 text-sm">Bloqueado</button>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="glass-panel rounded-3xl overflow-hidden border border-slate-700">
-                <div class="p-6 border-b border-slate-700 bg-slate-800/30 flex justify-between items-center">
-                    <h3 class="text-lg font-bold text-white">Últimas Transacciones</h3>
-                    <button class="text-xs text-zolaris-accent hover:text-white transition-colors">Ver todo en PolygonScan</button>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead class="bg-slate-900/50 text-slate-400 text-xs uppercase">
-                            <tr>
-                                <th class="px-6 py-4">Tipo</th>
-                                <th class="px-6 py-4">Hash</th>
-                                <th class="px-6 py-4">Fecha</th>
-                                <th class="px-6 py-4">Monto (ZOL)</th>
-                                <th class="px-6 py-4">Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-sm divide-y divide-slate-700">
-                            <tr class="hover:bg-slate-800/50 transition-colors">
-                                <td class="px-6 py-4 flex items-center gap-2">
-                                    <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">↓</div>
-                                    <span class="text-white font-bold">Recibido</span>
-                                </td>
-                                <td class="px-6 py-4 text-zolaris-accent font-mono cursor-pointer hover:underline">0x8a2f...9b1c</td>
-                                <td class="px-6 py-4 text-slate-400">Hace 2 horas</td>
-                                <td class="px-6 py-4 text-white font-bold">+ 150.00</td>
-                                <td class="px-6 py-4"><span class="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs border border-green-500/20">Completado</span></td>
-                            </tr>
-                            <tr class="hover:bg-slate-800/50 transition-colors">
-                                <td class="px-6 py-4 flex items-center gap-2">
-                                    <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-500">⚡</div>
-                                    <span class="text-white font-bold">Generación Solar</span>
-                                </td>
-                                <td class="px-6 py-4 text-zolaris-accent font-mono cursor-pointer hover:underline">0x3c1d...4e2f</td>
-                                <td class="px-6 py-4 text-slate-400">Ayer, 14:30</td>
-                                <td class="px-6 py-4 text-white font-bold">+ 24.50</td>
-                                <td class="px-6 py-4"><span class="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs border border-green-500/20">Completado</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="empty-state" class="hidden p-8 text-center">
-                    <p class="text-slate-500">Conecta tu billetera para ver tu historial.</p>
-                </div>
-            </div>
+    </div>
 
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-800 border border-slate-600 text-white px-6 py-4 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-3 z-50">
+        <div id="toast-icon"></div>
+        <div>
+            <h4 class="font-bold text-sm" id="toast-title">Notificación</h4>
+            <p class="text-xs text-slate-400" id="toast-msg">Mensaje del sistema</p>
         </div>
     </div>
 
     <script>
-        // --- CONFIGURACIÓN ---
-        // NOTA PARA EL USUARIO: Cambia esta dirección por la de tu contrato real en Polygon
-        // Usamos una dirección "dummy" válida (USDT en Polygon) para que el código no rompa al probar.
-        const TOKEN_CONTRACT_ADDRESS = "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"; 
+        // --- 1. CONFIGURACIÓN INICIAL ---
+        let provider, signer, userAddress;
+        const ZOL_PRICE = 0.45; // Precio simulado en USD/MATIC ratio variable
+        const MATIC_PRICE = 0.80; // Precio simulado USD
+        let userZolBalance = 0; // Balance inicial simulado
+
+        // --- 2. GRÁFICA EN VIVO (Chart.js) ---
+        const ctx = document.getElementById('priceChart').getContext('2d');
         
-        // ABI Mínimo para leer saldo de un ERC-20
-        const TOKEN_ABI = [
-            "function balanceOf(address owner) view returns (uint256)",
-            "function decimals() view returns (uint8)",
-            "function symbol() view returns (string)"
-        ];
+        // Generar datos aleatorios para la gráfica inicial
+        const initialData = Array.from({length: 24}, () => 0.40 + Math.random() * 0.10);
+        const labels = Array.from({length: 24}, (_, i) => `${i}:00`);
 
-        // Polygon Mainnet Params
-        const POLYGON_CHAIN_ID = '0x89'; // 137 en Hex
-        const POLYGON_RPC = 'https://polygon-rpc.com/';
+        const priceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Precio $ZOL (USD)',
+                    data: initialData,
+                    borderColor: '#F7A600',
+                    backgroundColor: 'rgba(247, 166, 0, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { display: false, color: '#334155' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                },
+                interaction: { intersect: false, mode: 'index' }
+            }
+        });
 
-        // Elementos DOM
-        const connectBtn = document.getElementById('connect-wallet-btn');
-        const walletText = document.getElementById('wallet-text');
-        const tokenBalanceDisplay = document.getElementById('token-balance');
-        const connectionStatus = document.getElementById('connection-status');
-        const walletAddressDisplay = document.getElementById('wallet-address');
+        // Simular movimiento en vivo
+        setInterval(() => {
+            const lastVal = priceChart.data.datasets[0].data[priceChart.data.datasets[0].data.length - 1];
+            const newVal = lastVal + (Math.random() - 0.5) * 0.02;
+            
+            priceChart.data.datasets[0].data.shift();
+            priceChart.data.datasets[0].data.push(newVal);
+            priceChart.update('none'); // Actualización suave
+        }, 3000);
 
-        // --- 1. FUNCIÓN CONECTAR BILLETERA ---
+
+        // --- 3. LÓGICA WEB3 (ETHERS.JS) ---
+        
         async function connectWallet() {
-            // Verificar si MetaMask está instalado
-            if (typeof window.ethereum === 'undefined') {
-                alert("MetaMask no detectado. Por favor instálalo para usar esta dApp.");
-                window.open("https://metamask.io/download/", "_blank");
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    // Solicitar conexión
+                    await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    
+                    provider = new ethers.providers.Web3Provider(window.ethereum);
+                    signer = provider.getSigner();
+                    const address = await signer.getAddress();
+                    userAddress = address;
+
+                    // Verificar Red (Polygon ChainId 137 o 0x89)
+                    const { chainId } = await provider.getNetwork();
+                    if (chainId !== 137) {
+                        document.getElementById('network-alert').classList.remove('hidden');
+                        // Intentar cambiar red (opcional)
+                    } else {
+                        document.getElementById('network-alert').classList.add('hidden');
+                    }
+
+                    // UI Update
+                    updateUIConnected(address);
+                    showToast('success', 'Wallet Conectada', `Conectado como ${address.substring(0,6)}...`);
+                    
+                    // Simular lectura de balance (Para demo, damos 500 tokens gratis al conectar)
+                    userZolBalance = 500; 
+                    updateBalanceUI();
+
+                } catch (error) {
+                    console.error(error);
+                    showToast('error', 'Error', 'No se pudo conectar la wallet.');
+                }
+            } else {
+                showToast('error', 'MetaMask no encontrado', 'Por favor instala MetaMask para usar esta dApp.');
+            }
+        }
+
+        function updateUIConnected(address) {
+            const btn = document.getElementById('connect-wallet');
+            const txt = document.getElementById('wallet-text');
+            
+            btn.classList.replace('from-purple-600', 'from-green-600');
+            btn.classList.replace('to-blue-600', 'to-green-500');
+            txt.innerText = address.substring(0, 6) + '...' + address.substring(38);
+            
+            // Mostrar panel de wallet
+            document.getElementById('wallet-info').classList.add('hidden');
+            document.getElementById('wallet-connected').classList.remove('hidden');
+            
+            // Activar botón de swap
+            const swapBtn = document.getElementById('swap-btn');
+            swapBtn.disabled = false;
+            swapBtn.innerText = "Intercambiar (Swap)";
+            swapBtn.classList.remove('cursor-not-allowed', 'bg-slate-700', 'text-slate-400');
+            swapBtn.classList.add('bg-zolaris-orange', 'text-zolaris-navy', 'hover:bg-white');
+            
+            // Simular balance MATIC
+            document.getElementById('matic-balance').innerText = "145.20";
+        }
+
+        function updateBalanceUI() {
+            document.getElementById('zol-balance').innerText = userZolBalance.toLocaleString();
+            updateTiers();
+        }
+
+        // --- 4. SISTEMA DE NIVELES (TIERS) ---
+        function updateTiers() {
+            const balance = userZolBalance;
+            const tierLabel = document.getElementById('user-tier');
+            const progress = document.getElementById('tier-progress');
+            const nextMsg = document.getElementById('next-tier-msg');
+            
+            // Reset cards opacity
+            document.getElementById('card-tier-1').classList.add('opacity-50');
+            document.getElementById('card-tier-2').classList.add('opacity-50');
+            document.getElementById('card-tier-3').classList.add('opacity-50');
+
+            if (balance >= 20000) {
+                tierLabel.innerText = "Nivel 3: Whale";
+                tierLabel.className = "bg-zolaris-orange text-zolaris-navy text-xs px-2 py-1 rounded font-bold";
+                progress.style.width = "100%";
+                nextMsg.innerText = "¡Eres el máximo nivel!";
+                document.getElementById('card-tier-3').classList.remove('opacity-50');
+                document.getElementById('card-tier-3').classList.add('ring-2', 'ring-zolaris-orange');
+            } else if (balance >= 5000) {
+                tierLabel.innerText = "Nivel 2: Pro";
+                tierLabel.className = "bg-blue-600 text-white text-xs px-2 py-1 rounded font-bold";
+                progress.style.width = "60%";
+                nextMsg.innerText = `Faltan ${(20000 - balance).toLocaleString()} ZOL para Nivel 3`;
+                document.getElementById('card-tier-2').classList.remove('opacity-50');
+                document.getElementById('card-tier-2').classList.add('ring-2', 'ring-blue-500');
+            } else if (balance >= 1000) {
+                tierLabel.innerText = "Nivel 1: Saver";
+                progress.style.width = "20%";
+                nextMsg.innerText = `Faltan ${(5000 - balance).toLocaleString()} ZOL para Nivel 2`;
+                document.getElementById('card-tier-1').classList.remove('opacity-50');
+                document.getElementById('card-tier-1').classList.add('ring-2', 'ring-slate-500');
+            } else {
+                tierLabel.innerText = "Sin Nivel";
+                progress.style.width = "5%";
+                nextMsg.innerText = `Faltan ${(1000 - balance).toLocaleString()} ZOL para Nivel 1`;
+            }
+        }
+
+        // --- 5. LOGICA SWAP ---
+        function calculateSwap() {
+            const input = parseFloat(document.getElementById('input-amount').value);
+            if (isNaN(input)) {
+                document.getElementById('output-amount').value = "";
+                return;
+            }
+            // Simular tasa de cambio: 1 MATIC ($0.80) / ZOL ($0.45) = ~1.77 ZOL por MATIC
+            const rate = MATIC_PRICE / ZOL_PRICE; 
+            const output = input * rate;
+            document.getElementById('output-amount').value = output.toFixed(2);
+        }
+
+        function executeSwap() {
+            const amount = parseFloat(document.getElementById('input-amount').value);
+            const receive = parseFloat(document.getElementById('output-amount').value);
+            
+            if (!userAddress) return;
+            if (isNaN(amount) || amount <= 0) {
+                showToast('error', 'Monto Inválido', 'Ingresa una cantidad mayor a 0');
                 return;
             }
 
-            try {
-                // Instanciar Provider (Ethers v6)
-                const provider = new ethers.BrowserProvider(window.ethereum);
+            // Simular transacción pendiente
+            const btn = document.getElementById('swap-btn');
+            const originalText = btn.innerText;
+            btn.disabled = true;
+            btn.innerHTML = `<svg class="animate-spin h-5 w-5 mr-3 text-white inline" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Procesando en Polygon...`;
+
+            setTimeout(() => {
+                // Transacción Exitosa
+                userZolBalance += receive;
+                updateBalanceUI();
                 
-                // Solicitar acceso a cuentas
-                const accounts = await provider.send("eth_requestAccounts", []);
-                const signer = await provider.getSigner();
-                const userAddress = await signer.getAddress();
+                btn.disabled = false;
+                btn.innerText = "¡Swap Exitoso!";
+                btn.classList.add('bg-green-600', 'text-white');
+                
+                showToast('success', 'Transacción Confirmada', `Has recibido ${receive.toFixed(2)} ZOL`);
 
-                // Actualizar UI
-                updateUIConnected(userAddress);
+                // Reset botón después de 2s
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.remove('bg-green-600', 'text-white');
+                    document.getElementById('input-amount').value = "";
+                    document.getElementById('output-amount').value = "";
+                }, 2000);
 
-                // Verificar Red (Polygon)
-                const network = await provider.getNetwork();
-                if (network.chainId !== 137n) { // 137n es BigInt en v6
-                    await switchToPolygon();
-                } else {
-                    connectionStatus.innerText = "Conectado a Polygon";
-                    connectionStatus.className = "text-green-400 font-bold";
-                }
+            }, 3000); // 3 segundos de espera simulada
+        }
 
-                // Obtener Saldo del Token
-                getTokenBalance(userAddress, provider);
+        // --- UTILS: TOAST SYSTEM ---
+        function showToast(type, title, message) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toast-icon');
+            const titleEl = document.getElementById('toast-title');
+            const msgEl = document.getElementById('toast-msg');
 
-            } catch (error) {
-                console.error("Error conectando:", error);
-                alert("Error al conectar: " + error.message);
+            // Iconos SVG
+            if (type === 'success') {
+                icon.innerHTML = `<svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+                toast.classList.add('border-green-500');
+            } else {
+                icon.innerHTML = `<svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+                toast.classList.add('border-red-500');
             }
-        }
 
-        // --- 2. CAMBIAR DE RED AUTOMÁTICAMENTE ---
-        async function switchToPolygon() {
-            try {
-                await window.ethereum.request({
-                    method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: POLYGON_CHAIN_ID }],
-                });
-                connectionStatus.innerText = "Conectado a Polygon";
-                connectionStatus.className = "text-green-400 font-bold";
-            } catch (switchError) {
-                // Si la red no está agregada en MetaMask, agregarla
-                if (switchError.code === 4902) {
-                    try {
-                        await window.ethereum.request({
-                            method: 'wallet_addEthereumChain',
-                            params: [{
-                                chainId: POLYGON_CHAIN_ID,
-                                chainName: 'Polygon Mainnet',
-                                rpcUrls: [POLYGON_RPC],
-                                nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
-                                blockExplorerUrls: ['https://polygonscan.com/']
-                            }],
-                        });
-                    } catch (addError) {
-                        console.error(addError);
-                    }
-                }
-                console.error(switchError);
-            }
-        }
+            titleEl.innerText = title;
+            msgEl.innerText = message;
 
-        // --- 3. LEER CONTRATO INTELIGENTE ---
-        async function getTokenBalance(address, provider) {
-            try {
-                const contract = new ethers.Contract(TOKEN_CONTRACT_ADDRESS, TOKEN_ABI, provider);
-                const rawBalance = await contract.balanceOf(address);
-                const decimals = await contract.decimals();
-                
-                // Formatear (ej: de 1000000 a 1.0)
-                const formattedBalance = ethers.formatUnits(rawBalance, decimals);
-                
-                // Animación de conteo simple
-                tokenBalanceDisplay.innerText = parseFloat(formattedBalance).toFixed(2);
-                
-            } catch (error) {
-                console.error("Error leyendo contrato:", error);
-                tokenBalanceDisplay.innerText = "Error";
-            }
-        }
-
-        // --- 4. UI HELPERS ---
-        function updateUIConnected(address) {
-            const shortAddress = `${address.substring(0, 6)}...${address.substring(38)}`;
-            walletText.innerText = shortAddress;
-            walletAddressDisplay.innerText = address;
-            connectBtn.classList.remove('from-blue-600', 'to-zolaris-blue');
-            connectBtn.classList.add('from-green-600', 'to-green-800', 'border-green-400');
-        }
-
-        // --- 5. MONITOR DE MERCADO (API FETCH) ---
-        async function fetchCryptoPrices() {
-            const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,matic-network&vs_currencies=usd&include_24hr_change=true';
+            // Animación Entrada
+            toast.classList.remove('translate-y-20', 'opacity-0');
             
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-
-                updatePriceCard('btc', data.bitcoin);
-                updatePriceCard('eth', data.ethereum);
-                updatePriceCard('matic', data['matic-network']);
-
-            } catch (error) {
-                console.error("Error API Mercado:", error);
-            }
+            // Animación Salida
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                // Limpiar bordes
+                setTimeout(() => {
+                    toast.classList.remove('border-green-500', 'border-red-500');
+                }, 300);
+            }, 4000);
         }
-
-        function updatePriceCard(id, data) {
-            const priceEl = document.getElementById(`price-${id}`);
-            const changeEl = document.getElementById(`change-${id}`);
-            
-            const price = data.usd.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-            const change = data.usd_24h_change.toFixed(2);
-            const isPositive = data.usd_24h_change >= 0;
-
-            priceEl.innerText = price;
-            changeEl.innerText = `${isPositive ? '▲' : '▼'} ${change}%`;
-            changeEl.className = `text-xs font-bold ${isPositive ? 'text-green-400' : 'text-red-400'}`;
-        }
-
-        // Init Prices on Load
-        fetchCryptoPrices();
-        // Actualizar precios cada 60 segundos
-        setInterval(fetchCryptoPrices, 60000);
-
     </script>
 </body>
 </html>
