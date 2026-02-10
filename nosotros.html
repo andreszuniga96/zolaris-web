@@ -23,6 +23,7 @@
                             orange: '#F7A600',
                             yellow: '#FDCB58',
                             accent: '#0EA5E9',
+                            cyan: '#00F0FF', // Agrega este color (Cian Neón)
                         }
                     },
                     fontFamily: {
@@ -94,7 +95,7 @@
                 
                 <a href="index.html" class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
                     <img class="h-12 w-auto transition-transform transform group-hover:scale-110 duration-500" 
-                        src="/public/assets/logo.png" 
+                        src="/assets/logo.png" 
                         alt="Zolaris Logo">
                 </a>
                 
@@ -103,6 +104,26 @@
                     <a href="nosotros.html" class="text-white font-bold border-b-2 border-zolaris-yellow transition-all">Nuestra Historia</a>
                     <a href="proyectos.html" class="text-slate-300 font-medium hover:text-white hover:scale-105 transition-all">Proyectos</a>
                     <a href="servicios.html" class="text-slate-300 font-medium hover:text-white hover:scale-105 transition-all">Servicios</a>
+
+                    <a href="zolaris-token.html" class="group relative inline-flex items-center gap-3 px-5 py-2.5 rounded-full 
+                            bg-[#0B2B46]/30 border border-cyan-500/50 backdrop-blur-sm
+                            text-cyan-400 font-bold text-sm tracking-wide
+                            transition-all duration-300 ease-out
+                            hover:border-cyan-400 hover:bg-cyan-950/30 
+                            hover:shadow-[0_0_20px_rgba(34,211,238,0.6)] 
+                            hover:-translate-y-0.5 active:scale-95">
+                        
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+                        </span>
+
+                        <span class="relative z-10 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">
+                            Zolaris Token
+                        </span>
+
+                        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </a>
                     
                     <a href="calculadora.html" class="group relative px-6 py-3 font-bold text-zolaris-navy rounded-full bg-gradient-to-r from-zolaris-yellow to-zolaris-orange shadow-[0_0_15px_rgba(247,166,0,0.4)] hover:shadow-[0_0_25px_rgba(247,166,0,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
                         <span class="relative z-10 flex items-center gap-2">
@@ -112,13 +133,7 @@
                         <div class="absolute inset-0 h-full w-full bg-white/30 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
                     </a>
 
-                    <a href="dashboard-web3.html" class="group relative px-6 py-3 font-bold text-zolaris-navy rounded-full bg-gradient-to-r from-zolaris-yellow to-zolaris-orange shadow-[0_0_15px_rgba(247,166,0,0.4)] hover:shadow-[0_0_25px_rgba(247,166,0,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
-                        <span class="relative z-10 flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            Zolaris Token
-                        </span>
-                        <div class="absolute inset-0 h-full w-full bg-white/30 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
-                    </a>
+                    
                 </div>
 
                 <div class="lg:hidden flex items-center">
@@ -135,12 +150,29 @@
                 <a href="nosotros.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Nuestra Historia</a>
                 <a href="proyectos.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Proyectos</a>
                 <a href="servicios.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Servicios</a>
+                <a href="zolaris-token.html" class="mt-4 relative group w-full flex items-center justify-center gap-3 px-4 py-4 rounded-xl 
+                        bg-[#0B2B46]/60 border border-cyan-500/50 backdrop-blur-md
+                        text-cyan-400 font-bold text-lg tracking-wide
+                        shadow-[0_0_10px_rgba(34,211,238,0.1)]
+                        transition-all duration-300 ease-out
+                        active:scale-95 active:bg-cyan-950/50 active:shadow-[0_0_20px_rgba(34,211,238,0.4)]">
+                    
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
+                    </span>
+
+                    <span class="relative z-10 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">
+                        Zolaris Token
+                    </span>
+                    
+                    <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 opacity-50"></div>
+                </a>
+                
                 <a href="calculadora.html" class="block mt-4 px-4 py-4 rounded-xl text-center text-base font-bold text-zolaris-navy bg-gradient-to-r from-zolaris-yellow to-zolaris-orange">
                     Cotiza ¡YA!
                 </a>
-                <a href="dashboard-web3.html" class="block mt-4 px-4 py-4 rounded-xl text-center text-base font-bold text-zolaris-navy bg-gradient-to-r from-zolaris-yellow to-zolaris-orange">
-                    Zolaris Token
-                </a>
+                
                 
             </div>
         </div>
@@ -149,7 +181,7 @@
     <header class="relative h-[70vh] min-h-[600px] flex items-center justify-center overflow-hidden pt-20">
         <div class="absolute inset-0 z-0">
             <img 
-            src="/public/assets/fotoh1.jpg" 
+            src="/assets/fotoh1.jpg" 
             alt="Fondo Zolaris" 
             class="w-full h-full object-cover"
             />
@@ -201,7 +233,7 @@
                         </div>
 
                         <div class="absolute inset-0 backface-hidden rotate-y-180 bg-zolaris-navy rounded-3xl overflow-hidden">
-                            <img src="/public/assets/Proyectos/foto4.jpg" class="absolute inset-0 w-full h-full object-cover opacity-100">
+                            <img src="/assets/Proyectos/foto4.jpg" class="absolute inset-0 w-full h-full object-cover opacity-100">
                             <div class="absolute inset-0 bg-gradient-to-t from-zolaris-navy via-zolaris-navy/80 to-transparent p-10 flex flex-col justify-end">
                                 <h3 class="text-2xl font-bold text-white mb-2">Libertad Energética</h3>
                                 <p class="text-slate-300">Cada proyecto es un paso hacia la autosuficiencia de nuestros clientes.</p>
@@ -227,7 +259,7 @@
                         </div>
 
                         <div class="absolute inset-0 backface-hidden rotate-y-180 bg-zolaris-navy rounded-3xl overflow-hidden">
-                            <img src="/public/assets/Reseña_historica/foto6.png" class="absolute inset-0 w-full h-full object-cover opacity-100">
+                            <img src="/assets/Reseña_historica/foto6.png" class="absolute inset-0 w-full h-full object-cover opacity-100">
                             <div class="absolute inset-0 bg-gradient-to-t from-zolaris-navy via-zolaris-navy/80 to-transparent p-10 flex flex-col justify-end">
                                 <h3 class="text-2xl font-bold text-white mb-2">Estándares Globales</h3>
                                 <p class="text-slate-300">Tecnología china de vanguardia aplicada al contexto colombiano.</p>
@@ -252,7 +284,7 @@
                 <div class="timeline-item mb-20 flex flex-col md:flex-row justify-between items-center w-full">
                     <div class="order-2 md:order-1 w-full md:w-5/12 pl-0 md:pr-8">
                         <div class="relative h-64 rounded-2xl overflow-hidden shadow-2xl border border-slate-700 group">
-                            <img src="/public/assets/Reseña_historica/foto1.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <img src="/assets/Reseña_historica/foto1.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             <div class="absolute inset-0 bg-black/40"></div>
                         </div>
                     </div>
@@ -289,7 +321,7 @@
 
                     <div class="order-2 md:order-3 w-full md:w-5/12 pl-0 md:pl-8">
                         <div class="relative h-64 rounded-2xl overflow-hidden shadow-2xl border border-slate-700 group">
-                            <img src="/public/assets/Reseña_historica/foto4.jpeg" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110">
+                            <img src="/assets/Reseña_historica/foto4.jpeg" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110">
                             <div class="absolute inset-0 bg-black/20"></div>
                         </div>
                     </div>
@@ -298,7 +330,7 @@
                 <div class="timeline-item mb-20 flex flex-col md:flex-row justify-between items-center w-full">
                     <div class="order-2 md:order-1 w-full md:w-5/12 pl-0 md:pr-8">
                         <div class="relative h-64 rounded-2xl overflow-hidden shadow-2xl border border-slate-700 group">
-                            <img src="/public/assets/img/AGPEMARIDIAZ.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <img src="/assets/img/AGPEMARIDIAZ.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             <div class="absolute inset-0 bg-black/40"></div>
                         </div>
                     </div>
@@ -335,7 +367,7 @@
 
                     <div class="order-2 md:order-3 w-full md:w-5/12 pl-0 md:pl-8">
                         <div class="relative h-64 rounded-2xl overflow-hidden shadow-2xl border border-red-900/50 group">
-                            <img src="/public/assets/Reseña_historica/foto2.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <img src="/assets/Reseña_historica/foto2.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             <div class="absolute inset-0 bg-red-900/20 mix-blend-overlay"></div>
                         </div>
                     </div>
@@ -344,7 +376,7 @@
                 <div class="timeline-item flex flex-col md:flex-row justify-between items-center w-full">
                     <div class="order-2 md:order-1 w-full md:w-5/12 pl-0 md:pr-8">
                         <div class="relative h-64 rounded-2xl overflow-hidden shadow-2xl border border-zolaris-orange group">
-                            <img src="/public/assets/img/AGPEBRICEÑO.jpeg" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110">
+                            <img src="/assets/img/AGPEBRICEÑO.jpeg" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110">
                             <div class="absolute inset-0 bg-gradient-to-t from-zolaris-orange/20 to-transparent"></div>
                         </div>
                     </div>
@@ -376,7 +408,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
                 <div class="group relative overflow-hidden rounded-2xl aspect-[3/4]">
-                    <img src="/public/assets/equipodetrabajo/foto1.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                    <img src="/assets/equipodetrabajo/foto1.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
                     <div class="absolute bottom-0 left-0 w-full p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform">
                         <p class="text-zolaris-orange font-bold text-xs uppercase">Fundador & CEO</p>
@@ -384,7 +416,7 @@
                     </div>
                 </div>
                 <div class="group relative overflow-hidden rounded-2xl aspect-[3/4]">
-                    <img src="/public/assets/equipodetrabajo/foto2.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                    <img src="/assets/equipodetrabajo/foto2.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
                     <div class="absolute bottom-0 left-0 w-full p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform">
                         <p class="text-zolaris-orange font-bold text-xs uppercase">Director Comercial</p>
@@ -392,7 +424,7 @@
                     </div>
                 </div>
                 <div class="group relative overflow-hidden rounded-2xl aspect-[3/4]">
-                    <img src="/public/assets/equipodetrabajo/foto3.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                    <img src="/assets/equipodetrabajo/foto3.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
                     <div class="absolute bottom-0 left-0 w-full p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform">
                         <p class="text-zolaris-orange font-bold text-xs uppercase">Embajador Energético</p>
@@ -400,7 +432,7 @@
                     </div>
                 </div>
                 <div class="group relative overflow-hidden rounded-2xl aspect-[3/4]">
-                    <img src="/public/assets/equipodetrabajo/foto4.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                    <img src="/assets/equipodetrabajo/foto4.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
                     <div class="absolute bottom-0 left-0 w-full p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform">
                         <p class="text-zolaris-orange font-bold text-xs uppercase">Director e Ingeniero Proyectos</p>
@@ -408,7 +440,7 @@
                     </div>
                 </div>
                 <div class="group relative overflow-hidden rounded-2xl aspect-[3/4]">
-                    <img src="/public/assets/equipodetrabajo/foto5.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                    <img src="/assets/equipodetrabajo/foto5.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
                     <div class="absolute bottom-0 left-0 w-full p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform">
                         <p class="text-zolaris-orange font-bold text-xs uppercase">Director en Innovación</p>
@@ -416,7 +448,7 @@
                     </div>
                 </div>
                 <div class="group relative overflow-hidden rounded-2xl aspect-[3/4]">
-                    <img src="/public/assets/equipodetrabajo/foto5.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                    <img src="/assets/equipodetrabajo/foto5.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
                     <div class="absolute bottom-0 left-0 w-full p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform">
                         <p class="text-zolaris-orange font-bold text-xs uppercase">Director Marketing Digital</p>
@@ -448,7 +480,7 @@
                     </div>
                 </div>
                 <div class="md:w-1/2 relative h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl">
-                    <img src="/public/assets/Proyectos/subestacionCEDENAR/foto1.JPG" class="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                    <img src="/assets/Proyectos/subestacionCEDENAR/foto1.JPG" class="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     <div class="absolute bottom-8 left-8">
                         <p class="text-white font-bold text-xl">Proyecto Rural ZNI</p>
@@ -469,7 +501,7 @@
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 <div class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer">
                     <div class="absolute inset-0 bg-slate-800 flex flex-col items-center justify-center p-4 transition-all duration-300 group-hover:bg-gradient-to-b group-hover:from-blue-600 group-hover:to-zolaris-navy">
-                        <img src="/public/assets/valores_institucionales/confianza.png" class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform">
+                        <img src="/assets/valores_institucionales/confianza.png" class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform">
                         <h3 class="text-white font-bold">Confianza</h3>
                     </div>
                     <div class="absolute inset-0 bg-black/80 flex items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center">
@@ -478,7 +510,7 @@
                 </div>
                 <div class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer">
                     <div class="absolute inset-0 bg-slate-800 flex flex-col items-center justify-center p-4 transition-all duration-300 group-hover:bg-gradient-to-b group-hover:from-yellow-600 group-hover:to-zolaris-navy">
-                        <img src="/public/assets/valores_institucionales/excelencia.png" class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform">
+                        <img src="/assets/valores_institucionales/excelencia.png" class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform">
                         <h3 class="text-white font-bold">Excelencia</h3>
                     </div>
                     <div class="absolute inset-0 bg-black/80 flex items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center">
@@ -487,7 +519,7 @@
                 </div>
                 <div class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer">
                     <div class="absolute inset-0 bg-slate-800 flex flex-col items-center justify-center p-4 transition-all duration-300 group-hover:bg-gradient-to-b group-hover:from-cyan-600 group-hover:to-zolaris-navy">
-                        <img src="/public/assets/valores_institucionales/inovacion.png" class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform">
+                        <img src="/assets/valores_institucionales/inovacion.png" class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform">
                         <h3 class="text-white font-bold">Innovación</h3>
                     </div>
                     <div class="absolute inset-0 bg-black/80 flex items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center">
@@ -496,7 +528,7 @@
                 </div>
                 <div class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer">
                     <div class="absolute inset-0 bg-slate-800 flex flex-col items-center justify-center p-4 transition-all duration-300 group-hover:bg-gradient-to-b group-hover:from-green-600 group-hover:to-zolaris-navy">
-                        <img src="/public/assets/valores_institucionales/responsabilidad.png" class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform">
+                        <img src="/assets/valores_institucionales/responsabilidad.png" class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform">
                         <h3 class="text-white font-bold">Responsabilidad</h3>
                     </div>
                     <div class="absolute inset-0 bg-black/80 flex items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center">
@@ -505,7 +537,7 @@
                 </div>
                 <div class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer">
                     <div class="absolute inset-0 bg-slate-800 flex flex-col items-center justify-center p-4 transition-all duration-300 group-hover:bg-gradient-to-b group-hover:from-pink-600 group-hover:to-zolaris-navy">
-                        <img src="/public/assets/valores_institucionales/servicio.png" class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform">
+                        <img src="/assets/valores_institucionales/servicio.png" class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform">
                         <h3 class="text-white font-bold">Servicio</h3>
                     </div>
                     <div class="absolute inset-0 bg-black/80 flex items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center">
@@ -514,7 +546,7 @@
                 </div>
                 <div class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer">
                     <div class="absolute inset-0 bg-slate-800 flex flex-col items-center justify-center p-4 transition-all duration-300 group-hover:bg-gradient-to-b group-hover:from-purple-600 group-hover:to-zolaris-navy">
-                        <img src="/public/assets/valores_institucionales/gratitud.png" class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform">
+                        <img src="/assets/valores_institucionales/gratitud.png" class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform">
                         <h3 class="text-white font-bold">Gratitud</h3>
                     </div>
                     <div class="absolute inset-0 bg-black/80 flex items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center">
@@ -561,7 +593,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                 <div class="space-y-4">
-                    <img src="/public/assets/logo.png" alt="Zolaris" class="h-16 brightness-0 invert">
+                    <img src="/assets/logo.png" alt="Zolaris" class="h-16 brightness-0 invert">
                     <p class="text-sm leading-relaxed max-w-xs">
                         El futuro de la energía es solar. Acompañamos tu transición energética con tecnología, confianza y excelencia.
                     </p>

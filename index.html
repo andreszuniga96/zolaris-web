@@ -25,6 +25,7 @@
                             orange: '#F7A600',
                             yellow: '#FDCB58',
                             accent: '#0EA5E9',
+                            cyan: '#00F0FF', // Agrega este color (Cian Neón)
                         }
                     },
                     fontFamily: {
@@ -39,10 +40,14 @@
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-20px)' },
                         }
+
                     }
                 }
             }
         }
+
+        // Dentro de tailwind.config.theme.extend.keyframes
+
     </script>
     
     <style>
@@ -123,7 +128,7 @@
                 
                 <a href="index.html" class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
                     <img class="h-12 w-auto transition-transform transform group-hover:scale-110 duration-500" 
-                        src="/public/assets/logo.png" 
+                        src="/assets/logo.png" 
                         alt="Zolaris Logo">
                 </a>
                 
@@ -132,6 +137,26 @@
                     <a href="nosotros.html" class="text-slate-300 font-medium hover:text-white hover:scale-105 transition-all">Nuestra Historia</a>
                     <a href="proyectos.html" class="text-slate-300 font-medium hover:text-white hover:scale-105 transition-all">Proyectos</a>
                     <a href="servicios.html" class="text-slate-300 font-medium hover:text-white hover:scale-105 transition-all">Servicios</a>
+
+                    <a href="zolaris-token.html" class="group relative inline-flex items-center gap-3 px-5 py-2.5 rounded-full 
+                            bg-[#0B2B46]/30 border border-cyan-500/50 backdrop-blur-sm
+                            text-cyan-400 font-bold text-sm tracking-wide
+                            transition-all duration-300 ease-out
+                            hover:border-cyan-400 hover:bg-cyan-950/30 
+                            hover:shadow-[0_0_20px_rgba(34,211,238,0.6)] 
+                            hover:-translate-y-0.5 active:scale-95">
+                        
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+                        </span>
+
+                        <span class="relative z-10 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">
+                            Zolaris Token
+                        </span>
+
+                        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </a>
                     
                     <a href="calculadora.html" class="group relative px-6 py-3 font-bold text-zolaris-navy rounded-full bg-gradient-to-r from-zolaris-yellow to-zolaris-orange shadow-[0_0_15px_rgba(247,166,0,0.4)] hover:shadow-[0_0_25px_rgba(247,166,0,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
                         <span class="relative z-10 flex items-center gap-2">
@@ -141,13 +166,7 @@
                         <div class="absolute inset-0 h-full w-full bg-white/30 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
                     </a>
 
-                    <a href="dashboard-web3.html" class="group relative px-6 py-3 font-bold text-zolaris-navy rounded-full bg-gradient-to-r from-zolaris-yellow to-zolaris-orange shadow-[0_0_15px_rgba(247,166,0,0.4)] hover:shadow-[0_0_25px_rgba(247,166,0,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
-                        <span class="relative z-10 flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            Zolaris Token
-                        </span>
-                        <div class="absolute inset-0 h-full w-full bg-white/30 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
-                    </a>
+                    
                 </div>
 
                 <div class="lg:hidden flex items-center">
@@ -164,12 +183,29 @@
                 <a href="nosotros.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Nuestra Historia</a>
                 <a href="proyectos.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Proyectos</a>
                 <a href="servicios.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Servicios</a>
+                <a href="zolaris-token.html" class="mt-4 relative group w-full flex items-center justify-center gap-3 px-4 py-4 rounded-xl 
+                        bg-[#0B2B46]/60 border border-cyan-500/50 backdrop-blur-md
+                        text-cyan-400 font-bold text-lg tracking-wide
+                        shadow-[0_0_10px_rgba(34,211,238,0.1)]
+                        transition-all duration-300 ease-out
+                        active:scale-95 active:bg-cyan-950/50 active:shadow-[0_0_20px_rgba(34,211,238,0.4)]">
+                    
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
+                    </span>
+
+                    <span class="relative z-10 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">
+                        Zolaris Token
+                    </span>
+                    
+                    <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 opacity-50"></div>
+                </a>
+                
                 <a href="calculadora.html" class="block mt-4 px-4 py-4 rounded-xl text-center text-base font-bold text-zolaris-navy bg-gradient-to-r from-zolaris-yellow to-zolaris-orange">
                     Cotiza ¡YA!
                 </a>
-                <a href="dashboard-web3.html" class="block mt-4 px-4 py-4 rounded-xl text-center text-base font-bold text-zolaris-navy bg-gradient-to-r from-zolaris-yellow to-zolaris-orange">
-                    Zolaris Token
-                </a>
+                
                 
             </div>
         </div>
@@ -303,10 +339,10 @@
                 </div>
                 <div class="relative h-[500px]">
                     <div class="absolute top-0 left-0 w-64 h-80 rounded-2xl overflow-hidden shadow-2xl border-4 border-slate-800 transform -rotate-6 hover:rotate-0 transition-transform duration-500 z-10">
-                        <img src="/public/assets/Reseña_historica/foto1.jpeg" alt="Inicios" class="w-full h-full object-cover">
+                        <img src="/assets/Reseña_historica/foto1.jpeg" alt="Inicios" class="w-full h-full object-cover">
                     </div>
                     <div class="absolute bottom-10 right-10 w-72 h-64 rounded-2xl overflow-hidden shadow-2xl border-4 border-slate-800 transform rotate-3 hover:rotate-0 transition-transform duration-500 z-20">
-                        <img src="/public/assets/Reseña_historica/foto2.jpeg" alt="Tecnología Actual" class="w-full h-full object-cover">
+                        <img src="/assets/Reseña_historica/foto2.jpeg" alt="Tecnología Actual" class="w-full h-full object-cover">
                     </div>
                     <div class="absolute inset-0 bg-zolaris-orange/10 rounded-full blur-[100px] z-0"></div>
                 </div>
@@ -328,7 +364,7 @@
         <div class="relative w-full max-w-[1400px] mx-auto h-[500px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl">
             <div id="carousel-track" class="flex h-full transition-transform duration-700 ease-in-out">
                 <div class="min-w-full h-full relative">
-                    <img src="/public/assets/Proyectos/foto1.jpeg" class="w-full h-full object-cover">
+                    <img src="/assets/Proyectos/foto1.jpeg" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                     <div class="absolute bottom-0 left-0 p-10 md:p-16">
                         <span class="bg-purple-600 text-white font-bold px-3 py-1 rounded text-xs uppercase mb-2 inline-block">Residencial</span>
@@ -337,7 +373,7 @@
                     </div>
                 </div>
                 <div class="min-w-full h-full relative">
-                    <img src="/public/assets/Proyectos/foto2.jpeg" class="w-full h-full object-cover">
+                    <img src="/assets/Proyectos/foto2.jpeg" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                     <div class="absolute bottom-0 left-0 p-10 md:p-16">
                         <span class="bg-purple-600 text-white font-bold px-3 py-1 rounded text-xs uppercase mb-2 inline-block">Residencial</span>
@@ -346,7 +382,7 @@
                     </div>
                 </div>
                 <div class="min-w-full h-full relative">
-                    <img src="/public/assets/Proyectos/foto3.jpeg" class="w-full h-full object-cover">
+                    <img src="/assets/Proyectos/foto3.jpeg" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                     <div class="absolute bottom-0 left-0 p-10 md:p-16">
                         <span class="bg-green-600 text-white font-bold px-3 py-1 rounded text-xs uppercase mb-2 inline-block">Comercial</span>
@@ -355,7 +391,7 @@
                     </div>
                 </div>
                 <div class="min-w-full h-full relative">
-                    <img src="/public/assets/Proyectos/casavillacampanela/foto1.JPG" class="w-full h-full object-cover">
+                    <img src="/assets/Proyectos/casavillacampanela/foto1.JPG" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                     <div class="absolute bottom-0 left-0 p-10 md:p-16">
                         <span class="bg-purple-600 text-white font-bold px-3 py-1 rounded text-xs uppercase mb-2 inline-block">Residencial</span>
@@ -489,11 +525,11 @@
             <p class="text-slate-500 mb-12">Empresas e instituciones que respaldan nuestra calidad.</p>
             
             <div class="flex flex-wrap justify-center items-center gap-16 opacity-100">
-                <img src="/public/assets/aliados_estrategicos/CEDENAR.png" alt="Cedenar" class="h-20 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img src="/public/assets/aliados_estrategicos/sunky.PNG" alt="Sunkin" class="h-20 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img src="/public/assets/aliados_estrategicos/logo-CEIE-fondo-transparente.png" alt="CEIE" class="h-24 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img src="/public/assets/aliados_estrategicos/clinica_SPA.png" alt="Clinical Spa" class="h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img src="/public/assets/aliados_estrategicos/el_mural.png" alt="El Mural" class="h-20 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="/assets/aliados_estrategicos/CEDENAR.png" alt="Cedenar" class="h-20 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="/assets/aliados_estrategicos/sunky.PNG" alt="Sunkin" class="h-20 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="/assets/aliados_estrategicos/logo-CEIE-fondo-transparente.png" alt="CEIE" class="h-24 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="/assets/aliados_estrategicos/clinica_SPA.png" alt="Clinical Spa" class="h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="/assets/aliados_estrategicos/el_mural.png" alt="El Mural" class="h-20 object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
             </div>
         </div>
     </section>
@@ -502,7 +538,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                 <div class="space-y-4">
-                    <img src="/public/assets/logo.png" alt="Zolaris" class="h-16 brightness-0 invert">
+                    <img src="/assets/logo.png" alt="Zolaris" class="h-16 brightness-0 invert">
                     <p class="text-sm leading-relaxed max-w-xs">
                         El futuro de la energía es solar. Acompañamos tu transición energética con tecnología, confianza y excelencia.
                     </p>

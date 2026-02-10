@@ -26,10 +26,20 @@
                             orange: '#F7A600',
                             yellow: '#FDCB58',
                             accent: '#0EA5E9',
+                            cyan: '#00F0FF', // Agrega este color (Cian Neón)
                         }
                     },
                     fontFamily: {
                         sans: ['Manrope', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards', // Animación unificada
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
                     }
                 }
             }
@@ -68,7 +78,7 @@
                 
                 <a href="index.html" class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
                     <img class="h-12 w-auto transition-transform transform group-hover:scale-110 duration-500" 
-                        src="/public/assets/logo.png" 
+                        src="/assets/logo.png" 
                         alt="Zolaris Logo">
                 </a>
                 
@@ -77,6 +87,26 @@
                     <a href="nosotros.html" class="text-slate-300 font-medium hover:text-white hover:scale-105 transition-all">Nuestra Historia</a>
                     <a href="proyectos.html" class="text-white font-bold border-b-2 border-zolaris-yellow transition-all">Proyectos</a>
                     <a href="servicios.html" class="text-slate-300 font-medium hover:text-white hover:scale-105 transition-all">Servicios</a>
+
+                    <a href="zolaris-token.html" class="group relative inline-flex items-center gap-3 px-5 py-2.5 rounded-full 
+                            bg-[#0B2B46]/30 border border-cyan-500/50 backdrop-blur-sm
+                            text-cyan-400 font-bold text-sm tracking-wide
+                            transition-all duration-300 ease-out
+                            hover:border-cyan-400 hover:bg-cyan-950/30 
+                            hover:shadow-[0_0_20px_rgba(34,211,238,0.6)] 
+                            hover:-translate-y-0.5 active:scale-95">
+                        
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+                        </span>
+
+                        <span class="relative z-10 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">
+                            Zolaris Token
+                        </span>
+
+                        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </a>
                     
                     <a href="calculadora.html" class="group relative px-6 py-3 font-bold text-zolaris-navy rounded-full bg-gradient-to-r from-zolaris-yellow to-zolaris-orange shadow-[0_0_15px_rgba(247,166,0,0.4)] hover:shadow-[0_0_25px_rgba(247,166,0,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
                         <span class="relative z-10 flex items-center gap-2">
@@ -86,13 +116,7 @@
                         <div class="absolute inset-0 h-full w-full bg-white/30 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
                     </a>
 
-                    <a href="dashboard-web3.html" class="group relative px-6 py-3 font-bold text-zolaris-navy rounded-full bg-gradient-to-r from-zolaris-yellow to-zolaris-orange shadow-[0_0_15px_rgba(247,166,0,0.4)] hover:shadow-[0_0_25px_rgba(247,166,0,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
-                        <span class="relative z-10 flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            Zolaris Token
-                        </span>
-                        <div class="absolute inset-0 h-full w-full bg-white/30 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
-                    </a>
+                    
                 </div>
 
                 <div class="lg:hidden flex items-center">
@@ -109,12 +133,29 @@
                 <a href="nosotros.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Nuestra Historia</a>
                 <a href="proyectos.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Proyectos</a>
                 <a href="servicios.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Servicios</a>
+                <a href="zolaris-token.html" class="mt-4 relative group w-full flex items-center justify-center gap-3 px-4 py-4 rounded-xl 
+                        bg-[#0B2B46]/60 border border-cyan-500/50 backdrop-blur-md
+                        text-cyan-400 font-bold text-lg tracking-wide
+                        shadow-[0_0_10px_rgba(34,211,238,0.1)]
+                        transition-all duration-300 ease-out
+                        active:scale-95 active:bg-cyan-950/50 active:shadow-[0_0_20px_rgba(34,211,238,0.4)]">
+                    
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
+                    </span>
+
+                    <span class="relative z-10 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">
+                        Zolaris Token
+                    </span>
+                    
+                    <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 opacity-50"></div>
+                </a>
+                
                 <a href="calculadora.html" class="block mt-4 px-4 py-4 rounded-xl text-center text-base font-bold text-zolaris-navy bg-gradient-to-r from-zolaris-yellow to-zolaris-orange">
                     Cotiza ¡YA!
                 </a>
-                <a href="dashboard-web3.html" class="block mt-4 px-4 py-4 rounded-xl text-center text-base font-bold text-zolaris-navy bg-gradient-to-r from-zolaris-yellow to-zolaris-orange">
-                    Zolaris Token
-                </a>
+                
                 
             </div>
         </div>
@@ -123,7 +164,7 @@
     <header class="relative h-[70vh] min-h-[600px] flex items-center justify-center overflow-hidden pt-20">
         <div class="absolute inset-0 z-0">
             <img 
-            src="/public/assets/fotoh3.png" 
+            src="/assets/fotoh3.png" 
             alt="Fondo Proyectos Zolaris" 
             class="w-full h-full object-cover"
             />
@@ -236,7 +277,7 @@
         <div class="flex flex-col lg:flex-row h-[700px] w-full gap-4 px-4 max-w-[1600px] mx-auto overflow-hidden">
             
             <div class="group relative flex-1 hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-3xl border border-white/10 shadow-2xl cursor-pointer" onclick="openProjectModal(16)">
-                <img src="/public/assets/img/AGPEAQUINE.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Proyecto La Cancha">
+                <img src="/assets/img/AGPEAQUINE.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Proyecto La Cancha">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
                 
                 <div class="absolute bottom-0 left-0 p-8 w-full transition-all duration-500">
@@ -263,7 +304,7 @@
             </div>
 
             <div class="group relative flex-1 hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-3xl border border-white/10 shadow-2xl cursor-pointer" onclick="openProjectModal(17)">
-                <img src="/public/assets/img/AGPECARNESNIKO.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Proyecto Carnes Niko">
+                <img src="/assets/img/AGPECARNESNIKO.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Proyecto Carnes Niko">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
                 
                 <div class="absolute bottom-0 left-0 p-8 w-full transition-all duration-500">
@@ -290,7 +331,7 @@
             </div>
 
             <div class="group relative flex-1 hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-3xl border border-white/10 shadow-2xl cursor-pointer" onclick="openProjectModal(7)">
-                <img src="/public/assets/img/AGPEMARIDIAZ.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Proyecto CEDENAR">
+                <img src="/assets/img/AGPEMARIDIAZ.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Proyecto CEDENAR">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
                 
                 <div class="absolute bottom-0 left-0 p-8 w-full transition-all duration-500">
@@ -373,7 +414,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                 <div class="space-y-4">
-                    <img src="/public/assets/logo.png" alt="Zolaris" class="h-16 brightness-0 invert">
+                    <img src="/assets/logo.png" alt="Zolaris" class="h-16 brightness-0 invert">
                     <p class="text-sm leading-relaxed max-w-xs">
                         El futuro de la energía es solar. Acompañamos tu transición energética con tecnología, confianza y excelencia.
                     </p>
@@ -538,24 +579,24 @@
     <script>
         // --- 1. DATOS DE PROYECTOS ---
         const projectsData = [
-            { id: 1, title: "Tienda Las Cuadras", category: "comercial", panels: 10, power: "6.15 kW", savings: "$ 580.000 COP", lat: 1.2227, lng: -77.2796, video: "/public/assets/img/AGPELASCUADRAS.mp4" },
-            { id: 2, title: "Subestación CEDENAR", category: "institucional", panels: 32, power: "20 kW", savings: "$ 1.900.000 COP", lat: 1.6986, lng: -78.7679, img: "/public/assets/Proyectos/subestacionCEDENAR/foto3.JPG" },
-            { id: 3, title: "La Cancha", category: "comercial", panels: 92, power: "52.5 kW", savings: "$ 4.800.000 COP", lat: 1.2136, lng: -77.2811, img: "/public/assets/Proyectos/lacancha/foto1.jpg" },
-            { id: 4, title: "Finca Remolino", category: "agro", panels: 15, power: "10.95 kW", savings: "$ 850.000 COP", lat: 1.6714, lng: -77.3327, img: "/public/assets/Proyectos/fincaremolino/foto1.jpeg" },
-            { id: 5, title: "Finca Pasizara", category: "agro", panels: 20, power: "12.3 kW", savings: "$ 1.100.000 COP", lat: 1.3812, lng: -77.2565, img: "/public/assets/Proyectos/fincapasizara/foto1.PNG" },
-            { id: 6, title: "Finca Cafetera", category: "agro", panels: 8, power: "4.68 kW", savings: "$ 410.000 COP", lat: 1.3595, lng: -77.2494, img: "/public/assets/Proyectos/fincacafetera/foto1.PNG" },
-            { id: 7, title: "Edificio Maridiaz", category: "residencial", panels: 32, power: "20 kW", savings: "$ 2.120.000 COP", lat: 1.2225, lng: -77.2840, video: "/public/assets/img/AGPEMARIDIAZ.mp4" },
-            { id: 8, title: "Edificio CEIE", category: "institucional", panels: 33, power: "25 kW", savings: "$ 2.200.000 COP", lat: 1.2150, lng: -77.2800, img: "/public/assets/Proyectos/edificiointeligenteCEIE/foto1.jpg" },
-            { id: 9, title: "Cueros El Mural", category: "comercial", panels: 10, power: "7 kW", savings: "$ 650.000 COP", lat: 1.2149, lng: -77.2830, img: "/public/assets/Proyectos/cueroselmural/foto1.JPG" },
-            { id: 10, title: "Clinical SPA", category: "comercial", panels: 50, power: "36.5 kW", savings: "$ 3.400.000 COP", lat: 1.2200, lng: -77.2850, img: "/public/assets/Proyectos/clinicaSPA/foto1.jpg" },
-            { id: 11, title: "Casa Villa Campanela", category: "residencial", panels: 5, power: "3.07 kW", savings: "$ 280.000 COP", lat: 1.2133, lng: -77.2928, img: "/public/assets/Proyectos/casavillacampanela/foto1.JPG" },
-            { id: 12, title: "Casa San Javier", category: "residencial", panels: 5, power: "3.07 kW", savings: "$ 280.000 COP", lat: 6.2577, lng: -76.6249, img: "/public/assets/Proyectos/casasanjaviermedellin/foto1.PNG" },
-            { id: 13, title: "Casa San Antonio", category: "residencial", panels: 8, power: "4.92 kW", savings: "$ 420.000 COP", lat: 1.3907, lng: -77.2367, img: "/public/assets/Proyectos/casasanantonio/foto1.jpg" },
-            { id: 14, title: "Casa Morasurco", category: "residencial", panels: 5, power: "3.07 kW", savings: "$ 280.000 COP", lat: 1.2293, lng: -77.2822, video: "/public/assets/img/AGPEMORASURCO.mp4" },
-            { id: 15, title: "Casa Briceño", category: "residencial", panels: 35, power: "18 kW", savings: "$ 1.700.000 COP", lat: 1.2424, lng: -77.3063, video: "/public/assets/img/AGPEBRICEÑO.mp4" },
-            { id: 16, title: "Casa Aquine 2", category: "residencial", panels: 6, power: "3.69 kW", savings: "$ 310.000 COP", lat: 1.2160, lng: -77.2750, video: "/public/assets/img/AGPEAQUINE.mp4" },
-            { id: 17, title: "Carnes Niko", category: "comercial", panels: 65, power: "40 kW", savings: "$ 4.500.000 COP", lat: 1.2106, lng: -77.2849, video: "/public/assets/img/AGPECARNESNIKO.mp4" },
-            { id: 18, title: "Cabañas San Antonio", category: "comercial", panels: 6, power: "3.69 kW", savings: "$ 310.000 COP", lat: 1.3904, lng: -77.2366, img: "/public/assets/Proyectos/cabañassanantonio/foto1.JPG" }
+            { id: 1, title: "Tienda Las Cuadras", category: "comercial", panels: 10, power: "6.15 kW", savings: "$ 580.000 COP", lat: 1.2227, lng: -77.2796, video: "/assets/img/AGPELASCUADRAS.mp4" },
+            { id: 2, title: "Subestación CEDENAR", category: "institucional", panels: 32, power: "20 kW", savings: "$ 1.900.000 COP", lat: 1.6986, lng: -78.7679, img: "/assets/Proyectos/subestacionCEDENAR/foto3.JPG" },
+            { id: 3, title: "La Cancha", category: "comercial", panels: 92, power: "52.5 kW", savings: "$ 4.800.000 COP", lat: 1.2136, lng: -77.2811, img: "/assets/Proyectos/lacancha/foto1.jpg" },
+            { id: 4, title: "Finca Remolino", category: "agro", panels: 15, power: "10.95 kW", savings: "$ 850.000 COP", lat: 1.6714, lng: -77.3327, img: "/assets/Proyectos/fincaremolino/foto1.jpeg" },
+            { id: 5, title: "Finca Pasizara", category: "agro", panels: 20, power: "12.3 kW", savings: "$ 1.100.000 COP", lat: 1.3812, lng: -77.2565, img: "/assets/Proyectos/fincapasizara/foto1.PNG" },
+            { id: 6, title: "Finca Cafetera", category: "agro", panels: 8, power: "4.68 kW", savings: "$ 410.000 COP", lat: 1.3595, lng: -77.2494, img: "/assets/Proyectos/fincacafetera/foto1.PNG" },
+            { id: 7, title: "Edificio Maridiaz", category: "residencial", panels: 32, power: "20 kW", savings: "$ 2.120.000 COP", lat: 1.2225, lng: -77.2840, video: "/assets/img/AGPEMARIDIAZ.mp4" },
+            { id: 8, title: "Edificio CEIE", category: "institucional", panels: 33, power: "25 kW", savings: "$ 2.200.000 COP", lat: 1.2150, lng: -77.2800, img: "/assets/Proyectos/edificiointeligenteCEIE/foto1.jpg" },
+            { id: 9, title: "Cueros El Mural", category: "comercial", panels: 10, power: "7 kW", savings: "$ 650.000 COP", lat: 1.2149, lng: -77.2830, img: "assets/Proyectos/cueroselmural/foto1.JPG" },
+            { id: 10, title: "Clinical SPA", category: "comercial", panels: 50, power: "36.5 kW", savings: "$ 3.400.000 COP", lat: 1.2200, lng: -77.2850, img: "/assets/Proyectos/clinicaSPA/foto1.jpg" },
+            { id: 11, title: "Casa Villa Campanela", category: "residencial", panels: 5, power: "3.07 kW", savings: "$ 280.000 COP", lat: 1.2133, lng: -77.2928, img: "/assets/Proyectos/casavillacampanela/foto1.JPG" },
+            { id: 12, title: "Casa San Javier", category: "residencial", panels: 5, power: "3.07 kW", savings: "$ 280.000 COP", lat: 6.2577, lng: -76.6249, img: "/assets/Proyectos/casasanjaviermedellin/foto1.PNG" },
+            { id: 13, title: "Casa San Antonio", category: "residencial", panels: 8, power: "4.92 kW", savings: "$ 420.000 COP", lat: 1.3907, lng: -77.2367, img: "/assets/Proyectos/casasanantonio/foto1.jpg" },
+            { id: 14, title: "Casa Morasurco", category: "residencial", panels: 5, power: "3.07 kW", savings: "$ 280.000 COP", lat: 1.2293, lng: -77.2822, video: "/assets/img/AGPEMORASURCO.mp4" },
+            { id: 15, title: "Casa Briceño", category: "residencial", panels: 35, power: "18 kW", savings: "$ 1.700.000 COP", lat: 1.2424, lng: -77.3063, video: "/assets/img/AGPEBRICEÑO.mp4" },
+            { id: 16, title: "Casa Aquine 2", category: "residencial", panels: 6, power: "3.69 kW", savings: "$ 310.000 COP", lat: 1.2160, lng: -77.2750, video: "/assets/img/AGPEAQUINE.mp4" },
+            { id: 17, title: "Carnes Niko", category: "comercial", panels: 65, power: "40 kW", savings: "$ 4.500.000 COP", lat: 1.2106, lng: -77.2849, video: "/assets/img/AGPECARNESNIKO.mp4" },
+            { id: 18, title: "Cabañas San Antonio", category: "comercial", panels: 6, power: "3.69 kW", savings: "$ 310.000 COP", lat: 1.3904, lng: -77.2366, img: "/assets/Proyectos/cabañassanantonio/foto1.JPG" }
         ];
 
         // --- 2. INICIALIZACIÓN DEL MAPA LEAFLET ---

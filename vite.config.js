@@ -15,7 +15,7 @@ export default defineConfig({
         servicios: resolve(__dirname, 'servicios.html'),
         calculadora: resolve(__dirname, 'calculadora.html'),
         dashboard: resolve(__dirname, 'dashboard-web3.html'),
-        
+        zolaris: resolve(__dirname, 'zolaris-token.html'),
       },
     },
   },

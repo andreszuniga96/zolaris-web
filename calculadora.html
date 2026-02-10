@@ -22,7 +22,8 @@
                             orange: '#F7A600', 
                             yellow: '#FDCB58',
                             accent: '#0EA5E9',
-                            dark: '#0f172a'
+                            dark: '#0f172a',
+                            cyan: '#00F0FF',
                         }
                     },
                     fontFamily: { sans: ['Manrope', 'sans-serif'] },
@@ -43,10 +44,10 @@
     <style>
         body { background-color: #0f172a; color: #f8fafc; }
         
-        /* Navbar Glass Effect idéntico a Nosotros */
+        /* Navbar Glass Effect */
         .glass-nav { background: rgba(11, 43, 70, 0.90); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
 
-        /* Estilos de inputs para la calculadora */
+        /* Estilos de inputs */
         .glass-panel { 
             background: rgba(30, 41, 59, 0.5); 
             backdrop-filter: blur(12px); 
@@ -66,7 +67,7 @@
             box-shadow: 0 0 0 2px rgba(247, 166, 0, 0.2);
         }
 
-        /* Range Slider Personalizado */
+        /* Range Slider */
         input[type="range"] { -webkit-appearance: none; background: transparent; }
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none; height: 20px; width: 20px;
@@ -78,6 +79,15 @@
             background: rgba(255,255,255,0.2); border-radius: 2px;
         }
 
+        /* Estado Bloqueado (Blur) */
+        .step-locked {
+            opacity: 0.4;
+            pointer-events: none;
+            filter: blur(4px);
+            user-select: none;
+            transition: all 0.5s ease;
+        }
+
         /* Modals */
         dialog::backdrop { background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(4px); }
     </style>
@@ -87,19 +97,24 @@
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-24">
-                
                 <a href="index.html" class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
                     <img class="h-12 w-auto transition-transform transform group-hover:scale-110 duration-500" 
-                        src="/public/assets/logo.png" 
+                        src="/assets/logo.png" 
                         alt="Zolaris Logo">
                 </a>
-                
                 <div class="hidden lg:flex space-x-8 items-center">
                     <a href="index.html" class="text-slate-300 font-medium hover:text-white hover:scale-105 transition-all">Inicio</a>
                     <a href="nosotros.html" class="text-slate-300 font-medium hover:text-white hover:scale-105 transition-all">Nuestra Historia</a>
                     <a href="proyectos.html" class="text-slate-300 font-medium hover:text-white hover:scale-105 transition-all">Proyectos</a>
                     <a href="servicios.html" class="text-slate-300 font-medium hover:text-white hover:scale-105 transition-all">Servicios</a>
-                    
+                    <a href="zolaris-token.html" class="group relative inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#0B2B46]/30 border border-cyan-500/50 backdrop-blur-sm text-cyan-400 font-bold text-sm tracking-wide transition-all duration-300 ease-out hover:border-cyan-400 hover:bg-cyan-950/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.6)] hover:-translate-y-0.5 active:scale-95">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+                        </span>
+                        <span class="relative z-10 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">Zolaris Token</span>
+                        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </a>
                     <a href="calculadora.html" class="group relative px-6 py-3 font-bold text-zolaris-navy rounded-full bg-gradient-to-r from-zolaris-yellow to-zolaris-orange shadow-[0_0_15px_rgba(247,166,0,0.4)] hover:shadow-[0_0_25px_rgba(247,166,0,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
                         <span class="relative z-10 flex items-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
@@ -107,16 +122,7 @@
                         </span>
                         <div class="absolute inset-0 h-full w-full bg-white/30 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
                     </a>
-
-                    <a href="dashboard-web3.html" class="group relative px-6 py-3 font-bold text-zolaris-navy rounded-full bg-gradient-to-r from-zolaris-yellow to-zolaris-orange shadow-[0_0_15px_rgba(247,166,0,0.4)] hover:shadow-[0_0_25px_rgba(247,166,0,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
-                        <span class="relative z-10 flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            Zolaris Token
-                        </span>
-                        <div class="absolute inset-0 h-full w-full bg-white/30 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
-                    </a>
                 </div>
-
                 <div class="lg:hidden flex items-center">
                     <button onclick="toggleMobileMenu()" class="text-white hover:text-zolaris-yellow focus:outline-none p-2 rounded-md hover:bg-white/10 transition-colors">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -131,20 +137,14 @@
                 <a href="nosotros.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Nuestra Historia</a>
                 <a href="proyectos.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Proyectos</a>
                 <a href="servicios.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Servicios</a>
-                <a href="calculadora.html" class="block mt-4 px-4 py-4 rounded-xl text-center text-base font-bold text-zolaris-navy bg-gradient-to-r from-zolaris-yellow to-zolaris-orange">
-                    Cotiza ¡YA!
-                </a>
-                <a href="dashboard-web3.html" class="block mt-4 px-4 py-4 rounded-xl text-center text-base font-bold text-zolaris-navy bg-gradient-to-r from-zolaris-yellow to-zolaris-orange">
-                    Zolaris Token
-                </a>
-                
+                <a href="calculadora.html" class="block mt-4 px-4 py-4 rounded-xl text-center text-base font-bold text-zolaris-navy bg-gradient-to-r from-zolaris-yellow to-zolaris-orange">Cotiza ¡YA!</a>
             </div>
         </div>
     </nav>
 
     <header class="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden pt-20">
         <div class="absolute inset-0 z-0">
-            <img src="/public/assets/fotoh2.jpg" alt="Fondo Calculadora" class="w-full h-full object-cover"/>
+            <img src="/assets/fotoh2.jpg" alt="Fondo Calculadora" class="w-full h-full object-cover"/>
             <div class="absolute inset-0 bg-gradient-to-b from-zolaris-navy/90 via-zolaris-navy/70 to-[#0f172a]"></div>
         </div>
 
@@ -174,7 +174,7 @@
                 
                 <div class="lg:col-span-5 space-y-6">
                     
-                    <div class="glass-panel rounded-3xl p-8 relative overflow-hidden">
+                    <div class="glass-panel rounded-3xl p-8 relative overflow-hidden transition-all" id="panel-datos">
                         <div class="absolute top-0 left-0 w-1 h-full bg-zolaris-orange"></div>
                         <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                             <span class="w-8 h-8 rounded-full bg-zolaris-orange/20 flex items-center justify-center text-zolaris-orange text-sm">1</span>
@@ -183,74 +183,85 @@
                         
                         <div class="space-y-4">
                             <div>
-                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Nombre Completo</label>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Nombre Completo <span class="text-red-500">*</span></label>
                                 <input type="text" id="lead-name" class="w-full glass-input rounded-xl p-3 placeholder-slate-500" placeholder="Ej: Iván Andrés">
                             </div>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Celular</label>
+                                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Celular <span class="text-red-500">*</span></label>
                                     <input type="tel" id="lead-phone" class="w-full glass-input rounded-xl p-3 placeholder-slate-500" placeholder="300 123...">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Email</label>
+                                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Email <span class="text-red-500">*</span></label>
                                     <input type="email" id="lead-email" class="w-full glass-input rounded-xl p-3 placeholder-slate-500" placeholder="tu@email.com">
                                 </div>
                             </div>
 
                             <div>
                                 <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Ciudad</label>
-                                <select id="lead-city" class="w-full glass-input rounded-xl p-3 cursor-pointer bg-slate-900" onchange="updateCalculations()">
+                                <select id="lead-city" class="w-full glass-input rounded-xl p-3 cursor-pointer bg-slate-900" onchange="handleCityChange()">
                                     </select>
+                            </div>
+                            
+                            <div class="pt-4">
+                                <button onclick="unlockStep2()" class="w-full py-3 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl transition-colors flex justify-center items-center gap-2">
+                                    CONTINUAR
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </button>
+                                <p class="text-center text-xs text-red-400 mt-2 hidden" id="step1-error">Por favor completa todos los campos correctamente.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="glass-panel rounded-3xl p-8 relative">
-                        <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                            <span class="w-8 h-8 rounded-full bg-zolaris-orange/20 flex items-center justify-center text-zolaris-orange text-sm">2</span>
-                            Consumo
-                        </h2>
+                    <div id="step-2-wrapper" class="step-locked transition-all duration-700">
+                        <div class="glass-panel rounded-3xl p-8 relative">
+                            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-zolaris-orange/20 flex items-center justify-center text-zolaris-orange text-sm">2</span>
+                                Consumo
+                            </h2>
 
-                        <div class="bg-slate-900/50 p-1 rounded-xl flex mb-6 border border-white/5">
-                            <button onclick="setInputMode('bill')" id="btn-mode-bill" class="flex-1 py-2 rounded-lg text-sm font-bold transition-all bg-zolaris-orange text-zolaris-navy shadow-lg">
-                                Valor Factura ($)
-                            </button>
-                            <button onclick="setInputMode('kwh')" id="btn-mode-kwh" class="flex-1 py-2 rounded-lg text-sm font-bold transition-all text-slate-400 hover:text-white">
-                                Consumo (kWh)
-                            </button>
-                        </div>
+                            <div class="bg-slate-900/50 p-1 rounded-xl flex mb-6 border border-white/5">
+                                <button onclick="setInputMode('bill')" id="btn-mode-bill" class="flex-1 py-2 rounded-lg text-sm font-bold transition-all bg-zolaris-orange text-zolaris-navy shadow-lg">
+                                    Valor Factura ($)
+                                </button>
+                                <button onclick="setInputMode('kwh')" id="btn-mode-kwh" class="flex-1 py-2 rounded-lg text-sm font-bold transition-all text-slate-400 hover:text-white">
+                                    Consumo (kWh)
+                                </button>
+                            </div>
 
-                        <div class="mb-8">
-                            <div class="flex justify-between items-end mb-4">
-                                <span class="text-slate-400 font-medium" id="slider-label">Pago Mensual Promedio</span>
-                                <div class="text-right">
-                                    <span class="text-3xl font-bold text-zolaris-orange block" id="display-value">$ 200.000</span>
-                                    <span class="text-xs text-slate-500" id="display-subtext">~212 kWh/mes</span>
+                            <div class="mb-8">
+                                <div class="flex justify-between items-end mb-4">
+                                    <span class="text-slate-400 font-medium" id="slider-label">Pago Mensual Promedio</span>
+                                    <div class="text-right">
+                                        <span class="text-3xl font-bold text-zolaris-orange block" id="display-value">$ 200.000</span>
+                                        <span class="text-xs text-slate-500" id="display-subtext">~212 kWh/mes</span>
+                                    </div>
                                 </div>
+                                <input type="range" id="consumption-slider" class="w-full mb-2" oninput="handleSliderChange(this.value)">
                             </div>
-                            <input type="range" id="consumption-slider" class="w-full mb-2" oninput="handleSliderChange(this.value)">
-                        </div>
 
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Tipo de Techo</label>
-                                <select id="roof-type" class="w-full glass-input rounded-xl p-2 text-sm bg-slate-900">
-                                    <option value="Teja de Barro">Teja de Barro</option>
-                                    <option value="Termoacústica">Termoacústica</option>
-                                    <option value="Placa Concreto">Placa Concreto</option>
-                                    <option value="Estructura Metálica">Estructura Metálica</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Tarifa ($/kWh)</label>
-                                <input type="number" id="kwh-price" value="940" class="w-full glass-input rounded-xl p-2 text-sm" onchange="updateCalculations()">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Tipo de Techo</label>
+                                    <select id="roof-type" class="w-full glass-input rounded-xl p-2 text-sm bg-slate-900">
+                                        <option value="Teja de Barro">Teja de Barro</option>
+                                        <option value="Termoacústica">Termoacústica</option>
+                                        <option value="Placa Concreto">Placa Concreto</option>
+                                        <option value="Estructura Metálica">Estructura Metálica</option>
+                                    </select>
+                                </div>
+                                <div id="container-tarifa">
+                                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Tarifa ($/kWh)</label>
+                                    <input type="number" id="kwh-price" class="w-full glass-input rounded-xl p-2 text-sm bg-slate-800" readonly>
+                                    <p class="text-[10px] text-slate-500 mt-1">*Tarifa promedio segun ciudad</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="lg:col-span-7 space-y-6">
+                <div class="lg:col-span-7 space-y-6 step-locked transition-all duration-700" id="step-3-wrapper">
                     
                     <div class="glass-panel rounded-3xl p-8 border-t-4 border-t-zolaris-orange relative overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900">
                         <div class="absolute -right-20 -top-20 w-64 h-64 bg-zolaris-orange/10 rounded-full blur-3xl"></div>
@@ -302,6 +313,19 @@
                         </div>
                     </div>
 
+                    <div class="glass-panel p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 border border-slate-700 bg-slate-900/60">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center border border-slate-600">
+                                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            </div>
+                            <div class="text-sm">
+                                <p class="text-white font-bold">Verificación de Seguridad</p>
+                                <p class="text-slate-400">Resuelve: <span id="captcha-question" class="font-mono text-zolaris-yellow font-bold text-lg"></span></p>
+                            </div>
+                        </div>
+                        <input type="number" id="captcha-input" placeholder="Tu respuesta" class="glass-input w-24 text-center rounded-lg p-2 font-bold text-lg">
+                    </div>
+
                     <button id="btn-submit" onclick="submitData()" class="group w-full py-5 bg-gradient-to-r from-zolaris-orange to-zolaris-yellow hover:from-orange-500 hover:to-yellow-400 text-zolaris-navy font-black text-lg rounded-2xl shadow-[0_0_20px_rgba(247,166,0,0.3)] transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3">
                         <span id="btn-text">SOLICITAR PROPUESTA FORMAL</span>
                         <svg id="btn-icon" class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
@@ -317,7 +341,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                 <div class="space-y-4">
-                    <img src="/public/assets/logo.png" alt="Zolaris" class="h-16 brightness-0 invert">
+                    <img src="/assets/logo.png" alt="Zolaris" class="h-16 brightness-0 invert">
                     <p class="text-sm leading-relaxed max-w-xs">
                         El futuro de la energía es solar. Acompañamos tu transición energética con tecnología, confianza y excelencia.
                     </p>
@@ -414,12 +438,12 @@
 
     <script>
         // *** CONFIGURACIÓN ***
-        // PEGA AQUÍ LA URL DE TU SCRIPT DE GOOGLE QUE COPIASTE AL IMPLEMENTAR
         const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzGTJxrUX0TjfjN9q_3Ho-nezs3s8tVv1pi81CBHpYJ3TQU3eP6dOHPBaWrIz02oVczNQ/exec"; 
 
         const DEFAULT_PROD = 1840.0;
         const POTENCIA_PANEL_W = 730;
 
+        // Datos de Producción (Se mantiene tu lista)
         const PRODUCCION_CIUDAD = {
             "Medellín": 1556.4, "Envigado": 1528.5, "Rionegro": 1660.0, "Cartagena": 1840.0,
             "Marinilla": 1662.9, "El Santuario": 1640.2, "Santa Elena": 1535.0, "Guarne": 1571.9,
@@ -431,25 +455,27 @@
             "Cali": 1503.3, "Yumbo": 1493.3
         };
 
-        let state = { mode: 'bill', val: 200000, city: 'Pasto', priceKwh: 940 };
+        // *** NUEVA: Lista de Tarifas Estimadas (Valores $/kWh) ***
+        // Puedes ajustar estos valores según el operador de red real de la zona
+        const TARIFA_CIUDAD = {
+            "Pasto": 940, "Taminango": 930, "Chachagüí": 940,
+            "Medellín": 850, "Envigado": 850, "Rionegro": 860, "Bogotá": 800,
+            "Cali": 830, "Yumbo": 830, "Cartagena": 1050,
+            // Valor por defecto para las que no estén explícitas
+            "DEFAULT": 900 
+        };
+
+        let state = { mode: 'bill', val: 300000, city: 'Pasto', priceKwh: 940, step2Unlocked: false };
+        let captchaResult = 0;
 
         document.addEventListener('DOMContentLoaded', () => {
             populateCities();
             setInputMode('bill');
-            
-            // Efecto scroll navbar
-            window.addEventListener('scroll', () => {
-                const navbar = document.getElementById('navbar');
-                if (window.scrollY > 50) {
-                    navbar.classList.add('shadow-lg');
-                    navbar.classList.replace('h-24', 'h-20');
-                } else {
-                    navbar.classList.remove('shadow-lg');
-                    navbar.classList.replace('h-20', 'h-24');
-                }
-            });
+            handleCityChange(); // Set initial tariff
+            generateCaptcha();
         });
 
+        // 1. Lógica de Ciudades y Tarifas
         function populateCities() {
             const select = document.getElementById('lead-city');
             Object.keys(PRODUCCION_CIUDAD).sort().forEach(city => {
@@ -461,38 +487,82 @@
             });
         }
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                setTimeout(() => menu.classList.remove('scale-y-0', 'opacity-0'), 10);
-            } else {
-                menu.classList.add('scale-y-0', 'opacity-0');
-                setTimeout(() => menu.classList.add('hidden'), 300);
-            }
+        function handleCityChange() {
+            const city = document.getElementById('lead-city').value;
+            // Busca la tarifa en el objeto, si no existe usa la DEFAULT o la de Medellín como fallback
+            const tarifa = TARIFA_CIUDAD[city] || TARIFA_CIUDAD["DEFAULT"] || 900;
+            
+            // Actualiza el input de tarifa visualmente
+            document.getElementById('kwh-price').value = tarifa;
+            
+            // Actualiza el cálculo
+            state.city = city;
+            state.priceKwh = tarifa;
+            updateCalculations();
         }
 
+        // 2. Validación y UX Paso a Paso
+        function unlockStep2() {
+            const name = document.getElementById('lead-name').value.trim();
+            const phone = document.getElementById('lead-phone').value.trim();
+            const email = document.getElementById('lead-email').value.trim();
+            const errorMsg = document.getElementById('step1-error');
+            
+            // Validaciones Regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (name.length < 3 || phone.length < 7 || !emailRegex.test(email)) {
+                errorMsg.classList.remove('hidden');
+                errorMsg.innerText = "Por favor verifica: Nombre, Celular y un Email válido (con @).";
+                return;
+            }
+
+            // Si pasa validación
+            errorMsg.classList.add('hidden');
+            state.step2Unlocked = true;
+            
+            // Quitar bloqueo visual
+            document.getElementById('step-2-wrapper').classList.remove('step-locked');
+            document.getElementById('step-3-wrapper').classList.remove('step-locked');
+            
+            // Scroll suave al siguiente paso
+            document.getElementById('step-2-wrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // 3. Modos y Rangos Actualizados
         function setInputMode(mode) {
             state.mode = mode;
             const slider = document.getElementById('consumption-slider');
             const btnBill = document.getElementById('btn-mode-bill');
             const btnKwh = document.getElementById('btn-mode-kwh');
+            const tarifaContainer = document.getElementById('container-tarifa');
             
             const activeClass = "bg-zolaris-orange text-zolaris-navy shadow-lg";
             const inactiveClass = "text-slate-400 hover:text-white bg-transparent shadow-none";
 
             if(mode === 'bill') {
-                slider.min = 50000; slider.max = 3000000; slider.step = 10000;
-                if(state.val < 50000) state.val = 200000;
+                // Rango: $300.000 a $15.000.000
+                slider.min = 300000; slider.max = 15000000; slider.step = 50000;
+                state.val = 300000; // Valor inicial seguro
+                
                 document.getElementById('slider-label').innerText = "Pago Mensual Promedio ($)";
                 btnBill.className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${activeClass}`;
                 btnKwh.className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${inactiveClass}`;
+                
+                // Mostrar input tarifa (informativo)
+                tarifaContainer.style.display = 'block';
+                
             } else {
-                slider.min = 50; slider.max = 3500; slider.step = 10;
-                if(state.val > 5000) state.val = Math.round(state.val / state.priceKwh);
+                // Rango: 300 kWh a 15.000 kWh
+                slider.min = 300; slider.max = 15000; slider.step = 50;
+                state.val = 300;
+                
                 document.getElementById('slider-label').innerText = "Consumo mensual (kWh)";
                 btnKwh.className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${activeClass}`;
                 btnBill.className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${inactiveClass}`;
+                
+                // Ocultar input tarifa (no necesario para cálculo directo en kWh)
+                tarifaContainer.style.display = 'none';
             }
             slider.value = state.val;
             handleSliderChange(state.val);
@@ -501,6 +571,7 @@
         function handleSliderChange(val) {
             state.val = parseFloat(val);
             state.city = document.getElementById('lead-city').value;
+            // Aseguramos que siempre lea la tarifa actual, aunque esté oculta
             state.priceKwh = parseFloat(document.getElementById('kwh-price').value) || 940;
             updateCalculations();
         }
@@ -516,6 +587,7 @@
                 document.getElementById('display-subtext').innerText = `~${Math.round(consumo_kwh)} kWh/mes`;
             } else {
                 document.getElementById('display-value').innerText = `${state.val} kWh`;
+                // Mostramos el costo estimado basado en la tarifa de la ciudad seleccionada
                 document.getElementById('display-subtext').innerText = `~${formatCOP(state.val * state.priceKwh)} COP/mes`;
             }
 
@@ -528,14 +600,18 @@
             const num_paneles = Math.ceil(potencia_instalada / (POTENCIA_PANEL_W / 1000));
             const potencia_real = num_paneles * (POTENCIA_PANEL_W / 1000);
 
-            // Costos
-            let cobro_kwp = potencia_real < 20 ? 4156723 : (potencia_real <= 50 ? 3882175 : 3623591);
+            // Costos (Ajustados para proyectos grandes si se llega a 15.000 kWh)
+            let cobro_kwp;
+            if (potencia_real < 10) cobro_kwp = 4156723;
+            else if (potencia_real < 50) cobro_kwp = 3882175;
+            else cobro_kwp = 3400000; // Mejor precio para proyectos muy grandes
+
             const costo = potencia_real * cobro_kwp;
 
             // Retorno
             const produccion = (PRODUCCION_CIUDAD[state.city] || DEFAULT_PROD) * potencia_real;
             const ahorro_anual = (consumo_kwh * 11.9 * state.priceKwh) + ((produccion/12 - consumo_kwh) > 0 ? ((produccion/12 - consumo_kwh)*12*330) : 0);
-            const beneficios = 0.40 * costo;
+            const beneficios = 0.40 * costo; // Beneficios tributarios aproximados
             const payback = costo / (ahorro_anual + (beneficios/3));
 
             // Impacto
@@ -551,7 +627,31 @@
             document.getElementById('impact-trees').innerText = Math.round(co2 * 1000 / 22);
         }
 
+        // 4. Captcha Simple
+        function generateCaptcha() {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            captchaResult = num1 + num2;
+            document.getElementById('captcha-question').innerText = `${num1} + ${num2} = ?`;
+            document.getElementById('captcha-input').value = '';
+        }
+
         async function submitData() {
+            // Verificar si el paso 1 fue completado
+            if(!state.step2Unlocked) {
+                alert("Por favor completa tus datos y presiona 'Continuar' primero.");
+                document.getElementById('panel-datos').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            // Verificar Captcha
+            const userCaptcha = parseInt(document.getElementById('captcha-input').value);
+            if(userCaptcha !== captchaResult) {
+                alert("La respuesta de seguridad es incorrecta. Inténtalo de nuevo.");
+                generateCaptcha();
+                return;
+            }
+
             const btn = document.getElementById('btn-submit');
             const btnText = document.getElementById('btn-text');
             const btnIcon = document.getElementById('btn-icon');
@@ -561,11 +661,6 @@
             const email = document.getElementById('lead-email').value;
             const telefono = document.getElementById('lead-phone').value;
             const ciudad = document.getElementById('lead-city').value;
-
-            if(!nombre || !telefono) {
-                alert("Por favor completa tu Nombre y Celular.");
-                return;
-            }
 
             // UI Loading
             btn.disabled = true;
@@ -606,6 +701,7 @@
                     btnText.innerText = "SOLICITAR PROPUESTA FORMAL";
                     btnIcon.classList.remove('hidden');
                     loadIcon.classList.add('hidden');
+                    generateCaptcha(); // Reset captcha
                 }, 1500);
 
             } catch (e) {
@@ -614,31 +710,20 @@
             }
         }
 
-        // 5. Modales Legales
-        function openModal(id) {
-            document.getElementById(id).classList.remove('hidden');
-        }
-        function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
-        }
-
-        // --- 5. MOBILE MENU (ACTUALIZADO CON ANIMACIÓN) ---
+        // Funciones auxiliares de UI
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             if (menu.classList.contains('hidden')) {
                 menu.classList.remove('hidden');
-                setTimeout(() => {
-                    menu.classList.remove('scale-y-0', 'opacity-0');
-                }, 10);
+                setTimeout(() => { menu.classList.remove('scale-y-0', 'opacity-0'); }, 10);
             } else {
                 menu.classList.add('scale-y-0', 'opacity-0');
-                setTimeout(() => {
-                    menu.classList.add('hidden');
-                }, 300);
+                setTimeout(() => { menu.classList.add('hidden'); }, 300);
             }
         }
 
-        // Navbar Scroll
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
