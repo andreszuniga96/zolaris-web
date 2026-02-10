@@ -120,23 +120,36 @@
         </div>
     </nav>
 
-    <header class="relative pt-40 pb-20 overflow-hidden bg-gradient-to-br from-slate-900 via-[#0B1525] to-zolaris-navy">
-        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-zolaris-blue/10 rounded-full blur-[120px]"></div>
-        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-zolaris-orange/5 rounded-full blur-[100px]"></div>
-        <div class="absolute inset-0 bg-[url('/assets/pattern-solar.png')] opacity-[0.03]"></div>
+    <header class="relative h-[70vh] min-h-[600px] flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <img 
+            src="/public/assets/fotoh3.png" 
+            alt="Fondo Proyectos Zolaris" 
+            class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-b from-zolaris-navy/90 via-zolaris-navy/70 to-[#0f172a]"></div>
+        </div>
 
-        <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
-            <span class="inline-block py-1 px-3 rounded-full bg-slate-800 border border-slate-700 text-zolaris-orange text-xs font-bold tracking-widest uppercase mb-6 animate-fade-in">
-                Huella Solar Zolaris
-            </span>
-            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight tracking-tight">
+        <div class="relative z-10 text-center max-w-5xl mx-auto px-4 animate-fade-in-up">
+            <div class="inline-block mb-6 p-1 rounded-full bg-gradient-to-r from-zolaris-orange to-zolaris-yellow">
+                <div class="bg-zolaris-navy px-6 py-2 rounded-full">
+                    <span class="text-zolaris-yellow text-xs font-bold tracking-[0.3em] uppercase">
+                        Huella Solar Zolaris
+                    </span>
+                </div>
+            </div>
+            
+            <h1 class="text-5xl md:text-8xl font-extrabold text-white mb-8 leading-tight tracking-tight">
                 Ingeniería que conecta <br> 
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-zolaris-yellow to-zolaris-orange">territorios y vidas</span>
             </h1>
-            <p class="text-xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed">
+            
+            <p class="text-xl md:text-2xl text-slate-300 font-light max-w-3xl mx-auto leading-relaxed">
                 Nuestra tecnología no solo genera energía; genera desarrollo. Explora en el mapa cómo estamos iluminando el suroccidente colombiano, proyecto a proyecto.
             </p>
         </div>
+        
+        
     </header>
 
     <section class="py-12 bg-[#0f172a] relative">
@@ -222,7 +235,7 @@
 
         <div class="flex flex-col lg:flex-row h-[700px] w-full gap-4 px-4 max-w-[1600px] mx-auto overflow-hidden">
             
-            <div class="group relative flex-1 hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-3xl border border-white/10 shadow-2xl cursor-pointer" onclick="openModal(3)">
+            <div class="group relative flex-1 hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-3xl border border-white/10 shadow-2xl cursor-pointer" onclick="openProjectModal(16)">
                 <img src="/public/assets/img/AGPEAQUINE.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Proyecto La Cancha">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
                 
@@ -249,7 +262,7 @@
                 </div>
             </div>
 
-            <div class="group relative flex-1 hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-3xl border border-white/10 shadow-2xl cursor-pointer" onclick="openModal(17)">
+            <div class="group relative flex-1 hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-3xl border border-white/10 shadow-2xl cursor-pointer" onclick="openProjectModal(17)">
                 <img src="/public/assets/img/AGPECARNESNIKO.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Proyecto Carnes Niko">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
                 
@@ -276,7 +289,7 @@
                 </div>
             </div>
 
-            <div class="group relative flex-1 hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-3xl border border-white/10 shadow-2xl cursor-pointer" onclick="openModal(2)">
+            <div class="group relative flex-1 hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-3xl border border-white/10 shadow-2xl cursor-pointer" onclick="openProjectModal(7)">
                 <img src="/public/assets/img/AGPEMARIDIAZ.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Proyecto CEDENAR">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
                 
@@ -382,9 +395,9 @@
                 <div>
                     <h3 class="text-white font-bold mb-6">Legal</h3>
                     <ul class="space-y-3 text-sm cursor-pointer">
-                        <li><span onclick="openModal('modal-privacidad')" class="hover:text-zolaris-orange transition-colors">Política de Privacidad</span></li>
-                        <li><span onclick="openModal('modal-terminos')" class="hover:text-zolaris-orange transition-colors">Términos y Condiciones</span></li>
-                        <li><span onclick="openModal('modal-datos')" class="hover:text-zolaris-orange transition-colors">Tratamiento de Datos</span></li>
+                        <li><span onclick="openLegalModal('modal-privacidad')" class="hover:text-zolaris-orange transition-colors">Política de Privacidad</span></li>
+                        <li><span onclick="openLegalModal('modal-terminos')" class="hover:text-zolaris-orange transition-colors">Términos y Condiciones</span></li>
+                        <li><span onclick="openLegalModal('modal-datos')" class="hover:text-zolaris-orange transition-colors">Tratamiento de Datos</span></li>
                     </ul>
                 </div>
 
@@ -411,7 +424,7 @@
     </footer>
 
     <div id="modal-privacidad" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-privacidad')"></div>
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeLegalModal('modal-privacidad')"></div>
         <div class="relative bg-slate-900 w-full max-w-2xl rounded-2xl p-8 border border-slate-700 shadow-2xl max-h-[80vh] overflow-y-auto">
             <h3 class="text-2xl font-bold text-white mb-4">Política de Privacidad</h3>
             <div class="text-slate-300 space-y-4 text-sm">
@@ -421,12 +434,12 @@
                 <p>Implementamos medidas de seguridad técnicas y organizativas para proteger sus datos contra el acceso no autorizado, la alteración o la destrucción. Sin embargo, recuerde que ninguna transmisión por Internet es 100% segura.</p>
                 <p>Usted tiene derecho a acceder, corregir o solicitar la eliminación de sus datos personales en cualquier momento contactándonos a través de nuestros canales oficiales.</p>
             </div>
-            <button onclick="closeModal('modal-privacidad')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
+            <button onclick="closeLegalModal('modal-privacidad')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
         </div>
     </div>
 
     <div id="modal-terminos" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-terminos')"></div>
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeLegalModal('modal-terminos')"></div>
         <div class="relative bg-slate-900 w-full max-w-2xl rounded-2xl p-8 border border-slate-700 shadow-2xl max-h-[80vh] overflow-y-auto">
             <h3 class="text-2xl font-bold text-white mb-4">Términos y Condiciones</h3>
             <div class="text-slate-300 space-y-4 text-sm">
@@ -436,12 +449,12 @@
                 <p>Zolaris se reserva el derecho de modificar, suspender o interrumpir cualquier aspecto del servicio en cualquier momento sin previo aviso. No nos hacemos responsables por daños directos o indirectos derivados del uso o la imposibilidad de uso de este sitio web.</p>
                 <p>Cualquier disputa relacionada con estos términos se regirá por las leyes de la República de Colombia y se someterá a la jurisdicción de los tribunales de Pasto, Nariño.</p>
             </div>
-            <button onclick="closeModal('modal-terminos')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
+            <button onclick="closeLegalModal('modal-terminos')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
         </div>
     </div>
 
     <div id="modal-datos" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-datos')"></div>
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeLegalModal('modal-datos')"></div>
         <div class="relative bg-slate-900 w-full max-w-2xl rounded-2xl p-8 border border-slate-700 shadow-2xl max-h-[80vh] overflow-y-auto">
             <h3 class="text-2xl font-bold text-white mb-4">Tratamiento de Datos</h3>
             <div class="text-slate-300 space-y-4 text-sm">
@@ -451,15 +464,15 @@
                 <p>Zolaris garantiza la confidencialidad y seguridad de la información, adoptando las medidas necesarias para evitar su adulteración, pérdida, consulta, uso o acceso no autorizado o fraudulento.</p>
                 <p>Para ejercer sus derechos de Habeas Data, puede contactarnos a través del correo electrónico tramites.zolaris@gmail.com o en nuestra oficina física en Pasto, Nariño.</p>
             </div>
-            <button onclick="closeModal('modal-datos')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
+            <button onclick="closeLegalModal('modal-datos')" class="mt-6 px-6 py-2 bg-zolaris-orange text-zolaris-navy font-bold rounded-lg hover:bg-white transition-colors">Cerrar</button>
         </div>
     </div>
 
     <div id="project-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity" onclick="closeProjectModal()"></div>
         
         <div class="relative bg-slate-900 w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl border border-slate-700 transform transition-all scale-95 opacity-0 flex flex-col md:flex-row" id="modal-content">
-            <button onclick="closeModal()" class="absolute top-4 right-4 z-20 w-10 h-10 bg-black/60 backdrop-blur rounded-full text-white flex items-center justify-center hover:bg-zolaris-orange transition-colors">
+            <button onclick="closeProjectModal()" class="absolute top-4 right-4 z-20 w-10 h-10 bg-black/60 backdrop-blur rounded-full text-white flex items-center justify-center hover:bg-zolaris-orange transition-colors">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             
@@ -523,52 +536,47 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // --- 1. DATOS DE PROYECTOS (Con Coordenadas Decimales Corregidas) ---
-        // Se convirtieron las coordenadas DMS a Decimal para que Leaflet las entienda.
+        // --- 1. DATOS DE PROYECTOS ---
         const projectsData = [
             { id: 1, title: "Tienda Las Cuadras", category: "comercial", panels: 10, power: "6.15 kW", savings: "$ 580.000 COP", lat: 1.2227, lng: -77.2796, video: "/public/assets/img/AGPELASCUADRAS.mp4" },
             { id: 2, title: "Subestación CEDENAR", category: "institucional", panels: 32, power: "20 kW", savings: "$ 1.900.000 COP", lat: 1.6986, lng: -78.7679, img: "/public/assets/Proyectos/subestacionCEDENAR/foto3.JPG" },
-            { id: 3, title: "La Cancha", category: "comercial", panels: 92, power: "52.5 kW", savings: "$ 4.800.000 COP", lat: 1.2136, lng: -77.2811, img: "/public/assets/Proyectos/lacancha/foto1.jpg" }, // Pasto aprox
+            { id: 3, title: "La Cancha", category: "comercial", panels: 92, power: "52.5 kW", savings: "$ 4.800.000 COP", lat: 1.2136, lng: -77.2811, img: "/public/assets/Proyectos/lacancha/foto1.jpg" },
             { id: 4, title: "Finca Remolino", category: "agro", panels: 15, power: "10.95 kW", savings: "$ 850.000 COP", lat: 1.6714, lng: -77.3327, img: "/public/assets/Proyectos/fincaremolino/foto1.jpeg" },
             { id: 5, title: "Finca Pasizara", category: "agro", panels: 20, power: "12.3 kW", savings: "$ 1.100.000 COP", lat: 1.3812, lng: -77.2565, img: "/public/assets/Proyectos/fincapasizara/foto1.PNG" },
             { id: 6, title: "Finca Cafetera", category: "agro", panels: 8, power: "4.68 kW", savings: "$ 410.000 COP", lat: 1.3595, lng: -77.2494, img: "/public/assets/Proyectos/fincacafetera/foto1.PNG" },
             { id: 7, title: "Edificio Maridiaz", category: "residencial", panels: 32, power: "20 kW", savings: "$ 2.120.000 COP", lat: 1.2225, lng: -77.2840, video: "/public/assets/img/AGPEMARIDIAZ.mp4" },
-            { id: 8, title: "Edificio CEIE", category: "institucional", panels: 33, power: "25 kW", savings: "$ 2.200.000 COP", lat: 1.2150, lng: -77.2800, img: "/public/assets/Proyectos/edificiointeligenteCEIE/foto1.jpg" }, // Pasto aprox
+            { id: 8, title: "Edificio CEIE", category: "institucional", panels: 33, power: "25 kW", savings: "$ 2.200.000 COP", lat: 1.2150, lng: -77.2800, img: "/public/assets/Proyectos/edificiointeligenteCEIE/foto1.jpg" },
             { id: 9, title: "Cueros El Mural", category: "comercial", panels: 10, power: "7 kW", savings: "$ 650.000 COP", lat: 1.2149, lng: -77.2830, img: "/public/assets/Proyectos/cueroselmural/foto1.JPG" },
-            { id: 10, title: "Clinical SPA", category: "comercial", panels: 50, power: "36.5 kW", savings: "$ 3.400.000 COP", lat: 1.2200, lng: -77.2850, img: "/public/assets/Proyectos/clinicaSPA/foto1.jpg" }, // Pasto aprox
+            { id: 10, title: "Clinical SPA", category: "comercial", panels: 50, power: "36.5 kW", savings: "$ 3.400.000 COP", lat: 1.2200, lng: -77.2850, img: "/public/assets/Proyectos/clinicaSPA/foto1.jpg" },
             { id: 11, title: "Casa Villa Campanela", category: "residencial", panels: 5, power: "3.07 kW", savings: "$ 280.000 COP", lat: 1.2133, lng: -77.2928, img: "/public/assets/Proyectos/casavillacampanela/foto1.JPG" },
-            { id: 12, title: "Casa San Javier", category: "residencial", panels: 5, power: "3.07 kW", savings: "$ 280.000 COP", lat: 6.2577, lng: -76.6249, img: "/public/assets/Proyectos/casasanjaviermedellin/foto1.PNG" }, // Medellin
+            { id: 12, title: "Casa San Javier", category: "residencial", panels: 5, power: "3.07 kW", savings: "$ 280.000 COP", lat: 6.2577, lng: -76.6249, img: "/public/assets/Proyectos/casasanjaviermedellin/foto1.PNG" },
             { id: 13, title: "Casa San Antonio", category: "residencial", panels: 8, power: "4.92 kW", savings: "$ 420.000 COP", lat: 1.3907, lng: -77.2367, img: "/public/assets/Proyectos/casasanantonio/foto1.jpg" },
             { id: 14, title: "Casa Morasurco", category: "residencial", panels: 5, power: "3.07 kW", savings: "$ 280.000 COP", lat: 1.2293, lng: -77.2822, video: "/public/assets/img/AGPEMORASURCO.mp4" },
             { id: 15, title: "Casa Briceño", category: "residencial", panels: 35, power: "18 kW", savings: "$ 1.700.000 COP", lat: 1.2424, lng: -77.3063, video: "/public/assets/img/AGPEBRICEÑO.mp4" },
-            { id: 16, title: "Casa Aquine 2", category: "residencial", panels: 6, power: "3.69 kW", savings: "$ 310.000 COP", lat: 1.2160, lng: -77.2750, video: "/public/assets/img/AGPEAQUINE.mp4" }, // Pasto aprox
+            { id: 16, title: "Casa Aquine 2", category: "residencial", panels: 6, power: "3.69 kW", savings: "$ 310.000 COP", lat: 1.2160, lng: -77.2750, video: "/public/assets/img/AGPEAQUINE.mp4" },
             { id: 17, title: "Carnes Niko", category: "comercial", panels: 65, power: "40 kW", savings: "$ 4.500.000 COP", lat: 1.2106, lng: -77.2849, video: "/public/assets/img/AGPECARNESNIKO.mp4" },
             { id: 18, title: "Cabañas San Antonio", category: "comercial", panels: 6, power: "3.69 kW", savings: "$ 310.000 COP", lat: 1.3904, lng: -77.2366, img: "/public/assets/Proyectos/cabañassanantonio/foto1.JPG" }
         ];
 
         // --- 2. INICIALIZACIÓN DEL MAPA LEAFLET ---
-        const map = L.map('map').setView([1.5, -77.5], 8); // Centrado en Nariño, Zoom out
+        const map = L.map('map').setView([1.5, -77.5], 8);
 
-        // Capa oscura (CartoDB Dark Matter)
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
             maxZoom: 20
         }).addTo(map);
 
-        // Colores por categoría
         const categoryColors = {
-            'residencial': '#3B82F6', // Azul
-            'comercial': '#F97316',   // Naranja
-            'agro': '#22C55E',        // Verde
-            'institucional': '#A855F7' // Violeta
+            'residencial': '#3B82F6',
+            'comercial': '#F97316',
+            'agro': '#22C55E',
+            'institucional': '#A855F7'
         };
 
-        // Añadir Marcadores
         projectsData.forEach(p => {
             const color = categoryColors[p.category] || '#F7A600';
             
-            // Icono CSS Personalizado
             const customIcon = L.divIcon({
                 className: 'custom-div-icon',
                 html: `<div style="background-color: ${color}; width: 15px; height: 15px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 10px ${color};"></div>`,
@@ -578,46 +586,42 @@
 
             const marker = L.marker([p.lat, p.lng], { icon: customIcon }).addTo(map);
             
-            // Tooltip hover
             marker.bindTooltip(p.title, {
                 permanent: false, 
                 direction: 'top',
                 className: 'bg-slate-800 text-white border-0 px-2 py-1 rounded text-xs'
             });
 
-            // Click evento para abrir modal
+            // CORRECCIÓN: Llamamos a openProjectModal en lugar de openModal
             marker.on('click', () => {
-                openModal(p.id);
+                openProjectModal(p.id);
             });
         });
 
-        // --- 3. LÓGICA DEL MODAL (Ficha Técnica Proyecto) ---
-        const modal = document.getElementById('project-modal');
-        const modalContent = document.getElementById('modal-content');
+        // --- 3. LÓGICA DEL MODAL DE PROYECTOS (FICHA TÉCNICA) ---
+        // Nombre cambiado para evitar conflictos
+        const projectModal = document.getElementById('project-modal');
+        const projectModalContent = document.getElementById('modal-content');
 
-        function openModal(id) {
+        function openProjectModal(id) {
             const p = projectsData.find(item => item.id === id);
             if (!p) return;
 
             const imgElement = document.getElementById('modal-img');
             const videoElement = document.getElementById('modal-video');
 
-            // Lógica para alternar entre Video e Imagen
             if (p.video) {
-                // Configurar Video
                 videoElement.src = p.video;
                 videoElement.classList.remove('hidden');
                 imgElement.classList.add('hidden');
-                imgElement.src = ""; // Limpiar imagen para ahorrar recursos
+                imgElement.src = ""; 
             } else {
-                // Configurar Imagen
                 imgElement.src = p.img;
                 imgElement.classList.remove('hidden');
                 videoElement.classList.add('hidden');
-                videoElement.src = ""; // Detener video si estaba cargado
+                videoElement.src = "";
             }
 
-            // Datos de texto (se mantienen igual)
             document.getElementById('modal-title').innerText = p.title;
             document.getElementById('modal-cat').innerText = p.category;
             document.getElementById('modal-panels').innerText = p.panels;
@@ -625,37 +629,37 @@
             document.getElementById('modal-savings').innerText = p.savings;
             document.getElementById('modal-location').innerText = `${p.lat}, ${p.lng}`;
 
-            // Calculo estimado de CO2
             const kwVal = parseFloat(p.power); 
             if (!isNaN(kwVal)) {
                 const co2 = (kwVal * 1200 * 0.0004).toFixed(1);
                 document.getElementById('modal-co2').innerText = co2 + " Ton";
             }
 
-            modal.classList.remove('hidden');
+            projectModal.classList.remove('hidden');
             setTimeout(() => {
-                modalContent.classList.remove('scale-95', 'opacity-0');
-                modalContent.classList.add('scale-100', 'opacity-100');
+                projectModalContent.classList.remove('scale-95', 'opacity-0');
+                projectModalContent.classList.add('scale-100', 'opacity-100');
             }, 10);
         }
 
-        function closeModal() {
-            modalContent.classList.remove('scale-100', 'opacity-100');
-            modalContent.classList.add('scale-95', 'opacity-0');
+        function closeProjectModal() {
+            projectModalContent.classList.remove('scale-100', 'opacity-100');
+            projectModalContent.classList.add('scale-95', 'opacity-0');
             setTimeout(() => {
-                modal.classList.add('hidden');
+                projectModal.classList.add('hidden');
             }, 300);
         }
 
-        // 5. Modales Legales
-        function openModal(id) {
+        // --- 4. LÓGICA DE MODALES LEGALES (FOOTER) ---
+        // Nombre específico para evitar conflictos
+        function openLegalModal(id) {
             document.getElementById(id).classList.remove('hidden');
         }
-        function closeModal(id) {
+        function closeLegalModal(id) {
             document.getElementById(id).classList.add('hidden');
         }
 
-        // --- 4. SWIPER (Galería Técnica) ---
+        // --- 5. SWIPER ---
         var swiper = new Swiper(".techSwiper", {
             effect: "coverflow",
             grabCursor: true,
@@ -677,7 +681,7 @@
             }
         });
 
-        // --- 5. MOBILE MENU (ACTUALIZADO CON ANIMACIÓN) ---
+        // --- 6. MOBILE MENU ---
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             if (menu.classList.contains('hidden')) {
@@ -693,55 +697,40 @@
             }
         }
 
-        // Navbar Scroll
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('shadow-lg');
-                navbar.classList.replace('h-24', 'h-20');
-            } else {
-                navbar.classList.remove('shadow-lg');
-                navbar.classList.replace('h-20', 'h-24');
-            }
-        });
-
+        // --- 7. ANIMACIÓN DE NÚMEROS (COUNTERS) ---
         document.addEventListener('DOMContentLoaded', () => {
-        const counters = document.querySelectorAll('.counter');
-        const speed = 200; // Cuanto más alto, más lenta la animación
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200;
 
-        const startCounter = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counter = entry.target;
-                    const updateCount = () => {
-                        const target = +counter.getAttribute('data-target');
-                        const count = +counter.innerText;
-                        const inc = target / speed;
+            const startCounter = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const updateCount = () => {
+                            const target = +counter.getAttribute('data-target');
+                            const count = +counter.innerText;
+                            const inc = target / speed;
 
-                        if (count < target) {
-                            counter.innerText = Math.ceil(count + inc);
-                            setTimeout(updateCount, 15);
-                        } else {
-                            counter.innerText = target;
-                        }
-                    };
-                    updateCount();
-                    // Dejamos de observar una vez que la animación ocurrió
-                    observer.unobserve(counter);
-                }
+                            if (count < target) {
+                                counter.innerText = Math.ceil(count + inc);
+                                setTimeout(updateCount, 15);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        updateCount();
+                        observer.unobserve(counter);
+                    }
+                });
+            };
+
+            const options = { threshold: 0.5 };
+            const observer = new IntersectionObserver(startCounter, options);
+
+            counters.forEach(counter => {
+                observer.observe(counter);
             });
-        };
-
-        const options = {
-            threshold: 0.5 // Se activa cuando el 50% de la sección es visible
-        };
-
-        const observer = new IntersectionObserver(startCounter, options);
-
-        counters.forEach(counter => {
-            observer.observe(counter);
         });
-    });
 
         // Navbar Scroll
         window.addEventListener('scroll', () => {
