@@ -77,11 +77,7 @@
             transition: all 0.5s ease;
         }
 
-        /* Modals */
-        dialog::backdrop { background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(4px); }
-    </style>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script type="module" src="/src/main.js"></script>
     <link rel="stylesheet" href="/src/style.css">
 </head>
@@ -458,63 +454,6 @@
                 <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
                 Hablar con un Asesor (WhatsApp)
             </a>
-            <button id="btn-descargar-pdf" onclick="descargarCotizacionPDF()" class="w-full py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl transition-colors flex justify-center items-center gap-3">
-                <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                Descargar Cotización en PDF
-            </button>
-        </div>
-    </div>
-
-    <!-- Contenedor oculto para la generación del PDF -->
-    <div id="pdf-container" class="absolute -left-[9999px] top-0 w-[800px] p-10 font-sans" style="background-color: #ffffff; color: #1e293b;">
-        <div class="flex justify-between items-center mb-8 border-b-2 pb-4" style="border-color: #0B2B46;">
-            <img src="/assets/logo.png" style="height: 50px; filter: brightness(0);" />
-            <div class="text-right">
-                <h1 class="text-2xl font-bold" style="color: #0B2B46;">PRE-COTIZACIÓN SOLAR</h1>
-                <p class="text-sm" style="color: #64748b;">Documento Generado Automáticamente</p>
-            </div>
-        </div>
-
-        <div class="mb-8">
-            <h2 class="text-lg font-bold border-b mb-3 uppercase" style="color: #F7A600; border-color: #e2e8f0;">1. Datos del Cliente</h2>
-            <div class="grid grid-cols-2 gap-4 text-sm">
-                <p><span class="font-bold">Nombre:</span> <span id="pdf-name"></span></p>
-                <p><span class="font-bold">Ciudad:</span> <span id="pdf-city"></span></p>
-                <p><span class="font-bold">Celular:</span> <span id="pdf-phone"></span></p>
-                <p><span class="font-bold">Email:</span> <span id="pdf-email"></span></p>
-            </div>
-        </div>
-
-        <div class="mb-8">
-            <h2 class="text-lg font-bold border-b mb-3 uppercase" style="color: #F7A600; border-color: #e2e8f0;">2. Consumo y Sistema Sugerido</h2>
-            <div class="grid grid-cols-2 gap-4 text-sm">
-                <p><span class="font-bold">Consumo/Pago Mensual:</span> <span id="pdf-consumption"></span></p>
-                <p><span class="font-bold">Tipo de Techo:</span> <span id="pdf-roof"></span></p>
-                <p><span class="font-bold">Potencia del Sistema:</span> <span id="pdf-power"></span></p>
-                <p><span class="font-bold">Número de Paneles (730W):</span> <span id="pdf-panels"></span></p>
-            </div>
-        </div>
-
-        <div class="mb-8 p-6 rounded-xl border" style="background-color: #f8fafc; border-color: #e2e8f0;">
-            <h2 class="text-xl font-bold mb-4 text-center" style="color: #0B2B46;">Inversión Estimada "Llave en Mano"</h2>
-            <p class="text-4xl font-extrabold text-center mb-2" id="pdf-cost" style="color: #F7A600;"></p>
-            <p class="text-xs text-center mb-6" style="color: #64748b;">*Incluye Paneles, Inversores, Estructura, Ingeniería, Instalación y Trámites ante operador de red.</p>
-
-            <div class="grid grid-cols-2 gap-6">
-                <div class="text-center p-4 rounded-lg shadow-sm border" style="background-color: #ffffff; border-color: #f1f5f9;">
-                    <p class="text-xs font-bold uppercase mb-1" style="color: #94a3b8;">Ahorro Mensual Estimado</p>
-                    <p class="text-xl font-bold" id="pdf-savings" style="color: #16a34a;"></p>
-                </div>
-                <div class="text-center p-4 rounded-lg shadow-sm border" style="background-color: #ffffff; border-color: #f1f5f9;">
-                    <p class="text-xs font-bold uppercase mb-1" style="color: #94a3b8;">Retorno de Inversión (Payback)</p>
-                    <p class="text-xl font-bold" id="pdf-payback" style="color: #0B2B46;"></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="text-xs text-center mt-12 border-t pt-4" style="color: #94a3b8; border-color: #e2e8f0;">
-            Zolaris Ingeniería S.A.S. | Cra. 37 #19b-35 Oficina 1005, Pasto, Colombia | tramites.zolaris@gmail.com<br>
-            Esta pre-cotización es una estimación referencial basada en datos promedio. Sujeta a rectificación tras visita técnica.
         </div>
     </div>
 
@@ -794,80 +733,6 @@
                 if (btnIcon) btnIcon.classList.remove('hidden');
                 if (loadingIcon) loadingIcon.classList.add('hidden');
                 btnSubmit.disabled = false;
-            }
-        }
-
-        function descargarCotizacionPDF() {
-            const btn = document.getElementById('btn-descargar-pdf');
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = `<svg class="w-6 h-6 animate-spin text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Generando PDF...`;
-            btn.disabled = true;
-
-            // Rellenar la plantilla PDF
-            document.getElementById('pdf-name').innerText = document.getElementById('lead-name').value || 'Cliente';
-            document.getElementById('pdf-city').innerText = state.city;
-            document.getElementById('pdf-phone').innerText = document.getElementById('lead-phone').value || 'N/A';
-            document.getElementById('pdf-email').innerText = document.getElementById('lead-email').value || 'N/A';
-            document.getElementById('pdf-consumption').innerText = document.getElementById('display-value').innerText;
-            document.getElementById('pdf-roof').innerText = document.getElementById('roof-type').value;
-            document.getElementById('pdf-power').innerText = document.getElementById('result-power').innerText;
-            document.getElementById('pdf-panels').innerText = document.getElementById('result-panels').innerText;
-            document.getElementById('pdf-cost').innerText = document.getElementById('result-cost').innerText;
-            document.getElementById('pdf-savings').innerText = document.getElementById('result-savings').innerText;
-            document.getElementById('pdf-payback').innerText = document.getElementById('result-payback').innerText;
-
-            const element = document.getElementById('pdf-container');
-            const opt = {
-                margin:       0.5,
-                filename:     'Precotizacion_Zolaris.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-            
-            function fallbackPrintPDF() {
-                const printWindow = window.open('', '_blank');
-                printWindow.document.write(`
-                    <html>
-                    <head>
-                        <title>Cotización Zolaris</title>
-                        <script src="https://cdn.tailwindcss.com"></script>
-                        <style>
-                            body { margin: 0; padding: 20px; font-family: sans-serif; }
-                            @media print { @page { margin: 0.5in; } }
-                        </style>
-                    </head>
-                    <body>
-                        <div style="max-width: 800px; margin: 0 auto;">
-                            ${element.innerHTML}
-                        </div>
-                        <script>
-                            setTimeout(() => {
-                                window.print();
-                                window.close();
-                            }, 800);
-                        </script>
-                    </body>
-                    </html>
-                `);
-                printWindow.document.close();
-            }
-
-            if (typeof html2pdf === 'function') {
-                html2pdf().set(opt).from(element).save().then(() => {
-                    btn.innerHTML = originalHTML;
-                    btn.disabled = false;
-                }).catch(err => {
-                    console.error("Error generando PDF con html2pdf:", err);
-                    console.log("Usando fallback de impresión nativa debido a incompatibilidad de CSS...");
-                    fallbackPrintPDF();
-                    btn.innerHTML = originalHTML;
-                    btn.disabled = false;
-                });
-            } else {
-                fallbackPrintPDF();
-                btn.innerHTML = originalHTML;
-                btn.disabled = false;
             }
         }
         
