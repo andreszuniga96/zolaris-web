@@ -439,6 +439,261 @@
         </div>
     </div>
 
-    
+    <script>
+        // *** CONFIGURACIÓN ***
+        const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzGTJxrUX0TjfjN9q_3Ho-nezs3s8tVv1pi81CBHpYJ3TQU3eP6dOHPBaWrIz02oVczNQ/exec"; 
+
+        const DEFAULT_PROD = 1840.0;
+        const POTENCIA_PANEL_W = 730;
+
+        // Datos de Producción
+        const PRODUCCION_CIUDAD = {
+            "Medellín": 1556.4, "Envigado": 1528.5, "Rionegro": 1660.0, "Cartagena": 1840.0,
+            "Marinilla": 1662.9, "El Santuario": 1640.2, "Santa Elena": 1535.0, "Guarne": 1571.9,
+            "Copacabana": 1547.0, "Girardota": 1577.2, "Barbosa": 1546.9, "Itagui": 1535.3,
+            "Sabaneta": 1506.4, "La Estrella": 1499.1, "Caldas": 1449.7, "El Retiro": 1495.1,
+            "La Ceja": 1562.2, "La Unión": 1637.0, "El Peñol": 1613.9, "San Pedro De Los Milagros": 1552.5,
+            "Bello": 1580.8, "Santa Fe De Antioquia": 1620.4, "Sopetrán Y San Jerónimo": 1614.5,
+            "Pasto": 1332.6, "Taminango": 1560.3, "Chachagüí": 1411.5, "Bogotá": 1391.6,
+            "Cali": 1503.3, "Yumbo": 1493.3
+        };
+
+        // Lista de Tarifas Estimadas (Valores $/kWh)
+        const TARIFA_CIUDAD = {
+            "Pasto": 940, "Taminango": 930, "Chachagüí": 940,
+            "Medellín": 850, "Envigado": 850, "Rionegro": 860, "Bogotá": 800,
+            "Cali": 830, "Yumbo": 830, "Cartagena": 1050,
+            "DEFAULT": 900 
+        };
+
+        let state = { mode: 'bill', val: 300000, city: 'Pasto', priceKwh: 940, step2Unlocked: false };
+        let captchaResult = 0;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            populateCities();
+            setInputMode('bill');
+            handleCityChange(); // Set initial tariff
+            generateCaptcha();
+        });
+
+        // 1. Lógica de Ciudades y Tarifas
+        function populateCities() {
+            const select = document.getElementById('lead-city');
+            Object.keys(PRODUCCION_CIUDAD).sort().forEach(city => {
+                const option = document.createElement('option');
+                option.value = city;
+                option.text = city;
+                if(city === 'Pasto') option.selected = true;
+                select.appendChild(option);
+            });
+        }
+
+        function handleCityChange() {
+            const city = document.getElementById('lead-city').value;
+            const tarifa = TARIFA_CIUDAD[city] || TARIFA_CIUDAD["DEFAULT"] || 900;
+            
+            document.getElementById('kwh-price').value = tarifa;
+            
+            state.city = city;
+            state.priceKwh = tarifa;
+            updateCalculations();
+        }
+
+        // 2. Validación y UX Paso a Paso
+        function unlockStep2() {
+            const name = document.getElementById('lead-name').value.trim();
+            const phone = document.getElementById('lead-phone').value.trim();
+            const email = document.getElementById('lead-email').value.trim();
+            const errorMsg = document.getElementById('step1-error');
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (name.length < 3 || phone.length < 7 || !emailRegex.test(email)) {
+                errorMsg.classList.remove('hidden');
+                errorMsg.innerText = "Por favor verifica: Nombre, Celular y un Email válido (con @).";
+                return;
+            }
+
+            errorMsg.classList.add('hidden');
+            state.step2Unlocked = true;
+            
+            document.getElementById('step-2-wrapper').classList.remove('step-locked');
+            document.getElementById('step-3-wrapper').classList.remove('step-locked');
+            
+            document.getElementById('step-2-wrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // 3. Modos y Rangos Actualizados
+        function setInputMode(mode) {
+            state.mode = mode;
+            const slider = document.getElementById('consumption-slider');
+            const btnBill = document.getElementById('btn-mode-bill');
+            const btnKwh = document.getElementById('btn-mode-kwh');
+            const tarifaContainer = document.getElementById('container-tarifa');
+            
+            const activeClass = "bg-zolaris-orange text-zolaris-navy shadow-lg";
+            const inactiveClass = "text-slate-400 hover:text-white bg-transparent shadow-none";
+
+            if(mode === 'bill') {
+                slider.min = 300000; slider.max = 15000000; slider.step = 50000;
+                state.val = 300000; 
+                
+                document.getElementById('slider-label').innerText = "Pago Mensual Promedio ($)";
+                btnBill.className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${activeClass}`;
+                btnKwh.className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${inactiveClass}`;
+                
+                tarifaContainer.style.display = 'block';
+                
+            } else {
+                slider.min = 300; slider.max = 15000; slider.step = 50;
+                state.val = 300;
+                
+                document.getElementById('slider-label').innerText = "Consumo mensual (kWh)";
+                btnKwh.className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${activeClass}`;
+                btnBill.className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${inactiveClass}`;
+                
+                tarifaContainer.style.display = 'none';
+            }
+            slider.value = state.val;
+            handleSliderChange(state.val);
+        }
+
+        function handleSliderChange(val) {
+            state.val = parseFloat(val);
+            state.city = document.getElementById('lead-city').value;
+            state.priceKwh = parseFloat(document.getElementById('kwh-price').value) || 940;
+            updateCalculations();
+        }
+
+        function formatCOP(v) { return '$ ' + Math.round(v).toLocaleString('es-CO'); }
+
+        function updateCalculations() {
+            let consumo_kwh = state.mode === 'bill' ? (state.val / state.priceKwh) : state.val;
+            
+            if (state.mode === 'bill') {
+                document.getElementById('display-value').innerText = formatCOP(state.val);
+                document.getElementById('display-subtext').innerText = `~${Math.round(consumo_kwh)} kWh/mes`;
+            } else {
+                document.getElementById('display-value').innerText = `${state.val} kWh`;
+                document.getElementById('display-subtext').innerText = `~${formatCOP(state.val * state.priceKwh)} COP/mes`;
+            }
+
+            const factor_seguridad = 1.2;
+            const hsp = 3.9;
+            const pr = 0.95 * 0.90;
+            const potencia_instalada = (consumo_kwh * factor_seguridad) / (30 * hsp * pr);
+
+            const num_paneles = Math.ceil(potencia_instalada / (POTENCIA_PANEL_W / 1000));
+            const potencia_real = num_paneles * (POTENCIA_PANEL_W / 1000);
+
+            let cobro_kwp;
+            if (potencia_real < 10) cobro_kwp = 4156723;
+            else if (potencia_real < 50) cobro_kwp = 3882175;
+            else cobro_kwp = 3400000;
+
+            const costo = potencia_real * cobro_kwp;
+
+            const produccion = (PRODUCCION_CIUDAD[state.city] || DEFAULT_PROD) * potencia_real;
+            const ahorro_anual = (consumo_kwh * 11.9 * state.priceKwh) + ((produccion/12 - consumo_kwh) > 0 ? ((produccion/12 - consumo_kwh)*12*330) : 0);
+            const beneficios = 0.40 * costo;
+            const payback = costo / (ahorro_anual + (beneficios/3));
+
+            const co2 = (consumo_kwh * 11.9 * 0.40) / 1000;
+
+            document.getElementById('result-cost').innerText = formatCOP(costo);
+            document.getElementById('result-power').innerText = potencia_real.toFixed(2) + ' kWp';
+            document.getElementById('result-panels').innerText = num_paneles;
+            document.getElementById('result-savings').innerText = formatCOP(consumo_kwh * state.priceKwh);
+            document.getElementById('result-payback').innerText = payback > 0 ? payback.toFixed(1) + " Años" : "N/A";
+            document.getElementById('impact-co2').innerText = co2.toFixed(1) + " Ton";
+            document.getElementById('impact-trees').innerText = Math.round(co2 * 1000 / 22);
+        }
+
+        // 4. Captcha Simple
+        function generateCaptcha() {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            captchaResult = num1 + num2;
+            document.getElementById('captcha-question').innerText = `${num1} + ${num2} = ?`;
+            document.getElementById('captcha-input').value = '';
+        }
+
+        async function submitData() {
+            if(!state.step2Unlocked) {
+                alert("Por favor completa tus datos y presiona 'Continuar' primero.");
+                document.getElementById('panel-datos').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            const userCaptcha = parseInt(document.getElementById('captcha-input').value);
+            if(userCaptcha !== captchaResult) {
+                alert("La respuesta de seguridad es incorrecta. Inténtalo de nuevo.");
+                generateCaptcha();
+                return;
+            }
+
+            const btnText = document.getElementById('btn-text');
+            const btnIcon = document.getElementById('btn-icon');
+            const loadingIcon = document.getElementById('loading-icon');
+            const btnSubmit = document.getElementById('btn-submit');
+
+            btnText.innerText = "ENVIANDO...";
+            if (btnIcon) btnIcon.classList.add('hidden');
+            if (loadingIcon) loadingIcon.classList.remove('hidden');
+            btnSubmit.disabled = true;
+
+            try {
+                const formData = new FormData();
+                formData.append('Nombre', document.getElementById('lead-name').value);
+                formData.append('Celular', document.getElementById('lead-phone').value);
+                formData.append('Email', document.getElementById('lead-email').value);
+                formData.append('Ciudad', state.city);
+                formData.append('Techo', document.getElementById('roof-type').value);
+                formData.append('Consumo', document.getElementById('display-value').innerText);
+                formData.append('CostoEstimado', document.getElementById('result-cost').innerText);
+                formData.append('Potencia', document.getElementById('result-power').innerText);
+
+                await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+
+                alert("¡Gracias! Tu solicitud ha sido enviada con éxito. Un ingeniero se pondrá en contacto pronto.");
+                location.reload();
+            } catch(error) {
+                console.error(error);
+                alert("Ocurrió un error. Por favor, intenta de nuevo o contáctanos por WhatsApp.");
+            } finally {
+                btnText.innerText = "SOLICITAR PROPUESTA FORMAL";
+                if (btnIcon) btnIcon.classList.remove('hidden');
+                if (loadingIcon) loadingIcon.classList.add('hidden');
+                btnSubmit.disabled = false;
+            }
+        }
+        
+        // Modals y menú móvil
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.getElementById(id).classList.add('flex');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.getElementById(id).classList.remove('flex');
+        }
+        
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if(menu.classList.contains('scale-y-0')) {
+                menu.classList.remove('scale-y-0', 'opacity-0', 'hidden');
+                menu.classList.add('scale-y-100', 'opacity-100');
+            } else {
+                menu.classList.remove('scale-y-100', 'opacity-100');
+                menu.classList.add('scale-y-0', 'opacity-0');
+                setTimeout(() => menu.classList.add('hidden'), 300);
+            }
+        }
+    </script>
 </body>
 </html>
