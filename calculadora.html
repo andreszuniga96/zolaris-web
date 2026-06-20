@@ -466,17 +466,17 @@
     </div>
 
     <!-- Contenedor oculto para la generación del PDF -->
-    <div id="pdf-container" class="absolute -left-[9999px] top-0 w-[800px] bg-white text-slate-800 p-10 font-sans">
-        <div class="flex justify-between items-center mb-8 border-b-2 border-[#0B2B46] pb-4">
-            <img src="/assets/logo.png" style="height: 50px;" class="brightness-0" />
+    <div id="pdf-container" class="absolute -left-[9999px] top-0 w-[800px] p-10 font-sans" style="background-color: #ffffff; color: #1e293b;">
+        <div class="flex justify-between items-center mb-8 border-b-2 pb-4" style="border-color: #0B2B46;">
+            <img src="/assets/logo.png" style="height: 50px; filter: brightness(0);" />
             <div class="text-right">
-                <h1 class="text-2xl font-bold text-[#0B2B46]">PRE-COTIZACIÓN SOLAR</h1>
-                <p class="text-sm text-slate-500">Documento Generado Automáticamente</p>
+                <h1 class="text-2xl font-bold" style="color: #0B2B46;">PRE-COTIZACIÓN SOLAR</h1>
+                <p class="text-sm" style="color: #64748b;">Documento Generado Automáticamente</p>
             </div>
         </div>
 
         <div class="mb-8">
-            <h2 class="text-lg font-bold text-[#F7A600] border-b border-slate-200 mb-3 uppercase">1. Datos del Cliente</h2>
+            <h2 class="text-lg font-bold border-b mb-3 uppercase" style="color: #F7A600; border-color: #e2e8f0;">1. Datos del Cliente</h2>
             <div class="grid grid-cols-2 gap-4 text-sm">
                 <p><span class="font-bold">Nombre:</span> <span id="pdf-name"></span></p>
                 <p><span class="font-bold">Ciudad:</span> <span id="pdf-city"></span></p>
@@ -486,7 +486,7 @@
         </div>
 
         <div class="mb-8">
-            <h2 class="text-lg font-bold text-[#F7A600] border-b border-slate-200 mb-3 uppercase">2. Consumo y Sistema Sugerido</h2>
+            <h2 class="text-lg font-bold border-b mb-3 uppercase" style="color: #F7A600; border-color: #e2e8f0;">2. Consumo y Sistema Sugerido</h2>
             <div class="grid grid-cols-2 gap-4 text-sm">
                 <p><span class="font-bold">Consumo/Pago Mensual:</span> <span id="pdf-consumption"></span></p>
                 <p><span class="font-bold">Tipo de Techo:</span> <span id="pdf-roof"></span></p>
@@ -495,24 +495,24 @@
             </div>
         </div>
 
-        <div class="mb-8 bg-slate-50 p-6 rounded-xl border border-slate-200">
-            <h2 class="text-xl font-bold text-[#0B2B46] mb-4 text-center">Inversión Estimada "Llave en Mano"</h2>
-            <p class="text-4xl font-extrabold text-center text-[#F7A600] mb-2" id="pdf-cost"></p>
-            <p class="text-xs text-center text-slate-500 mb-6">*Incluye Paneles, Inversores, Estructura, Ingeniería, Instalación y Trámites ante operador de red.</p>
+        <div class="mb-8 p-6 rounded-xl border" style="background-color: #f8fafc; border-color: #e2e8f0;">
+            <h2 class="text-xl font-bold mb-4 text-center" style="color: #0B2B46;">Inversión Estimada "Llave en Mano"</h2>
+            <p class="text-4xl font-extrabold text-center mb-2" id="pdf-cost" style="color: #F7A600;"></p>
+            <p class="text-xs text-center mb-6" style="color: #64748b;">*Incluye Paneles, Inversores, Estructura, Ingeniería, Instalación y Trámites ante operador de red.</p>
 
             <div class="grid grid-cols-2 gap-6">
-                <div class="text-center p-4 bg-white rounded-lg shadow-sm border border-slate-100">
-                    <p class="text-xs font-bold text-slate-400 uppercase mb-1">Ahorro Mensual Estimado</p>
-                    <p class="text-xl font-bold text-green-600" id="pdf-savings"></p>
+                <div class="text-center p-4 rounded-lg shadow-sm border" style="background-color: #ffffff; border-color: #f1f5f9;">
+                    <p class="text-xs font-bold uppercase mb-1" style="color: #94a3b8;">Ahorro Mensual Estimado</p>
+                    <p class="text-xl font-bold" id="pdf-savings" style="color: #16a34a;"></p>
                 </div>
-                <div class="text-center p-4 bg-white rounded-lg shadow-sm border border-slate-100">
-                    <p class="text-xs font-bold text-slate-400 uppercase mb-1">Retorno de Inversión (Payback)</p>
-                    <p class="text-xl font-bold text-[#0B2B46]" id="pdf-payback"></p>
+                <div class="text-center p-4 rounded-lg shadow-sm border" style="background-color: #ffffff; border-color: #f1f5f9;">
+                    <p class="text-xs font-bold uppercase mb-1" style="color: #94a3b8;">Retorno de Inversión (Payback)</p>
+                    <p class="text-xl font-bold" id="pdf-payback" style="color: #0B2B46;"></p>
                 </div>
             </div>
         </div>
 
-        <div class="text-xs text-slate-400 text-center mt-12 border-t border-slate-200 pt-4">
+        <div class="text-xs text-center mt-12 border-t pt-4" style="color: #94a3b8; border-color: #e2e8f0;">
             Zolaris Ingeniería S.A.S. | Cra. 37 #19b-35 Oficina 1005, Pasto, Colombia | tramites.zolaris@gmail.com<br>
             Esta pre-cotización es una estimación referencial basada en datos promedio. Sujeta a rectificación tras visita técnica.
         </div>
@@ -825,17 +825,47 @@
                 jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
             
+            function fallbackPrintPDF() {
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(`
+                    <html>
+                    <head>
+                        <title>Cotización Zolaris</title>
+                        <script src="https://cdn.tailwindcss.com"></script>
+                        <style>
+                            body { margin: 0; padding: 20px; font-family: sans-serif; }
+                            @media print { @page { margin: 0.5in; } }
+                        </style>
+                    </head>
+                    <body>
+                        <div style="max-width: 800px; margin: 0 auto;">
+                            ${element.innerHTML}
+                        </div>
+                        <script>
+                            setTimeout(() => {
+                                window.print();
+                                window.close();
+                            }, 800);
+                        </script>
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
+            }
+
             if (typeof html2pdf === 'function') {
                 html2pdf().set(opt).from(element).save().then(() => {
                     btn.innerHTML = originalHTML;
                     btn.disabled = false;
                 }).catch(err => {
-                    console.error("Error generando PDF:", err);
+                    console.error("Error generando PDF con html2pdf:", err);
+                    console.log("Usando fallback de impresión nativa debido a incompatibilidad de CSS...");
+                    fallbackPrintPDF();
                     btn.innerHTML = originalHTML;
                     btn.disabled = false;
                 });
             } else {
-                alert("El generador de PDF está cargando, por favor intenta en unos segundos.");
+                fallbackPrintPDF();
                 btn.innerHTML = originalHTML;
                 btn.disabled = false;
             }
